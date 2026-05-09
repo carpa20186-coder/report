@@ -7,31 +7,29 @@
   <style>
     :root {
       color-scheme: light;
-      --ink: #17202b;
-      --muted: #647084;
-      --line: #dfe5ee;
+      --ink: #1f2933;
+      --muted: #6b7482;
+      --line: #e3e7ee;
       --paper: #ffffff;
-      --bg: #f4f6f9;
-      --blue: #1f5fbf;
-      --navy: #132238;
-      --green: #11795d;
-      --amber: #a35c00;
-      --soft-blue: #eaf2ff;
-      --soft-green: #eaf7f2;
-      --shadow: 0 18px 40px rgba(20, 32, 48, .08);
+      --bg: #f6f7f9;
+      --blue: #2f5f9f;
+      --navy: #263446;
+      --green: #24735d;
+      --amber: #9b6a24;
+      --soft-blue: #eef4ff;
+      --soft-green: #edf8f4;
+      --shadow: 0 8px 22px rgba(31, 41, 51, .06);
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      background:
-        linear-gradient(180deg, #edf3ff 0, rgba(237,243,255,0) 360px),
-        var(--bg);
+      background: var(--bg);
       color: var(--ink);
       font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
       line-height: 1.75;
     }
     .shell {
-      max-width: 1180px;
+      max-width: 1120px;
       margin: 0 auto;
       padding: 28px 22px 56px;
     }
@@ -43,14 +41,14 @@
       margin-bottom: 18px;
     }
     .hero-main, .hero-side, .card {
-      background: rgba(255,255,255,.94);
+      background: var(--paper);
       border: 1px solid var(--line);
       border-radius: 8px;
       box-shadow: var(--shadow);
     }
     .hero-main {
       padding: 30px;
-      border-top: 5px solid var(--blue);
+      border-top: 4px solid var(--blue);
     }
     .eyebrow {
       display: inline-flex;
@@ -63,14 +61,14 @@
     }
     h1 {
       margin: 0 0 12px;
-      font-size: clamp(30px, 5vw, 48px);
+      font-size: clamp(28px, 4vw, 42px);
       line-height: 1.15;
       letter-spacing: 0;
     }
     .judgement {
       margin: 0;
       max-width: 760px;
-      font-size: 18px;
+      font-size: 16px;
       color: #293648;
     }
     .hero-side {
@@ -107,7 +105,7 @@
     }
     .kpi strong {
       display: block;
-      font-size: clamp(20px, 3vw, 28px);
+      font-size: clamp(18px, 2vw, 24px);
       line-height: 1.25;
     }
     .kpi small {
@@ -123,7 +121,7 @@
       align-items: center;
       gap: 10px;
       margin: 0 0 18px;
-      font-size: 24px;
+      font-size: 22px;
       line-height: 1.35;
     }
     .card h2::before {
@@ -134,13 +132,13 @@
       background: var(--blue);
     }
     .highlight {
-      border-top: 5px solid var(--green);
+      border-top: 4px solid var(--green);
     }
     .highlight h2::before {
       background: var(--green);
     }
     .action-card {
-      border-top: 5px solid var(--amber);
+      border-top: 4px solid var(--amber);
     }
     .action-card h2::before {
       background: var(--amber);
@@ -161,7 +159,7 @@
       gap: 10px;
     }
     .metric {
-      padding: 12px;
+      padding: 11px 12px;
       border: 1px solid var(--line);
       border-radius: 8px;
       background: #fbfcff;
@@ -173,7 +171,7 @@
     }
     .metric strong {
       display: block;
-      font-size: 19px;
+      font-size: 17px;
     }
     h3 {
       margin: 24px 0 10px;
@@ -196,7 +194,7 @@
       border-bottom: 1px solid var(--line);
       text-align: left;
       vertical-align: top;
-      font-size: 14px;
+      font-size: 13px;
       white-space: nowrap;
     }
     th {
@@ -205,7 +203,7 @@
       background: #f8faff;
       max-width: 360px;
       white-space: normal;
-      font-weight: 700;
+      font-weight: 650;
     }
     tr:last-child th, tr:last-child td {
       border-bottom: 0;
@@ -230,6 +228,57 @@
       background: #fbfcff;
       padding: 16px;
     }
+    .funnel table {
+      min-width: 720px;
+    }
+    .funnel thead th {
+      position: static;
+      background: #eef4ff;
+      color: var(--navy);
+      font-weight: 700;
+    }
+    .funnel tbody th {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .funnel td {
+      font-variant-numeric: tabular-nums;
+    }
+    .hint {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .readable {
+      max-width: 860px;
+    }
+    .readable p {
+      font-size: 15px;
+      line-height: 1.9;
+      margin-bottom: 14px;
+    }
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .decision {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffaf2;
+      padding: 14px;
+    }
+    .decision span {
+      display: inline-block;
+      color: var(--amber);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .decision p {
+      margin: 0;
+      line-height: 1.75;
+    }
     .axis h3 {
       margin-top: 0;
       color: var(--blue);
@@ -241,7 +290,7 @@
       padding: 18px;
     }
     @media (max-width: 900px) {
-      .hero, .axis-grid { grid-template-columns: 1fr; }
+      .hero, .axis-grid, .decision-grid { grid-template-columns: 1fr; }
       .kpi-row, .spotlight { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 560px) {
@@ -256,17 +305,32 @@
   <div class="shell">
     <div class="hero">
       <section class="hero-main">
-        <div class="eyebrow">Daily Report / generated 2026-05-09 11:16</div>
+        <div class="eyebrow">Daily Report / generated 2026-05-09 11:19</div>
         <h1>論理エンジン<br>日次レポート</h1>
         <p class="judgement">配信は継続。直近3日は実CPAが良好で、034の劣等感訴求は質も見て横展開候補。最大論点はLINEシナリオの2問目以降の落ち込みです。</p>
         <div class="kpi-row"><div class='kpi'><span>今月CPA</span><strong>¥1,173</strong><small>月次</small></div><div class='kpi'><span>登録</span><strong>63</strong><small>今月</small></div><div class='kpi'><span>購入</span><strong>1</strong><small>今月</small></div><div class='kpi'><span>ROAS</span><strong>267.8%</strong><small>今月</small></div></div>
       </section>
       <aside class="hero-side">
         <h2>今日の次アクション</h2>
-        <ul><li>直近3日は案件全体CPA¥504、実CPA¥1,416で、登録獲得はかなり強い。月次CPAも目安内なので、配信自体は継続。</li><li>直近で質まで見て強いのは オプトD｜ヘッド（実CPA¥717）、PH1｜頭がいい人への劣等感（実CPA¥1,055）、画像オプト｜仕事できる同僚（実CPA¥2,378）。034は直近実CPAも軽く、CR別ファネルでも2問目以降が相対的に強いため横展開優先。</li><li>035は登録CPAが軽い一方で実登録が薄いので、コピーの勝ち筋は残しつつ、登録後の期待値と1問目以降の接続を調整する。</li><li>シナリオ全体では2問目以降の落ち込みが最大論点。広告の増額判断より先に、2問目へ進む理由とセミナー視聴への導線を強める。</li></ul>
+        <ul><li>034の劣等感訴求を横展開</li><li>035は登録後の期待値を調整</li><li>LINEの2問目以降を最優先で改善</li></ul>
       </aside>
     </div>
-    <section class='card highlight'><h2>直近3日パフォーマンス</h2><p class='period'>対象期間：2026-05-07 / 2026-05-08 / 2026-05-09</p><div class='spotlight'><div class='kpi'><span>消化</span><strong>¥29,738</strong><small></small></div><div class='kpi'><span>実登録</span><strong>21</strong><small></small></div><div class='kpi'><span>実CPA</span><strong>¥1,416</strong><small></small></div><div class='kpi'><span>CTR</span><strong>3.2%</strong><small></small></div><div class='kpi'><span>CVR</span><strong>9.9%</strong><small></small></div></div><h3>日別推移</h3><div class='table-wrap'><table><tr><th>2026-05-07</th><td>消化¥16,516</td><td>実登録10</td><td>実CPA¥1,652</td><td>CTR3.3%</td><td>CVR9.0%</td></tr><tr><th>2026-05-08</th><td>消化¥10,567</td><td>実登録7</td><td>実CPA¥1,510</td><td>CTR2.9%</td><td>CVR11.8%</td></tr><tr><th>2026-05-09</th><td>消化¥2,655</td><td>実登録4</td><td>実CPA¥664</td><td>CTR4.4%</td><td>CVR8.8%</td></tr></table></div><h3>CR別</h3><div class='table-wrap'><table><tr><th>007【論理エンジン】オプトD｜ヘッド</th><td>消化¥8,608</td><td>実登録12</td><td>実CPA¥717</td><td>CTR3.1%</td><td>CVR11.4%</td></tr><tr><th>037【論理エンジン】032｜画像オプト</th><td>消化¥4,797</td><td>実登録1</td><td>実CPA¥4,797</td><td>CTR2.5%</td><td>CVR5.6%</td></tr><tr><th>032【論理エンジン】PH1｜会議で言葉が出てこない</th><td>消化¥4,415</td><td>実登録1</td><td>実CPA¥4,415</td><td>CTR2.8%</td><td>CVR10.8%</td></tr><tr><th>034【論理エンジン】PH1｜頭がいい人への劣等感</th><td>消化¥4,220</td><td>実登録4</td><td>実CPA¥1,055</td><td>CTR3.8%</td><td>CVR11.5%</td></tr><tr><th>041【論理エンジン】｜白黒漫画オプト｜仕事できる同僚</th><td>消化¥2,736</td><td>実登録1</td><td>実CPA¥2,736</td><td>CTR3.2%</td><td>CVR4.4%</td></tr><tr><th>035【論理エンジン】PH1｜「話がわかりにくい」と言われた</th><td>消化¥2,584</td><td>実登録1</td><td>実CPA¥2,584</td><td>CTR4.8%</td><td>CVR7.5%</td></tr><tr><th>042【論理エンジン】画像オプト｜仕事できる同僚</th><td>消化¥2,378</td><td>実登録1</td><td>実CPA¥2,378</td><td>CTR3.5%</td><td>CVR13.9%</td></tr></table></div></section><section class='card summary-card'><h2>今月サマリー</h2><div class='metrics'><div class='metric'><span>消化</span><strong>¥73,949</strong></div><div class='metric'><span>CTR</span><strong>3.5%</strong></div><div class='metric'><span>CVR</span><strong>3.9%</strong></div><div class='metric'><span>CPA</span><strong>¥1,173</strong></div><div class='metric'><span>登録</span><strong>63</strong></div><div class='metric'><span>購入</span><strong>1</strong></div><div class='metric'><span>売上</span><strong>¥198,000</strong></div><div class='metric'><span>ROAS</span><strong>267.8%</strong></div></div></section><section class='card '><h2>累計サマリー</h2><div class='metrics'><div class='metric'><span>消化</span><strong>¥724,461</strong></div><div class='metric'><span>平均CPA</span><strong>¥778</strong></div><div class='metric'><span>登録</span><strong>930</strong></div><div class='metric'><span>購入</span><strong>18</strong></div><div class='metric'><span>売上</span><strong>¥1,683,000</strong></div><div class='metric'><span>ROAS</span><strong>232.3%</strong></div></div></section><section class='card '><h2>アクティブCR</h2><div class='table-wrap'><table><tr><th>007【論理エンジン】オプトD｜ヘッド</th><td>消化¥9,133</td><td>登録11</td><td>CPA¥830</td><td>CTR3.4%</td><td>CVR4.4%</td></tr><tr><th>032【論理エンジン】PH1｜会議で言葉が出てこない</th><td>消化¥14,771</td><td>登録10</td><td>CPA¥1,477</td><td>CTR2.3%</td><td>CVR4.7%</td></tr><tr><th>034【論理エンジン】PH1｜頭がいい人への劣等感</th><td>消化¥14,588</td><td>登録16</td><td>CPA¥912</td><td>CTR3.7%</td><td>CVR4.4%</td></tr><tr><th>035【論理エンジン】PH1｜「話がわかりにくい」と言われた</th><td>消化¥14,930</td><td>登録16</td><td>CPA¥933</td><td>CTR5.4%</td><td>CVR3.1%</td></tr><tr><th>037【論理エンジン】032｜画像オプト</th><td>消化¥12,464</td><td>登録7</td><td>CPA¥1,781</td><td>CTR2.6%</td><td>CVR4.5%</td></tr><tr><th>041【論理エンジン】｜白黒漫画オプト｜仕事できる同僚</th><td>消化¥2,736</td><td>登録1</td><td>CPA¥2,736</td><td>CTR3.2%</td><td>CVR2.2%</td></tr><tr><th>042【論理エンジン】画像オプト｜仕事できる同僚</th><td>消化¥2,378</td><td>登録1</td><td>CPA¥2,378</td><td>CTR3.5%</td><td>CVR2.8%</td></tr></table></div></section><section class='card '><h2>CR別ファネル通過率</h2><div class='metrics'><div class='metric'><span>007 メタ広告全体（主力）</span><strong>n=177｜1問:77% 2問:36% 3問:23% 視聴:18% 完了:5%</strong></div><div class='metric'><span>032 会議中の思考 PH1</span><strong>n=20｜1問:75% 2問:15% 3問:15% 視聴:35% 完了:5%</strong></div><div class='metric'><span>033 読書・学習 PH1</span><strong>n=14｜1問:79% 2問:29% 3問:14% 視聴:29% 完了:7%</strong></div><div class='metric'><span>034 劣等感 PH2</span><strong>n=28｜1問:71% 2問:43% 3問:25% 視聴:21% 完了:0%</strong></div><div class='metric'><span>037 参考</span><strong>n=3｜1問:67% 2問:67% 3問:67% 視聴:67% 完了:33%</strong></div></div><p>035 話がわかりにくい PH1：n=27｜1問:78% 2問:33% 3問:15% 視聴:26% 完了:4%</p></section><section class='card flow-card'><h2>LINEシナリオ</h2><div class='metrics'><div class='metric'><span>登録</span><strong>261人</strong></div><div class='metric'><span>1問目</span><strong>198人（76%）</strong></div><div class='metric'><span>2問目</span><strong>116人（44%）</strong></div><div class='metric'><span>3問目</span><strong>71人（27%）</strong></div><div class='metric'><span>BEセミナー</span><strong>49人（19%）</strong></div><div class='metric'><span>購入</span><strong>1人（0.4%）</strong></div></div></section><section class='card '><h2>数値まとめ・コメント</h2><p>登録CPAは¥1,173です。前月CPA¥683よりは重くなっていますが、目安の¥1,500は下回っており、登録獲得の出足は悪くありません。<br>一方でLINEでは2問目以降の落ち込みが大きく、広告で獲得した関心をセミナー視聴まで運ぶ設計が改善ポイントです。<br>CR別では034が2問目以降の通過で相対的に強く、032と035は視聴関心が見えるため、訴求を横展開しながらシナリオ側を調整したいです。</p></section><section class='card '><h2>ターゲットインサイト</h2><p>論理エンジンのターゲットは、「頭が良くなりたい」というより、仕事の中で“自分だけ言語化できない”“説明が伝わらない”“会議で置いていかれる”という小さな劣等感を抱えている層です。</p><p>直近は生成AI活用やリスキリングの文脈も強く、単なるコミュ力訴求よりも「問いの立て方」「考えを整理する型」「伝わる順番」のように、仕事で再現できるスキルとして見せる方が刺さりやすいです。</p><p>今日のリサーチでも、AI活用が広がるほど「問いの立て方」「前提整理」「判断力」が差分になりやすいという見方を採用します。</p><p>今回の数値では、035のCTRとCPAが強いため、「話がわかりにくい」「説明が長い」「要点がぼやける」系の訴求を短期の横展開軸にします。ただし当たりCRに寄せすぎると似た案が続くため、AI、読書、情報整理、判断力などの新規開拓も混ぜます。</p></section><section class='card'><h2>次のCR訴求軸案</h2><p class='section-lead'>今回は、当たりCRの近接横展開だけでなく、論理エンジンの根本インサイトを抽象化して新しい入口も検証します。</p><div class='axis-grid'><article class='axis'><h3>1. 横展開｜説明が長いのに伝わらない</h3><p>フック：<br>一生懸命話してるのに、<br>なぜか伝わらない。</p><p>オファー明記：<br>大人のための<br>「論理の授業」無料セミナー</p><p>狙い：<br>035の強さを活かす短期横展開。説明力ではなく、話す前の順番設計として見せる。</p></article><article class='axis'><h3>2. 新規開拓｜AIにうまく聞けない</h3><p>フック：<br>AIに聞いても、<br>浅い答えしか返ってこない。</p><p>オファー明記：<br>問いの立て方を学ぶ<br>大人のための「論理の授業」</p><p>狙い：<br>AI活用の広がりに合わせて、論理力を「質問力」「問いを立てる力」として再定義する。既存CRとは違う入口で、仕事効率・リスキリング層を狙う。</p></article><article class='axis'><h3>3. 新規開拓｜読んでも頭に残らない</h3><p>フック：<br>本を読んでも、<br>説明しようとすると<br>何も出てこない。</p><p>オファー明記：<br>考えを整理する型を学ぶ<br>大人のための「論理の授業」</p><p>狙い：<br>会議・説明系から少し離れ、読書・学習・情報整理の悩みに広げる。論理力を「自分の言葉にする力」として見せる。</p></article></div></section><section class='card action-card'><h2>参考アクションプラン</h2><p class='bullet'>・直近3日は案件全体CPA¥504、実CPA¥1,416で、登録獲得はかなり強い。月次CPAも目安内なので、配信自体は継続。</p><p class='bullet'>・直近で質まで見て強いのは オプトD｜ヘッド（実CPA¥717）、PH1｜頭がいい人への劣等感（実CPA¥1,055）、画像オプト｜仕事できる同僚（実CPA¥2,378）。034は直近実CPAも軽く、CR別ファネルでも2問目以降が相対的に強いため横展開優先。</p><p class='bullet'>・035は登録CPAが軽い一方で実登録が薄いので、コピーの勝ち筋は残しつつ、登録後の期待値と1問目以降の接続を調整する。</p><p class='bullet'>・シナリオ全体では2問目以降の落ち込みが最大論点。広告の増額判断より先に、2問目へ進む理由とセミナー視聴への導線を強める。</p><p>本日（2026年5月9日）のレポート報告になります。ご確認ください！</p><p>また、この数値レポートおよびCR案は、AIによる自動出力です。</p><p>あくまで補助的な参考情報としてご活用いただき、最終的な判断にあたっては、必ず人の目で内容を確認・解釈・推敲したうえで進めるようにしてくださいね。</p></section>
+    <section class='card highlight'><h2>直近3日パフォーマンス</h2><p class='period'>対象期間：2026-05-07 / 2026-05-08 / 2026-05-09</p><div class='spotlight'><div class='kpi'><span>消化</span><strong>¥29,738</strong><small></small></div><div class='kpi'><span>実登録</span><strong>21</strong><small></small></div><div class='kpi'><span>実CPA</span><strong>¥1,416</strong><small></small></div><div class='kpi'><span>CTR</span><strong>3.2%</strong><small></small></div><div class='kpi'><span>CVR</span><strong>9.9%</strong><small></small></div></div><h3>日別推移</h3><div class='table-wrap'><table><tr><th>2026-05-07</th><td>消化¥16,516</td><td>実登録10</td><td>実CPA¥1,652</td><td>CTR3.3%</td><td>CVR9.0%</td></tr><tr><th>2026-05-08</th><td>消化¥10,567</td><td>実登録7</td><td>実CPA¥1,510</td><td>CTR2.9%</td><td>CVR11.8%</td></tr><tr><th>2026-05-09</th><td>消化¥2,655</td><td>実登録4</td><td>実CPA¥664</td><td>CTR4.4%</td><td>CVR8.8%</td></tr></table></div><h3>CR別</h3><div class='table-wrap'><table><tr><th>007【論理エンジン】オプトD｜ヘッド</th><td>消化¥8,608</td><td>実登録12</td><td>実CPA¥717</td><td>CTR3.1%</td><td>CVR11.4%</td></tr><tr><th>037【論理エンジン】032｜画像オプト</th><td>消化¥4,797</td><td>実登録1</td><td>実CPA¥4,797</td><td>CTR2.5%</td><td>CVR5.6%</td></tr><tr><th>032【論理エンジン】PH1｜会議で言葉が出てこない</th><td>消化¥4,415</td><td>実登録1</td><td>実CPA¥4,415</td><td>CTR2.8%</td><td>CVR10.8%</td></tr><tr><th>034【論理エンジン】PH1｜頭がいい人への劣等感</th><td>消化¥4,220</td><td>実登録4</td><td>実CPA¥1,055</td><td>CTR3.8%</td><td>CVR11.5%</td></tr><tr><th>041【論理エンジン】｜白黒漫画オプト｜仕事できる同僚</th><td>消化¥2,736</td><td>実登録1</td><td>実CPA¥2,736</td><td>CTR3.2%</td><td>CVR4.4%</td></tr><tr><th>035【論理エンジン】PH1｜「話がわかりにくい」と言われた</th><td>消化¥2,584</td><td>実登録1</td><td>実CPA¥2,584</td><td>CTR4.8%</td><td>CVR7.5%</td></tr><tr><th>042【論理エンジン】画像オプト｜仕事できる同僚</th><td>消化¥2,378</td><td>実登録1</td><td>実CPA¥2,378</td><td>CTR3.5%</td><td>CVR13.9%</td></tr></table></div></section><section class='card summary-card'><h2>今月サマリー</h2><div class='metrics'><div class='metric'><span>消化</span><strong>¥73,949</strong></div><div class='metric'><span>CTR</span><strong>3.5%</strong></div><div class='metric'><span>CVR</span><strong>3.9%</strong></div><div class='metric'><span>CPA</span><strong>¥1,173</strong></div><div class='metric'><span>登録</span><strong>63</strong></div><div class='metric'><span>購入</span><strong>1</strong></div><div class='metric'><span>売上</span><strong>¥198,000</strong></div><div class='metric'><span>ROAS</span><strong>267.8%</strong></div></div></section><section class='card '><h2>累計サマリー</h2><div class='metrics'><div class='metric'><span>消化</span><strong>¥724,461</strong></div><div class='metric'><span>平均CPA</span><strong>¥778</strong></div><div class='metric'><span>登録</span><strong>930</strong></div><div class='metric'><span>購入</span><strong>18</strong></div><div class='metric'><span>売上</span><strong>¥1,683,000</strong></div><div class='metric'><span>ROAS</span><strong>232.3%</strong></div></div></section><section class='card '><h2>アクティブCR</h2><div class='table-wrap'><table><tr><th>007【論理エンジン】オプトD｜ヘッド</th><td>消化¥9,133</td><td>登録11</td><td>CPA¥830</td><td>CTR3.4%</td><td>CVR4.4%</td></tr><tr><th>032【論理エンジン】PH1｜会議で言葉が出てこない</th><td>消化¥14,771</td><td>登録10</td><td>CPA¥1,477</td><td>CTR2.3%</td><td>CVR4.7%</td></tr><tr><th>034【論理エンジン】PH1｜頭がいい人への劣等感</th><td>消化¥14,588</td><td>登録16</td><td>CPA¥912</td><td>CTR3.7%</td><td>CVR4.4%</td></tr><tr><th>035【論理エンジン】PH1｜「話がわかりにくい」と言われた</th><td>消化¥14,930</td><td>登録16</td><td>CPA¥933</td><td>CTR5.4%</td><td>CVR3.1%</td></tr><tr><th>037【論理エンジン】032｜画像オプト</th><td>消化¥12,464</td><td>登録7</td><td>CPA¥1,781</td><td>CTR2.6%</td><td>CVR4.5%</td></tr><tr><th>041【論理エンジン】｜白黒漫画オプト｜仕事できる同僚</th><td>消化¥2,736</td><td>登録1</td><td>CPA¥2,736</td><td>CTR3.2%</td><td>CVR2.2%</td></tr><tr><th>042【論理エンジン】画像オプト｜仕事できる同僚</th><td>消化¥2,378</td><td>登録1</td><td>CPA¥2,378</td><td>CTR3.5%</td><td>CVR2.8%</td></tr></table></div></section><section class='card '><h2>CR別ファネル通過率</h2><div class='table-wrap funnel'><table><thead><tr><th>CR</th><th>n</th><th>1問目</th><th>2問目</th><th>3問目</th><th>視聴</th><th>完了</th></tr></thead><tbody><tr><th>007 メタ広告全体（主力）</th><td>177</td><td>77%</td><td>36%</td><td>23%</td><td>18%</td><td>5%</td></tr><tr><th>032 会議中の思考 PH1</th><td>20</td><td>75%</td><td>15%</td><td>15%</td><td>35%</td><td>5%</td></tr><tr><th>033 読書・学習 PH1</th><td>14</td><td>79%</td><td>29%</td><td>14%</td><td>29%</td><td>7%</td></tr><tr><th>034 劣等感 PH2</th><td>28</td><td>71%</td><td>43%</td><td>25%</td><td>21%</td><td>0%</td></tr><tr><th>035 話がわかりにくい PH1</th><td>27</td><td>78%</td><td>33%</td><td>15%</td><td>26%</td><td>4%</td></tr><tr><th>037 参考</th><td>3</td><td>67%</td><td>67%</td><td>67%</td><td>67%</td><td>33%</td></tr></tbody></table></div><p class='hint'>見るポイント：2問目以降で落ちるCRは、登録後の期待値や導線を見直す候補です。</p></section><section class='card flow-card'><h2>LINEシナリオ</h2><div class='metrics'><div class='metric'><span>登録</span><strong>261人</strong></div><div class='metric'><span>1問目</span><strong>198人（76%）</strong></div><div class='metric'><span>2問目</span><strong>116人（44%）</strong></div><div class='metric'><span>3問目</span><strong>71人（27%）</strong></div><div class='metric'><span>BEセミナー</span><strong>49人（19%）</strong></div><div class='metric'><span>購入</span><strong>1人（0.4%）</strong></div></div></section><section class='card prose-card'>
+<h2>数値まとめ</h2>
+<div class='readable'>
+  <p><strong>広告は継続でよさそうです。</strong> 今月CPAは¥1,173で、目安の¥1,500を下回っています。</p>
+  <p>ただし、広告で取れた関心をLINE内で育てきれていません。特に2問目以降で落ちているため、登録直後の期待値づくりが改善ポイントです。</p>
+  <p>CR別では、034が登録後の通過率でも比較的強く、横展開の優先候補です。035はクリックや登録は取れますが、実登録の薄さに注意して見ます。</p>
+</div>
+</section><section class='card prose-card'>
+<h2>ターゲットインサイト</h2>
+<div class='readable'>
+  <p><strong>狙う相手：</strong>仕事で「考えをうまく言葉にできない」と感じている人です。</p>
+  <p>この層は、単に話し方を学びたいわけではありません。会議、資料作成、AIへの質問などで「頭の中では分かっているのに、外に出すとぼやける」ことに悩んでいます。</p>
+  <p>そのため訴求は、コミュ力よりも<strong>考える順番・問いの立て方・整理する型</strong>として見せる方が伝わりやすいです。</p>
+  <p>今は035の「話がわかりにくい」系が入口として強い一方、034の劣等感訴求は登録後の質も良いです。短期は034を横展開しつつ、AI・読書・情報整理の切り口も試すのがよさそうです。</p>
+</div>
+</section><section class='card'><h2>次のCR訴求軸案</h2><p class='section-lead'>今回は、当たりCRの近接横展開だけでなく、論理エンジンの根本インサイトを抽象化して新しい入口も検証します。</p><div class='axis-grid'><article class='axis'><h3>1. 横展開｜説明が長いのに伝わらない</h3><p>フック：<br>一生懸命話してるのに、<br>なぜか伝わらない。</p><p>オファー明記：<br>大人のための<br>「論理の授業」無料セミナー</p><p>狙い：<br>035の強さを活かす短期横展開。説明力ではなく、話す前の順番設計として見せる。</p></article><article class='axis'><h3>2. 新規開拓｜AIにうまく聞けない</h3><p>フック：<br>AIに聞いても、<br>浅い答えしか返ってこない。</p><p>オファー明記：<br>問いの立て方を学ぶ<br>大人のための「論理の授業」</p><p>狙い：<br>AI活用の広がりに合わせて、論理力を「質問力」「問いを立てる力」として再定義する。既存CRとは違う入口で、仕事効率・リスキリング層を狙う。</p></article><article class='axis'><h3>3. 新規開拓｜読んでも頭に残らない</h3><p>フック：<br>本を読んでも、<br>説明しようとすると<br>何も出てこない。</p><p>オファー明記：<br>考えを整理する型を学ぶ<br>大人のための「論理の授業」</p><p>狙い：<br>会議・説明系から少し離れ、読書・学習・情報整理の悩みに広げる。論理力を「自分の言葉にする力」として見せる。</p></article></div></section><section class='card action-card'><h2>参考アクションプラン</h2><div class='decision-grid'><article class='decision'><span>配信判断</span><p>全体は継続。直近3日の実CPAは¥1,521で、獲得効率は悪くありません。</p></article><article class='decision'><span>伸ばすCR</span><p>034の劣等感訴求を優先して横展開。直近実CPAも軽く、登録後の通過も比較的強いです。</p></article><article class='decision'><span>調整するCR</span><p>035は入口としては強い一方、実登録が薄め。コピーは残しつつ、登録後の期待値を調整します。</p></article><article class='decision'><span>最優先の改善</span><p>LINEの2問目以降。広告を増やす前に、2問目へ進む理由とセミナー視聴への導線を強めます。</p></article></div></section>
     <div class="footer">この数値レポートおよびCR案はAIによる自動出力です。最終判断は人の目で確認・解釈・推敲してください。</div>
   </div>
 </body>
