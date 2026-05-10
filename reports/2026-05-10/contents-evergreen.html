@@ -3,42 +3,509 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>コンテンツエバー 日次レポート（2026年5月10日）</title>
+  <title>本日（2026年5月10日）のレポート報告になります。ご確認ください！</title>
   <style>
-    :root { --accent: #a45a2a; --ink: #24313a; --muted: #64727d; --line: #d9e0e4; --bg: #f6f7f5; --card: #ffffff; }
+    :root {
+      color-scheme: light;
+      --ink: #1f2933;
+      --muted: #6b7482;
+      --line: #e3e7ee;
+      --paper: #ffffff;
+      --bg: #f6f7f9;
+      --blue: #2f5f9f;
+      --navy: #263446;
+      --green: #24735d;
+      --amber: #9b6a24;
+      --soft-blue: #eef4ff;
+      --soft-green: #edf8f4;
+      --shadow: 0 8px 22px rgba(31, 41, 51, .06);
+    }
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif; color: var(--ink); background: var(--bg); line-height: 1.72; }
-    header { background: var(--accent); color: white; padding: 48px 22px 40px; }
-    .wrap { max-width: 1080px; margin: 0 auto; }
-    .eyebrow { font-size: 13px; letter-spacing: .08em; opacity: .84; margin: 0 0 10px; }
-    h1 { margin: 0; font-size: clamp(30px, 5vw, 54px); line-height: 1.16; letter-spacing: 0; }
-    .lead { margin: 14px 0 0; max-width: 720px; opacity: .9; }
-    main { padding: 28px 22px 56px; }
-    .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 24px; margin: 0 0 18px; box-shadow: 0 10px 28px rgba(28, 40, 48, .06); }
-    h2 { margin: 0 0 16px; font-size: 22px; line-height: 1.35; letter-spacing: 0; }
-    p { margin: 0 0 12px; }
-    .bullet { padding-left: 1em; text-indent: -1em; }
-    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 0 0 18px; }
-    .metric { border: 1px solid var(--line); border-radius: 6px; padding: 12px; background: #fbfcfb; min-height: 76px; }
-    .metric span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 4px; }
-    .metric strong { display: block; font-size: 20px; line-height: 1.25; word-break: keep-all; overflow-wrap: anywhere; }
-    a { color: var(--accent); font-weight: 700; }
-    footer { color: var(--muted); font-size: 13px; padding: 0 22px 32px; }
-    @media (max-width: 640px) { header { padding-top: 34px; } .card { padding: 18px; } .metric strong { font-size: 18px; } }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+      line-height: 1.75;
+    }
+    .shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 22px 56px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+    .hero-main, .hero-side, .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .hero-main {
+      padding: 30px;
+      border-top: 4px solid var(--blue);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+    .judgement {
+      margin: 0;
+      max-width: 760px;
+      font-size: 16px;
+      color: #293648;
+    }
+    .hero-side {
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 118px;
+      gap: 12px;
+      align-items: end;
+      background:
+        radial-gradient(circle at 92% 18%, rgba(47, 95, 159, .10), transparent 32%),
+        var(--paper);
+    }
+    .hero-side h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+    .hero-side ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .hero-side li {
+      margin-bottom: 10px;
+    }
+    .hero-side-content {
+      position: relative;
+      z-index: 1;
+    }
+    .character-wrap {
+      align-self: end;
+      justify-self: center;
+      position: relative;
+      z-index: 0;
+    }
+    .character-wrap img {
+      display: block;
+      width: min(130px, 30vw);
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 16px rgba(31, 41, 51, .14));
+    }
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .kpi {
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .kpi span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .kpi strong {
+      display: block;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.25;
+    }
+    .kpi small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .card {
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+    .card h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    .card h2::before {
+      content: "";
+      width: 6px;
+      height: 24px;
+      border-radius: 4px;
+      background: var(--blue);
+    }
+    .highlight {
+      border-top: 4px solid var(--green);
+    }
+    .highlight h2::before {
+      background: var(--green);
+    }
+    .action-card {
+      border-top: 4px solid var(--amber);
+    }
+    .action-card h2::before {
+      background: var(--amber);
+    }
+    .period, .section-lead, .section-period {
+      color: var(--muted);
+      margin-top: -6px;
+    }
+    .section-period {
+      display: inline-flex;
+      margin-bottom: 16px;
+      padding: 5px 9px;
+      border-radius: 6px;
+      background: #f1f5fb;
+      color: #536073;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+    .spotlight {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 10px;
+    }
+    .metric {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 17px;
+    }
+    .chart-card {
+      margin: 18px 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .chart-card h3, .funnel-visual h3 {
+      margin-top: 0;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: minmax(170px, 1.1fr) minmax(180px, 2fr) 90px;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid #edf0f5;
+    }
+    .bar-row:last-child {
+      border-bottom: 0;
+    }
+    .bar-label {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--navy);
+    }
+    .bar-track {
+      height: 12px;
+      border-radius: 999px;
+      background: #e9eef6;
+      overflow: hidden;
+    }
+    .bar-track span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--green), #5ba98d);
+    }
+    .bar-value {
+      text-align: right;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .chart-note {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    h3 {
+      margin: 24px 0 10px;
+      font-size: 17px;
+      color: var(--navy);
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+    th, td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    th {
+      position: sticky;
+      left: 0;
+      background: #f8faff;
+      max-width: 360px;
+      white-space: normal;
+      font-weight: 650;
+    }
+    tr:last-child th, tr:last-child td {
+      border-bottom: 0;
+    }
+    .mobile-table-cards {
+      display: none;
+    }
+    .mobile-row-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .mobile-row-card h4 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--navy);
+    }
+    .mobile-row-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .mini-metric {
+      border: 1px solid #e6eaf1;
+      border-radius: 7px;
+      background: white;
+      padding: 8px 9px;
+      min-width: 0;
+    }
+    .mini-metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+    .mini-metric strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.25;
+      color: var(--ink);
+      overflow-wrap: anywhere;
+    }
+    .body p, .card p {
+      margin: 0 0 15px;
+    }
+    .bullet {
+      padding: 13px 15px;
+      border-left: 4px solid var(--blue);
+      background: #f8faff;
+      border-radius: 6px;
+    }
+    .axis-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .axis {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      padding: 16px;
+    }
+    .funnel table {
+      min-width: 720px;
+    }
+    .funnel thead th {
+      position: static;
+      background: #eef4ff;
+      color: var(--navy);
+      font-weight: 700;
+    }
+    .funnel tbody th {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .funnel td {
+      font-variant-numeric: tabular-nums;
+    }
+    .hint {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .funnel-visual {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .funnel-step {
+      display: grid;
+      grid-template-columns: 120px minmax(180px, 1fr) 92px;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid #edf0f5;
+    }
+    .funnel-step:last-child {
+      border-bottom: 0;
+    }
+    .funnel-name {
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .funnel-bar {
+      height: 22px;
+      border-radius: 6px;
+      background: #e9eef6;
+      overflow: hidden;
+    }
+    .funnel-bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), #6d91ca);
+    }
+    .funnel-num {
+      text-align: right;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .funnel-num small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .readable {
+      max-width: 860px;
+    }
+    .readable p {
+      font-size: 15px;
+      line-height: 1.9;
+      margin-bottom: 14px;
+    }
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .decision {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffaf2;
+      padding: 14px;
+    }
+    .decision span {
+      display: inline-block;
+      color: var(--amber);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .decision p {
+      margin: 0;
+      line-height: 1.75;
+    }
+    .axis h3 {
+      margin-top: 0;
+      color: var(--blue);
+    }
+    .footer {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 18px;
+    }
+    @media (max-width: 900px) {
+      .hero, .axis-grid, .decision-grid { grid-template-columns: 1fr; }
+      .kpi-row, .spotlight { grid-template-columns: 1fr 1fr; }
+      .bar-row, .funnel-step { grid-template-columns: 1fr; gap: 6px; }
+      .bar-value, .funnel-num { text-align: left; }
+      .hero-side { grid-template-columns: minmax(0, 1fr) 104px; }
+    }
+    @media (max-width: 560px) {
+      .shell { padding: 16px 12px 36px; }
+      .hero-main, .hero-side, .card { padding: 18px; }
+      .kpi-row, .spotlight, .metrics { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .hero-side { grid-template-columns: 1fr; }
+      .character-wrap {
+        justify-self: end;
+        margin-top: -8px;
+      }
+      .character-wrap img { width: 92px; }
+      .table-wrap { display: none; }
+      .mobile-table-cards { display: block; }
+      th, td { font-size: 13px; }
+    }
   </style>
 </head>
 <body>
-  <header><div class="wrap">
-    <p class="eyebrow">AI REPORT / 2026-05-10</p>
-    <h1>コンテンツエバー 日次レポート（2026年5月10日）</h1>
-    <p class="lead">Slack送信用プレビューと同じ内容から生成した詳細レポートです。</p>
-  </div></header>
-  <main><div class="wrap"><section class='card'><h2>5月サマリー</h2><div class='metrics'><div class='metric'><span>広告費</span><strong>¥312,546</strong></div><div class='metric'><span>リスト獲得数</span><strong>122</strong></div><div class='metric'><span>リスト単価</span><strong>¥2,562</strong></div><div class='metric'><span>総売上</span><strong>¥1,831,500</strong></div><div class='metric'><span>ROAS</span><strong>586%</strong></div><div class='metric'><span>実質利益</span><strong>¥1,518,954</strong></div></div><p>広告費：¥312,546<br>リスト獲得数：122<br>リスト単価：¥2,562<br>総売上：¥1,831,500<br>ROAS：586%<br>実質利益：¥1,518,954</p></section>
-<section class='card'><h2>セミナーパフォーマンス</h2><div class='metrics'><div class='metric'><span>ウェビナー申込数</span><strong>約58</strong></div><div class='metric'><span>ウェビナー申込率</span><strong>47.6%</strong></div><div class='metric'><span>ウェビナー申込単価</span><strong>約¥5,389</strong></div><div class='metric'><span>ウェビナー着席数</span><strong>約30</strong></div><div class='metric'><span>ウェビナー着席率</span><strong>51.0%</strong></div><div class='metric'><span>ウェビナー着席単価</span><strong>約¥10,418</strong></div></div><p>ウェビナー申込数：約58<br>ウェビナー申込率：47.6%<br>ウェビナー申込単価：約¥5,389<br>ウェビナー着席数：約30<br>ウェビナー着席率：51.0%<br>ウェビナー着席単価：約¥10,418</p><p>※数値報告スプシの最終報告は「5月9日17時00分」です。<br>※ウェビナー申込・着席は、プロモX側の5月遷移率をもとに補完しています。</p></section>
-<section class='card'><h2>成約</h2><div class='metrics'><div class='metric'><span>成約数</span><strong>6</strong></div><div class='metric'><span>獲得リストに対するBE成約率</span><strong>4.9%</strong></div><div class='metric'><span>ウェビナー申込数に対するBE成約率</span><strong>約10.3%</strong></div><div class='metric'><span>ウェビナー着席数に対するBE成約率</span><strong>約20.0%</strong></div><div class='metric'><span>成約数</span><strong>1</strong></div><div class='metric'><span>リストに対する成約率</span><strong>0.8%</strong></div><div class='metric'><span>成約数</span><strong>1</strong></div><div class='metric'><span>BE購入者に対する成約率</span><strong>16.7%</strong></div><div class='metric'><span>BE</span><strong>¥1,346,400</strong></div><div class='metric'><span>ダウンセル</span><strong>¥9,900</strong></div><div class='metric'><span>ワンタイム</span><strong>¥475,200</strong></div><div class='metric'><span>総売上</span><strong>¥1,831,500</strong></div><div class='metric'><span>ROAS</span><strong>586%</strong></div><div class='metric'><span>実質利益</span><strong>¥1,518,954</strong></div></div><p class='bullet'>・BE</p><p>成約数：6<br>獲得リストに対するBE成約率：4.9%<br>ウェビナー申込数に対するBE成約率：約10.3%<br>ウェビナー着席数に対するBE成約率：約20.0%</p><p class='bullet'>・ダウンセル</p><p>成約数：1<br>リストに対する成約率：0.8%</p><p class='bullet'>・ワンタイム</p><p>成約数：1<br>BE購入者に対する成約率：16.7%</p><p class='bullet'>・売上</p><p>BE：¥1,346,400<br>ダウンセル：¥9,900<br>ワンタイム：¥475,200<br>総売上：¥1,831,500<br>ROAS：586%<br>実質利益：¥1,518,954</p></section>
-<section class='card'><h2>見るべきポイント</h2><p class='bullet'>・5月は広告費¥312,546に対して売上¥1,831,500、ROAS586%で強い状態です。</p><p class='bullet'>・リスト単価は¥2,562で、今期平均より軽い水準です。</p><p class='bullet'>・BE成約率はリスト比4.9%で、ウェビナー着席まで進んだ人に対するBE成約率は推定約20.0%です。</p><p class='bullet'>・ワンタイムはUS1件として計上し、BE購入者に対する成約率は16.7%です。</p></section>
-<section class='card'><h2>今日の具体アクション</h2><p class='bullet'>・広告は停止ではなく継続し、リスト単価¥2,562を維持できるかを見る。</p><p class='bullet'>・BE成約率が高いので、ウェビナー申込・着席までの母数を増やす。</p><p class='bullet'>・プロモX側の申込率47.6%、着席率51.0%を基準に、申込後の着席リマインドを強める。</p><p class='bullet'>・USはワンタイム扱いで追い、BE購入者からの追加成約率を見る。</p></section>
-<section class='card'><h2>本日（2026年5月10日）のレポート報告になります。ご確認ください！</h2><p><a href='https://carpa20186-coder.github.io/report/reports/2026-05-10/contents-evergreen.html'>https://carpa20186-coder.github.io/report/reports/2026-05-10/contents-evergreen.html</a></p><p>また、この数値レポートは、AIによる自動出力です。</p><p>あくまで補助的な参考情報としてご活用いただき、最終的な判断にあたっては、必ず人の目で内容を確認・解釈・推敲したうえで進めるようにしてくださいね。</p></section></div></main>
-  <footer><div class="wrap">Generated on 2026-05-10</div></footer>
+  <div class="shell">
+    <div class="hero">
+      <section class="hero-main">
+        <div class="eyebrow">Daily Report / 2026-05-10</div>
+        <h1>コンテンツエバー<br>日次レポート</h1>
+        <p class="judgement">5月はROASが強い状態です。BE成約率が高いため、ウェビナー申込と着席までの母数を増やす判断で見ます。</p>
+        <div class='kpi-row'><div class='kpi'><span>広告費</span><strong>¥312,546</strong><small>本日更新</small></div><div class='kpi'><span>リスト獲得数</span><strong>122</strong><small>本日更新</small></div><div class='kpi'><span>リスト単価</span><strong>¥2,562</strong><small>本日更新</small></div><div class='kpi'><span>総売上</span><strong>¥1,831,500</strong><small>本日更新</small></div></div>
+      </section>
+      <aside class="hero-side">
+        <div class="hero-side-content">
+          <h2>今日の次アクション</h2>
+          <ul><li>広告は停止ではなく継続し、リスト単価¥2,562を維持できるかを見る。</li><li>BE成約率が高いので、ウェビナー申込・着席までの母数を増やす。</li><li>プロモX側の申込率47.6%、着席率51.0%を基準に、申込後の着席リマインドを強める。</li></ul>
+        </div>
+        <div class="character-wrap">
+          <img src="../../assets/report-character-header.png" alt="レポートを説明するキャラクター">
+        </div>
+      </aside>
+    </div>
+    <section class='card highlight'><h2>5月サマリー</h2><div class='metrics'><div class='metric'><span>広告費</span><strong>¥312,546</strong></div><div class='metric'><span>リスト獲得数</span><strong>122</strong></div><div class='metric'><span>リスト単価</span><strong>¥2,562</strong></div><div class='metric'><span>総売上</span><strong>¥1,831,500</strong></div><div class='metric'><span>ROAS</span><strong>586%</strong></div><div class='metric'><span>実質利益</span><strong>¥1,518,954</strong></div></div><p>広告費：¥312,546<br>リスト獲得数：122<br>リスト単価：¥2,562<br>総売上：¥1,831,500<br>ROAS：586%<br>実質利益：¥1,518,954</p></section><section class='card '><h2>セミナーパフォーマンス</h2><div class='metrics'><div class='metric'><span>ウェビナー申込数</span><strong>約58</strong></div><div class='metric'><span>ウェビナー申込率</span><strong>47.6%</strong></div><div class='metric'><span>ウェビナー申込単価</span><strong>約¥5,389</strong></div><div class='metric'><span>ウェビナー着席数</span><strong>約30</strong></div><div class='metric'><span>ウェビナー着席率</span><strong>51.0%</strong></div><div class='metric'><span>ウェビナー着席単価</span><strong>約¥10,418</strong></div></div><p>ウェビナー申込数：約58<br>ウェビナー申込率：47.6%<br>ウェビナー申込単価：約¥5,389<br>ウェビナー着席数：約30<br>ウェビナー着席率：51.0%<br>ウェビナー着席単価：約¥10,418</p><p>※数値報告スプシの最終報告は「5月9日17時00分」です。<br>※ウェビナー申込・着席は、プロモX側の5月遷移率をもとに補完しています。</p></section><section class='card '><h2>成約</h2><div class='metrics'><div class='metric'><span>成約数</span><strong>6</strong></div><div class='metric'><span>獲得リストに対するBE成約率</span><strong>4.9%</strong></div><div class='metric'><span>ウェビナー申込数に対するBE成約率</span><strong>約10.3%</strong></div><div class='metric'><span>ウェビナー着席数に対するBE成約率</span><strong>約20.0%</strong></div><div class='metric'><span>成約数</span><strong>1</strong></div><div class='metric'><span>リストに対する成約率</span><strong>0.8%</strong></div><div class='metric'><span>成約数</span><strong>1</strong></div><div class='metric'><span>BE購入者に対する成約率</span><strong>16.7%</strong></div><div class='metric'><span>BE</span><strong>¥1,346,400</strong></div><div class='metric'><span>ダウンセル</span><strong>¥9,900</strong></div><div class='metric'><span>ワンタイム</span><strong>¥475,200</strong></div><div class='metric'><span>総売上</span><strong>¥1,831,500</strong></div></div><p class='hint'>・BE</p><p>成約数：6<br>獲得リストに対するBE成約率：4.9%<br>ウェビナー申込数に対するBE成約率：約10.3%<br>ウェビナー着席数に対するBE成約率：約20.0%</p><p class='hint'>・ダウンセル</p><p>成約数：1<br>リストに対する成約率：0.8%</p><p class='hint'>・ワンタイム</p><p>成約数：1<br>BE購入者に対する成約率：16.7%</p><p class='hint'>・売上</p><p>BE：¥1,346,400<br>ダウンセル：¥9,900<br>ワンタイム：¥475,200<br>総売上：¥1,831,500<br>ROAS：586%<br>実質利益：¥1,518,954</p></section><section class='card '><h2>見るべきポイント</h2><p class='hint'>・5月は広告費¥312,546に対して売上¥1,831,500、ROAS586%で強い状態です。</p><p class='hint'>・リスト単価は¥2,562で、今期平均より軽い水準です。</p><p class='hint'>・BE成約率はリスト比4.9%で、ウェビナー着席まで進んだ人に対するBE成約率は推定約20.0%です。</p><p class='hint'>・ワンタイムはUS1件として計上し、BE購入者に対する成約率は16.7%です。</p></section><section class='card action-card'><h2>今日の具体アクション</h2><p class='hint'>・広告は停止ではなく継続し、リスト単価¥2,562を維持できるかを見る。</p><p class='hint'>・BE成約率が高いので、ウェビナー申込・着席までの母数を増やす。</p><p class='hint'>・プロモX側の申込率47.6%、着席率51.0%を基準に、申込後の着席リマインドを強める。</p><p class='hint'>・USはワンタイム扱いで追い、BE購入者からの追加成約率を見る。</p></section><section class='card '><h2>詳細レポート</h2><p><a href='https://carpa20186-coder.github.io/report/reports/2026-05-10/contents-evergreen.html'>https://carpa20186-coder.github.io/report/reports/2026-05-10/contents-evergreen.html</a></p><p>また、この数値レポートは、AIによる自動出力です。</p><p>あくまで補助的な参考情報としてご活用いただき、最終的な判断にあたっては、必ず人の目で内容を確認・解釈・推敲したうえで進めるようにしてくださいね。</p></section>
+    <div class="footer">この数値レポートおよびCR案はAIによる自動出力です。最終判断は人の目で確認・解釈・推敲してください。</div>
+  </div>
 </body>
 </html>
