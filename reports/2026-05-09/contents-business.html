@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>コンテンツビジネス 日次レポート</title>
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #657083;
+      --line: #e2e7ef;
+      --paper: #ffffff;
+      --bg: #f6f7f9;
+      --blue: #2f5f9f;
+      --green: #24735d;
+      --amber: #9b6a24;
+      --shadow: 0 8px 22px rgba(31, 41, 51, .06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+      line-height: 1.75;
+    }
+    .shell { max-width: 1080px; margin: 0 auto; padding: 28px 20px 56px; }
+    .hero, .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .hero { padding: 30px; border-top: 4px solid var(--blue); margin-bottom: 18px; }
+    .eyebrow { color: var(--blue); font-weight: 700; font-size: 13px; margin-bottom: 10px; }
+    h1 { margin: 0 0 12px; font-size: clamp(28px, 4vw, 42px); line-height: 1.15; letter-spacing: 0; }
+    .judgement { margin: 0; max-width: 760px; color: #293648; }
+    .kpis, .metrics, .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; }
+    .kpis { margin-top: 18px; }
+    .metric {
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .metric span { display: block; color: var(--muted); font-size: 12px; }
+    .metric strong { display: block; font-size: 18px; line-height: 1.35; }
+    .card { padding: 24px; margin-bottom: 18px; }
+    .card h2 { margin: 0 0 16px; font-size: 22px; display: flex; gap: 10px; align-items: center; }
+    .card h2::before { content: ""; width: 6px; height: 24px; border-radius: 4px; background: var(--blue); }
+    .highlight { border-top: 4px solid var(--green); }
+    .highlight h2::before { background: var(--green); }
+    .action { border-top: 4px solid var(--amber); }
+    .action h2::before { background: var(--amber); }
+    h3 { margin: 22px 0 10px; font-size: 17px; color: #263446; }
+    .note { color: var(--muted); font-size: 13px; margin-top: 10px; }
+    .pill {
+      display: inline-flex;
+      padding: 5px 9px;
+      border-radius: 6px;
+      background: #eef4ff;
+      color: #536073;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .decision {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffaf2;
+      padding: 14px;
+    }
+    .decision span { color: var(--amber); font-weight: 700; font-size: 13px; }
+    .decision p { margin: 6px 0 0; }
+    @media (max-width: 560px) {
+      .shell { padding: 16px 12px 36px; }
+      .hero, .card { padding: 18px; }
+      .kpis, .metrics, .grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow">Daily Report / 2026-05-09</div>
+      <h1>コンテンツビジネス<br>日次レポート</h1>
+      <p class="judgement">5月は広告費に対して売上が大きく上回っており、ROASは586%です。BE成約が6件、ワンタイム扱いのUSが1件、ダウンセルが1件出ています。申込・着席はプロモX側の遷移率から補完して確認します。</p>
+      <div class="kpis">
+        <div class="metric"><span>広告費</span><strong>¥312,546</strong></div>
+        <div class="metric"><span>リスト獲得数</span><strong>122</strong></div>
+        <div class="metric"><span>総売上</span><strong>¥1,831,500</strong></div>
+        <div class="metric"><span>ROAS</span><strong>586%</strong></div>
+      </div>
+    </section>
+<section class='card highlight'><h2>5月サマリー</h2>
+      <div class="metrics">
+        <div class="metric"><span>広告費</span><strong>¥312,546</strong></div>
+        <div class="metric"><span>リスト獲得数</span><strong>122</strong></div>
+        <div class="metric"><span>リスト単価</span><strong>¥2,562</strong></div>
+        <div class="metric"><span>総売上</span><strong>¥1,831,500</strong></div>
+        <div class="metric"><span>ROAS</span><strong>586%</strong></div>
+        <div class="metric"><span>実質利益</span><strong>¥1,518,954</strong></div>
+      </div>
+    </section><section class='card '><h2>セミナーパフォーマンス</h2>
+      <div class="pill">プロモX側の5月遷移率から補完</div>
+      <div class="metrics">
+        <div class="metric"><span>ウェビナー申込数</span><strong>約58</strong></div>
+        <div class="metric"><span>ウェビナー申込率</span><strong>47.6%</strong></div>
+        <div class="metric"><span>ウェビナー申込単価</span><strong>約¥5,389</strong></div>
+        <div class="metric"><span>ウェビナー着席数</span><strong>約30</strong></div>
+        <div class="metric"><span>ウェビナー着席率</span><strong>51.0%</strong></div>
+        <div class="metric"><span>ウェビナー着席単価</span><strong>約¥10,418</strong></div>
+      </div>
+      <p class="note">広告費・リスト数・売上は実報告シートを正とし、ウェビナー申込/着席はプロモXの5月全体遷移率を実報告側リスト数に掛けて補完しています。</p>
+    </section><section class='card '><h2>成約</h2>
+      <h3>BE</h3>
+      <div class="metrics">
+        <div class="metric"><span>成約数</span><strong>6</strong></div>
+        <div class="metric"><span>リスト比BE成約率</span><strong>4.9%</strong></div>
+        <div class="metric"><span>申込比BE成約率</span><strong>約10.3%</strong></div>
+        <div class="metric"><span>着席比BE成約率</span><strong>約20.0%</strong></div>
+      </div>
+      <h3>ダウンセル</h3>
+      <div class="metrics">
+        <div class="metric"><span>成約数</span><strong>1</strong></div>
+        <div class="metric"><span>リスト比成約率</span><strong>0.8%</strong></div>
+      </div>
+      <h3>ワンタイム</h3>
+      <div class="metrics">
+        <div class="metric"><span>成約数</span><strong>1</strong></div>
+        <div class="metric"><span>BE購入者比成約率</span><strong>16.7%</strong></div>
+      </div>
+    </section><section class='card '><h2>売上</h2>
+      <div class="metrics">
+        <div class="metric"><span>BE</span><strong>¥1,346,400</strong></div>
+        <div class="metric"><span>ダウンセル</span><strong>¥9,900</strong></div>
+        <div class="metric"><span>ワンタイム</span><strong>¥475,200</strong></div>
+        <div class="metric"><span>総売上</span><strong>¥1,831,500</strong></div>
+        <div class="metric"><span>ROAS</span><strong>586%</strong></div>
+        <div class="metric"><span>実質利益</span><strong>¥1,518,954</strong></div>
+      </div>
+    </section><section class='card '><h2>見るべきポイント</h2>
+      <p>5月は広告費¥312,546に対して売上¥1,831,500、ROAS586%でかなり強い状態です。リスト単価は¥2,562で、今期平均¥2,947より軽く、獲得効率も良好です。</p>
+      <p>BE成約率はリスト比4.9%で、過去月と比べても高い水準です。ウェビナー着席まで進んだ人に対するBE成約率は推定約20.0%なので、着席後の成約力は強く見えます。</p>
+      <p>ワンタイムはUS1件として計上します。BE購入者に対するワンタイム成約率は16.7%で、今後はBE後の追加提案導線として追う価値があります。</p>
+    </section><section class='card action'><h2>今日の具体アクション</h2>
+      <div class="grid">
+        <article class="decision"><span>1. 広告は継続</span><p>リスト単価¥2,562を維持できるかを見ながら、停止ではなく継続判断にします。</p></article>
+        <article class="decision"><span>2. 申込と着席を増やす</span><p>BE成約率が高いので、次はウェビナー申込・着席までの母数を増やします。</p></article>
+        <article class="decision"><span>3. リマインドを強める</span><p>プロモX側では申込率47.6%、着席率51.0%なので、申込後の着席リマインドを強めます。</p></article>
+        <article class="decision"><span>4. ワンタイムを追う</span><p>USはワンタイム扱いで、BE購入者からの追加成約率を追います。</p></article>
+      </div>
+    </section>
+    <p class="note">この数値レポートはAIによる自動出力デモです。最終判断は人の目で確認・解釈・推敲してください。</p>
+  </main>
+</body>
+</html>
