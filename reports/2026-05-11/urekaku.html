@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>本日（2026年5月11日）のレポート報告になります。ご確認ください！</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2933;
+      --muted: #6b7482;
+      --line: #e3e7ee;
+      --paper: #ffffff;
+      --bg: #f6f7f9;
+      --blue: #2f5f9f;
+      --navy: #263446;
+      --green: #24735d;
+      --amber: #9b6a24;
+      --soft-blue: #eef4ff;
+      --soft-green: #edf8f4;
+      --shadow: 0 8px 22px rgba(31, 41, 51, .06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+      line-height: 1.75;
+    }
+    .shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 22px 56px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+    .hero-main, .hero-side, .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .hero-main {
+      padding: 30px;
+      border-top: 4px solid var(--blue);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+    .judgement {
+      margin: 0;
+      max-width: 760px;
+      font-size: 16px;
+      color: #293648;
+    }
+    .hero-side {
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 118px;
+      gap: 12px;
+      align-items: end;
+      background:
+        radial-gradient(circle at 92% 18%, rgba(47, 95, 159, .10), transparent 32%),
+        var(--paper);
+    }
+    .hero-side h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+    .hero-side ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .hero-side li {
+      margin-bottom: 10px;
+    }
+    .hero-side-content {
+      position: relative;
+      z-index: 1;
+    }
+    .character-wrap {
+      align-self: end;
+      justify-self: center;
+      position: relative;
+      z-index: 0;
+    }
+    .character-wrap img {
+      display: block;
+      width: min(130px, 30vw);
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 16px rgba(31, 41, 51, .14));
+    }
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .kpi {
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .kpi span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .kpi strong {
+      display: block;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.25;
+    }
+    .kpi small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .card {
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+    .card h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    .card h2::before {
+      content: "";
+      width: 6px;
+      height: 24px;
+      border-radius: 4px;
+      background: var(--blue);
+    }
+    .highlight {
+      border-top: 4px solid var(--green);
+    }
+    .highlight h2::before {
+      background: var(--green);
+    }
+    .action-card {
+      border-top: 4px solid var(--amber);
+    }
+    .action-card h2::before {
+      background: var(--amber);
+    }
+    .period, .section-lead, .section-period {
+      color: var(--muted);
+      margin-top: -6px;
+    }
+    .section-period {
+      display: inline-flex;
+      margin-bottom: 16px;
+      padding: 5px 9px;
+      border-radius: 6px;
+      background: #f1f5fb;
+      color: #536073;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+    .spotlight {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 10px;
+    }
+    .metric {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 17px;
+    }
+    .chart-card {
+      margin: 18px 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .chart-card h3, .funnel-visual h3 {
+      margin-top: 0;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: minmax(170px, 1.1fr) minmax(180px, 2fr) 90px;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid #edf0f5;
+    }
+    .bar-row:last-child {
+      border-bottom: 0;
+    }
+    .bar-label {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--navy);
+    }
+    .bar-track {
+      height: 12px;
+      border-radius: 999px;
+      background: #e9eef6;
+      overflow: hidden;
+    }
+    .bar-track span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--green), #5ba98d);
+    }
+    .bar-value {
+      text-align: right;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .chart-note {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    h3 {
+      margin: 24px 0 10px;
+      font-size: 17px;
+      color: var(--navy);
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+    th, td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    th {
+      position: sticky;
+      left: 0;
+      background: #f8faff;
+      max-width: 360px;
+      white-space: normal;
+      font-weight: 650;
+    }
+    tr:last-child th, tr:last-child td {
+      border-bottom: 0;
+    }
+    .mobile-table-cards {
+      display: none;
+    }
+    .mobile-row-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .mobile-row-card h4 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--navy);
+    }
+    .mobile-row-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .mini-metric {
+      border: 1px solid #e6eaf1;
+      border-radius: 7px;
+      background: white;
+      padding: 8px 9px;
+      min-width: 0;
+    }
+    .mini-metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+    .mini-metric strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.25;
+      color: var(--ink);
+      overflow-wrap: anywhere;
+    }
+    .body p, .card p {
+      margin: 0 0 15px;
+    }
+    .bullet {
+      padding: 13px 15px;
+      border-left: 4px solid var(--blue);
+      background: #f8faff;
+      border-radius: 6px;
+    }
+    .axis-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .axis {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      padding: 16px;
+    }
+    .funnel table {
+      min-width: 720px;
+    }
+    .funnel thead th {
+      position: static;
+      background: #eef4ff;
+      color: var(--navy);
+      font-weight: 700;
+    }
+    .funnel tbody th {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .funnel td {
+      font-variant-numeric: tabular-nums;
+    }
+    .hint {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .funnel-visual {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .funnel-step {
+      display: grid;
+      grid-template-columns: 120px minmax(180px, 1fr) 92px;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid #edf0f5;
+    }
+    .funnel-step:last-child {
+      border-bottom: 0;
+    }
+    .funnel-name {
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .funnel-bar {
+      height: 22px;
+      border-radius: 6px;
+      background: #e9eef6;
+      overflow: hidden;
+    }
+    .funnel-bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), #6d91ca);
+    }
+    .funnel-num {
+      text-align: right;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .funnel-num small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .readable {
+      max-width: 860px;
+    }
+    .readable p {
+      font-size: 15px;
+      line-height: 1.9;
+      margin-bottom: 14px;
+    }
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .decision {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffaf2;
+      padding: 14px;
+    }
+    .decision span {
+      display: inline-block;
+      color: var(--amber);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .decision p {
+      margin: 0;
+      line-height: 1.75;
+    }
+    .axis h3 {
+      margin-top: 0;
+      color: var(--blue);
+    }
+    .footer {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 18px;
+    }
+    @media (max-width: 900px) {
+      .hero, .axis-grid, .decision-grid { grid-template-columns: 1fr; }
+      .kpi-row, .spotlight { grid-template-columns: 1fr 1fr; }
+      .bar-row, .funnel-step { grid-template-columns: 1fr; gap: 6px; }
+      .bar-value, .funnel-num { text-align: left; }
+      .hero-side { grid-template-columns: minmax(0, 1fr) 104px; }
+    }
+    @media (max-width: 560px) {
+      .shell { padding: 16px 12px 36px; }
+      .hero-main, .hero-side, .card { padding: 18px; }
+      .kpi-row, .spotlight, .metrics { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .hero-side { grid-template-columns: 1fr; }
+      .character-wrap {
+        justify-self: end;
+        margin-top: -8px;
+      }
+      .character-wrap img { width: 92px; }
+      .table-wrap { display: none; }
+      .mobile-table-cards { display: block; }
+      th, td { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="hero">
+      <section class="hero-main">
+        <div class="eyebrow">Daily Report / 2026-05-11</div>
+        <h1>売れる企画<br>日次レポート</h1>
+        <p class="judgement">登録獲得は良好。セミナー登録までは強く、次は視聴と成約導線を伸ばす局面です。</p>
+        <div class='kpi-row'><div class='metric'><span>消化</span><strong>¥284,200</strong></div><div class='metric'><span>CTR</span><strong>1.5%</strong></div><div class='metric'><span>CVR</span><strong>12.2%</strong></div><div class='metric'><span>CPA</span><strong>¥1,596</strong></div></div>
+      </section>
+      <aside class="hero-side">
+        <div class="hero-side-content">
+          <h2>今日の次アクション</h2>
+          <ul><li>直近3日は案件全体CPA¥1,187、実CPA¥1,879。月次CPAも良好なので、全体としては継続寄りで見る。</li><li>直近で効率が良いのは 220複製｜Phase3_長倉さん実写型（実CPA¥768）、Phase1_AI×note（実CPA¥1,154）。登録後の質も見ながら、効率が出ている実写型/既存勝ち筋を優先維持。</li><li>一方で Phase1_kindleで1冊も売れない（CPA¥2,817）、220複製｜Phase4_長倉さん実写型_短文テキスト（CPA¥2,298） は消化に対して実登録が弱い。停止ではなく、まずは予算配分を軽くして訴求またはLP接続を確認。</li></ul>
+        </div>
+        <div class="character-wrap">
+          <img src="../../assets/report-character-header.png" alt="レポートを説明するキャラクター">
+        </div>
+      </aside>
+    </div>
+    <section class='card highlight'><h2>今月サマリー（2026年5月）</h2><div class='metrics'><div class='metric'><span>消化</span><strong>¥284,200</strong></div><div class='metric'><span>CTR</span><strong>1.5%</strong></div><div class='metric'><span>CVR</span><strong>12.2%</strong></div><div class='metric'><span>CPA</span><strong>¥1,596</strong></div><div class='metric'><span>申込CPO</span><strong>¥2,186</strong></div><div class='metric'><span>着席CPO</span><strong>¥4,583</strong></div><div class='metric'><span>登録</span><strong>178</strong></div><div class='metric'><span>購入</span><strong>2</strong></div><div class='metric'><span>売上</span><strong>¥237,600</strong></div><div class='metric'><span>ROAS</span><strong>83.6%</strong></div></div><p>消化：¥284,200<br>CTR：1.5%<br>CVR：12.2%<br>CPA：¥1,596<br>申込CPO：¥2,186<br>着席CPO：¥4,583<br>登録：178<br>購入：2<br>売上：¥237,600<br>ROAS：83.6%</p></section><section class='card '><h2>累計サマリー（直近12ヶ月）</h2><div class='metrics'><div class='metric'><span>消化</span><strong>¥3,163,682</strong></div><div class='metric'><span>平均CPA</span><strong>¥1,845</strong></div><div class='metric'><span>登録</span><strong>1,714</strong></div><div class='metric'><span>購入</span><strong>41</strong></div><div class='metric'><span>売上</span><strong>¥4,791,600</strong></div><div class='metric'><span>ROAS</span><strong>151.5%</strong></div></div><p>消化：¥3,163,682<br>平均CPA：¥1,845<br>登録：1,714<br>購入：41<br>売上：¥4,791,600<br>ROAS：151.5%</p></section><section class='card '><h2>アクティブCR</h2><p class='hint'>・220【売れる企画】ノンタゲ：消化¥31,085｜登録23｜CPA¥1,352｜CTR1.8%｜CVR16.8%</p><p class='hint'>・224【売れる企画】220別タゲ：消化¥30,626｜登録26｜CPA¥1,178｜CTR1.7%｜CVR21.8%</p><p class='hint'>・235【売れる企画】220複製｜Phase3_長倉さん実写型：消化¥31,133｜登録33｜CPA¥943｜CTR1.7%｜CVR16.5%</p><p class='hint'>・246【売れる企画】220複製｜Phase4_長倉さん実写型_短文テキスト：消化¥31,007｜登録26｜CPA¥1,193｜CTR1.5%｜CVR14.3%</p><p class='hint'>・247【売れる企画】220複製｜Phase4_長倉さん実写型 _長文テキスト：消化¥31,067｜登録23｜CPA¥1,351｜CTR1.9%｜CVR13.2%</p><p class='hint'>・249【売れる企画】220複製｜Phase5_長倉さん実写型_ビジネス：消化¥31,023｜登録13｜CPA¥2,386｜CTR1.8%｜CVR7.6%</p><p class='hint'>・253【売れる企画】Phase1_AI×note：消化¥30,790｜登録10｜CPA¥3,079｜CTR1.7%｜CVR9.1%</p><p class='hint'>・254【売れる企画】Phase1_AI×note：消化¥31,794｜登録16｜CPA¥1,987｜CTR2.1%｜CVR12.4%</p></section><section class='card highlight'><h2>直近3日パフォーマンス</h2><div class='metrics'><div class='metric'><span>対象期間</span><strong>2026-05-09 / 2026-05-10 / 2026-05-11</strong></div><div class='metric'><span>2026-05-09</span><strong>消化¥25,942｜実登録14｜実CPA¥1,853｜CTR1.0%｜CVR18.4%</strong></div><div class='metric'><span>2026-05-10</span><strong>消化¥32,029｜実登録16｜実CPA¥2,002｜CTR1.3%｜CVR12.0%</strong></div><div class='metric'><span>2026-05-11</span><strong>消化¥9,677｜実登録6｜実CPA¥1,613｜CTR1.0%｜CVR10.7%</strong></div></div><p>対象期間：2026-05-09 / 2026-05-10 / 2026-05-11</p><p>案件全体<br>消化¥67,648｜実登録36｜実CPA¥1,879｜CTR1.1%｜CVR14.0%</p><p>日別・案件全体<br>2026-05-09：消化¥25,942｜実登録14｜実CPA¥1,853｜CTR1.0%｜CVR18.4%<br>2026-05-10：消化¥32,029｜実登録16｜実CPA¥2,002｜CTR1.3%｜CVR12.0%<br>2026-05-11：消化¥9,677｜実登録6｜実CPA¥1,613｜CTR1.0%｜CVR10.7%</p><p>CR別（直近3日合計）</p><p class='hint'>・256【売れる企画】Phase1_Udemy受講者が増えない：消化¥8,867｜実登録2｜実CPA¥4,434｜CTR0.5%｜CVR10.6%</p><p class='hint'>・253【売れる企画】Phase1_AI×note：消化¥7,092｜実登録3｜実CPA¥2,364｜CTR1.4%｜CVR17.9%</p><p class='hint'>・247【売れる企画】220複製｜Phase4_長倉さん実写型 _長文テキスト：消化¥7,091｜実登録4｜実CPA¥1,773｜CTR1.8%｜CVR11.4%</p><p class='hint'>・220【売れる企画】ノンタゲ：消化¥7,071｜実登録6｜実CPA¥1,178｜CTR1.9%｜CVR16.7%</p><p class='hint'>・249【売れる企画】220複製｜Phase5_長倉さん実写型_ビジネス：消化¥7,029｜実登録2｜実CPA¥3,514｜CTR1.6%｜CVR7.7%</p><p class='hint'>・224【売れる企画】220別タゲ：消化¥6,947｜実登録3｜実CPA¥2,316｜CTR1.4%｜CVR16.0%</p><p class='hint'>・254【売れる企画】Phase1_AI×note：消化¥6,925｜実登録6｜実CPA¥1,154｜CTR2.1%｜CVR30.3%</p><p class='hint'>・235【売れる企画】220複製｜Phase3_長倉さん実写型：消化¥6,916｜実登録9｜実CPA¥768｜CTR1.9%｜CVR20.0%</p></section><section class='card '><h2>CR別ファネル通過率</h2><div class='metrics'><div class='metric'><span>220</span><strong>n=18｜セミナー登録：56%｜ウェビナー視聴：39%｜昨日登録：11%</strong></div><div class='metric'><span>223</span><strong>n=1 ※参考値｜セミナー登録：100%｜ウェビナー視聴：100%｜昨日登録：0%</strong></div><div class='metric'><span>224</span><strong>n=19｜セミナー登録：58%｜ウェビナー視聴：16%｜昨日登録：16%</strong></div><div class='metric'><span>228</span><strong>n=1 ※参考値｜セミナー登録：100%｜ウェビナー視聴：0%｜昨日登録：0%</strong></div><div class='metric'><span>235</span><strong>n=21｜セミナー登録：67%｜ウェビナー視聴：24%｜昨日登録：43%</strong></div><div class='metric'><span>236</span><strong>n=3 ※参考値｜セミナー登録：33%｜ウェビナー視聴：0%｜昨日登録：33%</strong></div><div class='metric'><span>239</span><strong>n=1 ※参考値｜セミナー登録：100%｜ウェビナー視聴：0%｜昨日登録：100%</strong></div><div class='metric'><span>246</span><strong>n=19｜セミナー登録：63%｜ウェビナー視聴：26%｜昨日登録：21%</strong></div><div class='metric'><span>247</span><strong>n=16｜セミナー登録：56%｜ウェビナー視聴：31%｜昨日登録：25%</strong></div><div class='metric'><span>248</span><strong>n=5 ※参考値｜セミナー登録：100%｜ウェビナー視聴：60%｜昨日登録：20%</strong></div><div class='metric'><span>249</span><strong>n=10｜セミナー登録：80%｜ウェビナー視聴：20%｜昨日登録：20%</strong></div><div class='metric'><span>251</span><strong>n=2 ※参考値｜セミナー登録：100%｜ウェビナー視聴：100%｜昨日登録：0%</strong></div></div><p>220：n=18｜セミナー登録：56%｜ウェビナー視聴：39%｜昨日登録：11%<br>223：n=1 ※参考値｜セミナー登録：100%｜ウェビナー視聴：100%｜昨日登録：0%<br>224：n=19｜セミナー登録：58%｜ウェビナー視聴：16%｜昨日登録：16%<br>228：n=1 ※参考値｜セミナー登録：100%｜ウェビナー視聴：0%｜昨日登録：0%<br>235：n=21｜セミナー登録：67%｜ウェビナー視聴：24%｜昨日登録：43%<br>236：n=3 ※参考値｜セミナー登録：33%｜ウェビナー視聴：0%｜昨日登録：33%<br>239：n=1 ※参考値｜セミナー登録：100%｜ウェビナー視聴：0%｜昨日登録：100%<br>246：n=19｜セミナー登録：63%｜ウェビナー視聴：26%｜昨日登録：21%<br>247：n=16｜セミナー登録：56%｜ウェビナー視聴：31%｜昨日登録：25%<br>248：n=5 ※参考値｜セミナー登録：100%｜ウェビナー視聴：60%｜昨日登録：20%<br>249：n=10｜セミナー登録：80%｜ウェビナー視聴：20%｜昨日登録：20%<br>251：n=2 ※参考値｜セミナー登録：100%｜ウェビナー視聴：100%｜昨日登録：0%<br>253：n=6 ※参考値｜セミナー登録：83%｜ウェビナー視聴：67%｜昨日登録：0%<br>254：n=8 ※参考値｜セミナー登録：62%｜ウェビナー視聴：38%｜昨日登録：25%<br>256：n=3 ※参考値｜セミナー登録：67%｜ウェビナー視聴：33%｜昨日登録：67%</p></section><section class='card '><h2>LINEシナリオ</h2><div class='metrics'><div class='metric'><span>登録</span><strong>133人</strong></div><div class='metric'><span>セミナー登録</span><strong>87人（65%）</strong></div><div class='metric'><span>ウェビナー視聴</span><strong>41人（31%）</strong></div><div class='metric'><span>購入</span><strong>2人（2%）</strong></div><div class='metric'><span>昨日登録</span><strong>31人</strong></div></div><p>登録：133人<br>↓<br>セミナー登録：87人（65%）<br>↓<br>ウェビナー視聴：41人（31%）<br>↓<br>購入：2人（2%）<br>昨日登録：31人</p></section><section class='card '><h2>数値まとめ・コメント</h2><p>登録CPAは¥1,596で、登録獲得の効率は良好です。LMESではセミナー登録率65%、ウェビナー視聴率31%。登録後のセミナー登録までは強く、次は視聴と成約導線を丁寧に伸ばしたい局面です。</p></section><section class='card '><h2>ターゲットインサイト</h2><p>売れる企画のターゲットは、コンテンツ販売や無形商材をすでに始めている、または始めようとしている層です。Brain/Tips/noteで教材や有料記事を出したい、Xで発信している、AIで教材の形は作れる、でも「なぜ売れる企画にならないのか」で止まっている人を見ます。</p><p>表の悩みは「何を売ればいいかわからない」「AIで作っても薄い」「noteかBrainかTipsか迷う」です。ただ深層では、商品設計の問題というより、自分の経験に値段をつける怖さ、売れなかった時にX上で実力不足が見える怖さ、無料発信と有料商品の境界線が引けない不安があります。</p><p>今月は登録CPAが軽く、セミナー登録率も高いため、企画への関心は強いです。既存の延長では、すでに当たりが見えている「note販売の企画」「AI×note」「有料noteを売れる商品にする」という勝ち筋を主軸に横展開します。特に `Phase1_AI×note` はCPAだけを見ると重めですが、ファネルではセミナー登録率・視聴率が相対的に強く、テーマ関心はあると見ます。</p><p>一方で、note販売だけに寄せすぎると新しい母数の発見が弱くなります。新規開拓では、コンテンツ販売者に限らず、広告・LP・セミナー・講座などを動かしているが成果が伸びない事業者層にも広げたいです。次のCRでは“noteを書こう”ではなく、「有料noteが売れる企画になっているか」「誰に何を約束するかで販売結果が変わる」という企画の本質に寄せる方が、案件内容と噛み合います。</p></section><section class='card '><h2>次のCR訴求軸案</h2><p>今回は、登録効率の良さを活かしつつ、既存勝ち筋の横展開と新規開拓を分けて検証します。</p><p>1. 横展開｜note販売の企画設計</p><p>フック：<br>有料noteを書いた。<br>でも、なぜ売れないのか分からない。</p><p>オファー明記：<br>note販売を伸ばす<br>売れる企画の作り方</p><p>狙い：<br>既存の当たり訴求であるnote販売の企画を主軸に横展開する。noteの書き方ではなく、誰に何を約束する商品なのかを設計する必要性を出す。</p><p>2. 横展開｜AI×noteが薄くなる問題</p><p>フック：<br>AIでnoteは書ける。<br>でも、売れる企画にはならない。</p><p>オファー明記：<br>AI時代のnote販売に必要な<br>売れる企画の作り方</p><p>狙い：<br>`AI×note` の既存訴求を深める。AIで文章は作れても、読者が買う理由や約束が弱ければ売れないため、制作術ではなく企画設計へ接続する。</p><p>3. 新規開拓｜集客しても売れない事業者</p><p>フック：<br>広告もLPも作った。<br>でも、なぜ売れないのか分からない。</p><p>オファー明記：<br>売れる切り口を見直す<br>企画の型を無料で学ぶ</p><p>狙い：<br>コンテンツ販売者だけでなく、広告・LP・セミナー・講座などを動かしているが成果が伸びない事業者層を開拓する。制作物の改善ではなく、企画の切り口と約束設計がズレている可能性を提示する。</p></section><section class='card action-card'><h2>参考アクションプラン</h2><p class='hint'>・直近3日は案件全体CPA¥1,187、実CPA¥1,879。月次CPAも良好なので、全体としては継続寄りで見る。</p><p class='hint'>・直近で効率が良いのは 220複製｜Phase3_長倉さん実写型（実CPA¥768）、Phase1_AI×note（実CPA¥1,154）。登録後の質も見ながら、効率が出ている実写型/既存勝ち筋を優先維持。</p><p class='hint'>・一方で Phase1_kindleで1冊も売れない（CPA¥2,817）、220複製｜Phase4_長倉さん実写型_短文テキスト（CPA¥2,298） は消化に対して実登録が弱い。停止ではなく、まずは予算配分を軽くして訴求またはLP接続を確認。</p><p class='hint'>・LINEではセミナー登録率65%まで強いので、広告側の改善だけでなくウェビナー視聴率31%から成約までのリマインド/期待値づくりを優先する。</p></section><section class='card '><h2>詳細レポート</h2><p><a href='https://carpa20186-coder.github.io/report/reports/2026-05-11/urekaku.html'>https://carpa20186-coder.github.io/report/reports/2026-05-11/urekaku.html</a></p><p>また、この数値レポートは、AIによる自動出力です。</p><p>あくまで補助的な参考情報としてご活用いただき、最終的な判断にあたっては、必ず人の目で内容を確認・解釈・推敲したうえで進めるようにしてくださいね。</p></section>
+    <div class="footer">この数値レポートおよびCR案はAIによる自動出力です。最終判断は人の目で確認・解釈・推敲してください。</div>
+  </div>
+</body>
+</html>

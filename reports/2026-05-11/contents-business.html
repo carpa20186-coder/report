@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>本日（2026年5月11日）のレポート報告になります。ご確認ください！</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2933;
+      --muted: #6b7482;
+      --line: #e3e7ee;
+      --paper: #ffffff;
+      --bg: #f6f7f9;
+      --blue: #2f5f9f;
+      --navy: #263446;
+      --green: #24735d;
+      --amber: #9b6a24;
+      --soft-blue: #eef4ff;
+      --soft-green: #edf8f4;
+      --shadow: 0 8px 22px rgba(31, 41, 51, .06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+      line-height: 1.75;
+    }
+    .shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 22px 56px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+    .hero-main, .hero-side, .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .hero-main {
+      padding: 30px;
+      border-top: 4px solid var(--blue);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+    .judgement {
+      margin: 0;
+      max-width: 760px;
+      font-size: 16px;
+      color: #293648;
+    }
+    .hero-side {
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 118px;
+      gap: 12px;
+      align-items: end;
+      background:
+        radial-gradient(circle at 92% 18%, rgba(47, 95, 159, .10), transparent 32%),
+        var(--paper);
+    }
+    .hero-side h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+    .hero-side ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .hero-side li {
+      margin-bottom: 10px;
+    }
+    .hero-side-content {
+      position: relative;
+      z-index: 1;
+    }
+    .character-wrap {
+      align-self: end;
+      justify-self: center;
+      position: relative;
+      z-index: 0;
+    }
+    .character-wrap img {
+      display: block;
+      width: min(130px, 30vw);
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 16px rgba(31, 41, 51, .14));
+    }
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .kpi {
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .kpi span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .kpi strong {
+      display: block;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.25;
+    }
+    .kpi small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .card {
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+    .card h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    .card h2::before {
+      content: "";
+      width: 6px;
+      height: 24px;
+      border-radius: 4px;
+      background: var(--blue);
+    }
+    .highlight {
+      border-top: 4px solid var(--green);
+    }
+    .highlight h2::before {
+      background: var(--green);
+    }
+    .action-card {
+      border-top: 4px solid var(--amber);
+    }
+    .action-card h2::before {
+      background: var(--amber);
+    }
+    .period, .section-lead, .section-period {
+      color: var(--muted);
+      margin-top: -6px;
+    }
+    .section-period {
+      display: inline-flex;
+      margin-bottom: 16px;
+      padding: 5px 9px;
+      border-radius: 6px;
+      background: #f1f5fb;
+      color: #536073;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+    .spotlight {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 10px;
+    }
+    .metric {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 17px;
+    }
+    .chart-card {
+      margin: 18px 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .chart-card h3, .funnel-visual h3 {
+      margin-top: 0;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: minmax(170px, 1.1fr) minmax(180px, 2fr) 90px;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid #edf0f5;
+    }
+    .bar-row:last-child {
+      border-bottom: 0;
+    }
+    .bar-label {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--navy);
+    }
+    .bar-track {
+      height: 12px;
+      border-radius: 999px;
+      background: #e9eef6;
+      overflow: hidden;
+    }
+    .bar-track span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--green), #5ba98d);
+    }
+    .bar-value {
+      text-align: right;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .chart-note {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    h3 {
+      margin: 24px 0 10px;
+      font-size: 17px;
+      color: var(--navy);
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+    th, td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    th {
+      position: sticky;
+      left: 0;
+      background: #f8faff;
+      max-width: 360px;
+      white-space: normal;
+      font-weight: 650;
+    }
+    tr:last-child th, tr:last-child td {
+      border-bottom: 0;
+    }
+    .mobile-table-cards {
+      display: none;
+    }
+    .mobile-row-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .mobile-row-card h4 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--navy);
+    }
+    .mobile-row-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .mini-metric {
+      border: 1px solid #e6eaf1;
+      border-radius: 7px;
+      background: white;
+      padding: 8px 9px;
+      min-width: 0;
+    }
+    .mini-metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+    .mini-metric strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.25;
+      color: var(--ink);
+      overflow-wrap: anywhere;
+    }
+    .body p, .card p {
+      margin: 0 0 15px;
+    }
+    .bullet {
+      padding: 13px 15px;
+      border-left: 4px solid var(--blue);
+      background: #f8faff;
+      border-radius: 6px;
+    }
+    .axis-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .axis {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      padding: 16px;
+    }
+    .funnel table {
+      min-width: 720px;
+    }
+    .funnel thead th {
+      position: static;
+      background: #eef4ff;
+      color: var(--navy);
+      font-weight: 700;
+    }
+    .funnel tbody th {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .funnel td {
+      font-variant-numeric: tabular-nums;
+    }
+    .hint {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .funnel-visual {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .funnel-step {
+      display: grid;
+      grid-template-columns: 120px minmax(180px, 1fr) 92px;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid #edf0f5;
+    }
+    .funnel-step:last-child {
+      border-bottom: 0;
+    }
+    .funnel-name {
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .funnel-bar {
+      height: 22px;
+      border-radius: 6px;
+      background: #e9eef6;
+      overflow: hidden;
+    }
+    .funnel-bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), #6d91ca);
+    }
+    .funnel-num {
+      text-align: right;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .funnel-num small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .readable {
+      max-width: 860px;
+    }
+    .readable p {
+      font-size: 15px;
+      line-height: 1.9;
+      margin-bottom: 14px;
+    }
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .decision {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffaf2;
+      padding: 14px;
+    }
+    .decision span {
+      display: inline-block;
+      color: var(--amber);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .decision p {
+      margin: 0;
+      line-height: 1.75;
+    }
+    .axis h3 {
+      margin-top: 0;
+      color: var(--blue);
+    }
+    .footer {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 18px;
+    }
+    @media (max-width: 900px) {
+      .hero, .axis-grid, .decision-grid { grid-template-columns: 1fr; }
+      .kpi-row, .spotlight { grid-template-columns: 1fr 1fr; }
+      .bar-row, .funnel-step { grid-template-columns: 1fr; gap: 6px; }
+      .bar-value, .funnel-num { text-align: left; }
+      .hero-side { grid-template-columns: minmax(0, 1fr) 104px; }
+    }
+    @media (max-width: 560px) {
+      .shell { padding: 16px 12px 36px; }
+      .hero-main, .hero-side, .card { padding: 18px; }
+      .kpi-row, .spotlight, .metrics { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .hero-side { grid-template-columns: 1fr; }
+      .character-wrap {
+        justify-self: end;
+        margin-top: -8px;
+      }
+      .character-wrap img { width: 92px; }
+      .table-wrap { display: none; }
+      .mobile-table-cards { display: block; }
+      th, td { font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="hero">
+      <section class="hero-main">
+        <div class="eyebrow">Daily Report / 2026-05-11</div>
+        <h1>AIコンテンツエバー<br>日次レポート</h1>
+        <p class="judgement">母数はまだ小さいため、50代・再雇用系の反応を見ながら登録後の参加理由づけを強めます。</p>
+        <div class='kpi-row'><div class='metric'><span>消化</span><strong>¥64,391</strong></div><div class='metric'><span>CTR</span><strong>3.5%</strong></div><div class='metric'><span>CVR</span><strong>2.1%</strong></div><div class='metric'><span>CPA</span><strong>¥5,853</strong></div></div>
+      </section>
+      <aside class="hero-side">
+        <div class="hero-side-content">
+          <h2>今日の次アクション</h2>
+          <ul><li>直近3日は案件全体の実CPA¥6,572。月次母数はまだ小さいため、短期の良し悪しを見つつも大きな判断は急がない。</li><li>直近で効率が見えるのは 50代向け| 再雇用| 年配向けLP | ノンタゲ（実CPA¥6,572）。特に50代/再雇用系の反応が維持できるかを優先確認する。</li><li>一方で 実登録0の目立つCRはなし は登録後の質がまだ見えていない。訴求を止めるより、期待値とLP接続を見直しながら少額で検証する。</li></ul>
+        </div>
+        <div class="character-wrap">
+          <img src="../../assets/report-character-header.png" alt="レポートを説明するキャラクター">
+        </div>
+      </aside>
+    </div>
+    <section class='card highlight'><h2>今月サマリー（2026年5月）</h2><div class='metrics'><div class='metric'><span>消化</span><strong>¥64,391</strong></div><div class='metric'><span>CTR</span><strong>3.5%</strong></div><div class='metric'><span>CVR</span><strong>2.1%</strong></div><div class='metric'><span>CPA</span><strong>¥5,853</strong></div><div class='metric'><span>申込CPO</span><strong>¥12,878</strong></div><div class='metric'><span>着席CPO</span><strong>¥21,463</strong></div><div class='metric'><span>登録</span><strong>11</strong></div><div class='metric'><span>購入</span><strong>0</strong></div><div class='metric'><span>売上</span><strong>¥0</strong></div><div class='metric'><span>ROAS</span><strong>0.0%</strong></div></div><p>消化：¥64,391<br>CTR：3.5%<br>CVR：2.1%<br>CPA：¥5,853<br>申込CPO：¥12,878<br>着席CPO：¥21,463<br>登録：11<br>購入：0<br>売上：¥0<br>ROAS：0.0%</p></section><section class='card '><h2>累計サマリー（直近12ヶ月）</h2><div class='metrics'><div class='metric'><span>消化</span><strong>¥94,948</strong></div><div class='metric'><span>平均CPA</span><strong>¥5,934</strong></div><div class='metric'><span>登録</span><strong>16</strong></div><div class='metric'><span>購入</span><strong>0</strong></div><div class='metric'><span>売上</span><strong>¥0</strong></div><div class='metric'><span>ROAS</span><strong>0.0%</strong></div></div><p>消化：¥94,948<br>平均CPA：¥5,934<br>登録：16<br>購入：0<br>売上：¥0<br>ROAS：0.0%</p></section><section class='card '><h2>アクティブCR</h2><p class='hint'>・ai006【ai_コンテンツビジネス】50代向け| 再雇用| 年配向けLP | ノンタゲ：消化¥20,623｜登録7｜CPA¥2,946｜CTR2.9%｜CVR4.7%</p></section><section class='card highlight'><h2>直近3日パフォーマンス</h2><div class='metrics'><div class='metric'><span>対象期間</span><strong>2026-05-09 / 2026-05-10 / 2026-05-11</strong></div><div class='metric'><span>2026-05-09</span><strong>消化¥2,447｜実登録1｜実CPA¥2,447｜CTR2.6%｜CVR35.7%</strong></div><div class='metric'><span>2026-05-10</span><strong>消化¥3,050｜実登録0｜実CPA-｜CTR3.2%｜CVR23.8%</strong></div><div class='metric'><span>2026-05-11</span><strong>消化¥1,075｜実登録0｜実CPA-｜CTR3.3%｜CVR20.0%</strong></div></div><p>対象期間：2026-05-09 / 2026-05-10 / 2026-05-11</p><p>案件全体<br>消化¥6,572｜実登録1｜実CPA¥6,572｜CTR3.0%｜CVR26.7%</p><p>日別・案件全体<br>2026-05-09：消化¥2,447｜実登録1｜実CPA¥2,447｜CTR2.6%｜CVR35.7%<br>2026-05-10：消化¥3,050｜実登録0｜実CPA-｜CTR3.2%｜CVR23.8%<br>2026-05-11：消化¥1,075｜実登録0｜実CPA-｜CTR3.3%｜CVR20.0%</p><p>CR別（直近3日合計）</p><p class='hint'>・ai006【ai_コンテンツビジネス】50代向け| 再雇用| 年配向けLP | ノンタゲ：消化¥6,572｜実登録1｜実CPA¥6,572｜CTR3.0%｜CVR26.7%</p></section><section class='card '><h2>CR別ファネル通過率</h2><div class='metrics'><div class='metric'><span>003（606）</span><strong>n=5 ※参考値｜動画タップ：80%｜セミナー申込：40%｜セミナー着席：20%｜成約：0%</strong></div><div class='metric'><span>001（604）</span><strong>n=1 ※参考値｜動画タップ：100%｜セミナー申込：100%｜セミナー着席：100%｜成約：0%</strong></div><div class='metric'><span>ai006</span><strong>n=4 ※参考値｜動画タップ：50%｜セミナー申込：50%｜セミナー着席：25%｜成約：0%</strong></div><div class='metric'><span>ai007</span><strong>n=1 ※参考値｜動画タップ：100%｜セミナー申込：0%｜セミナー着席：0%｜成約：0%</strong></div><div class='metric'><span>ai008</span><strong>n=1 ※参考値｜動画タップ：0%｜セミナー申込：0%｜セミナー着席：0%｜成約：0%</strong></div></div><p>003（606）：n=5 ※参考値｜動画タップ：80%｜セミナー申込：40%｜セミナー着席：20%｜成約：0%<br>001（604）：n=1 ※参考値｜動画タップ：100%｜セミナー申込：100%｜セミナー着席：100%｜成約：0%<br>ai006：n=4 ※参考値｜動画タップ：50%｜セミナー申込：50%｜セミナー着席：25%｜成約：0%<br>ai007：n=1 ※参考値｜動画タップ：100%｜セミナー申込：0%｜セミナー着席：0%｜成約：0%<br>ai008：n=1 ※参考値｜動画タップ：0%｜セミナー申込：0%｜セミナー着席：0%｜成約：0%</p></section><section class='card '><h2>LINEシナリオ</h2><div class='metrics'><div class='metric'><span>登録</span><strong>12人</strong></div><div class='metric'><span>動画タップ</span><strong>8人（67%）</strong></div><div class='metric'><span>セミナー申込</span><strong>5人（42%）</strong></div><div class='metric'><span>セミナー着席</span><strong>3人（25%）</strong></div><div class='metric'><span>購入</span><strong>0人（0%）</strong></div></div><p>登録：12人<br>↓<br>動画タップ：8人（67%）<br>↓<br>セミナー申込：5人（42%）<br>↓<br>セミナー着席：3人（25%）<br>↓<br>購入：0人（0%）</p></section><section class='card '><h2>数値まとめ・コメント</h2><p>広告は消化¥64,391、登録11件、CPA¥5,853です。LMES側は登録12人に対し、動画タップ67%、セミナー申込42%、着席25%です。母数はまだ小さいため、広告効率とシナリオ通過率は参考値として見ます。</p></section><section class='card '><h2>ターゲットインサイト</h2><p>コンテンツビジネスのターゲットは、すでにコンテンツ販売をしている人ではなく、本当のゼロイチ層です。その中でも直近は、過去購入者が50代以上に寄っている文脈と、現在アクティブな `50代向け｜再雇用｜年配向けLP` のCPAが軽い流れを重視して見ます。</p><p>この層の表の悩みは「老後のお金が不安」「再雇用後の収入や働き方が見えない」「まだ何か始めたいけれど、今さら自分にできるのか不安」です。ただ深層では、お金だけではなく、会社員として積み上げてきた経験がこのまま終わってしまう寂しさ、年齢を理由に選択肢が狭まっていく焦り、若い人向けの副業情報に自分が置いていかれている感覚があります。</p><p>一方で、50代以上の反応は既存勝ち筋として伸ばしつつ、そこだけに寄せすぎると新しい母数の発見が弱くなります。次の訴求は、50代以上には「人生後半の経験を価値に変える」「会社以外の選択肢をゼロから作る」と提示し、別軸では「今の働き方に閉塞感がある30〜40代」「特別な実績はないが人生を変えたいゼロイチ層」にも、コンテンツビジネスという選択肢を広げて検証するのが良さそうです。</p></section><section class='card '><h2>次のCR訴求軸案</h2><p>今回は、50代以上・再雇用前後の勝ち筋を横展開しつつ、別セグメントのゼロイチ層も開拓するバランスで検証します。</p><p>1. 横展開｜50代・再雇用後の選択肢</p><p>フック：<br>再雇用で働き続けるだけが、<br>人生後半の選択肢だろうか。</p><p>オファー明記：<br>50代からゼロで学べる<br>コンテンツビジネスの始め方</p><p>狙い：<br>直近の50代向けCRの反応を活かし、再雇用や定年後の不安を、会社以外の選択肢づくりへ接続する。</p><p>2. 横展開｜経験をこのまま終わらせたくない</p><p>フック：<br>30年働いてきた経験は、<br>誰かの役に立つ資産になる。</p><p>オファー明記：<br>人生経験を価値に変える<br>コンテンツビジネス入門</p><p>狙い：<br>50代以上の勝ち筋を、老後不安だけでなく「積み上げた経験を誰かの役に立てたい」という前向きな自己効力感へ広げる。</p><p>3. 新規開拓｜30〜40代の閉塞感</p><p>フック：<br>このまま働き続けても、<br>人生が広がる気がしない。</p><p>オファー明記：<br>知識ゼロから選択肢を作る<br>コンテンツビジネス無料セミナー</p><p>狙い：<br>50代以上とは別に、今の働き方に閉塞感がある30〜40代を開拓する。年齢訴求ではなく、人生の選択肢を増やす文脈でコンテンツビジネスを提示する。</p></section><section class='card action-card'><h2>参考アクションプラン</h2><p class='hint'>・直近3日は案件全体の実CPA¥6,572。月次母数はまだ小さいため、短期の良し悪しを見つつも大きな判断は急がない。</p><p class='hint'>・直近で効率が見えるのは 50代向け| 再雇用| 年配向けLP | ノンタゲ（実CPA¥6,572）。特に50代/再雇用系の反応が維持できるかを優先確認する。</p><p class='hint'>・一方で 実登録0の目立つCRはなし は登録後の質がまだ見えていない。訴求を止めるより、期待値とLP接続を見直しながら少額で検証する。</p><p class='hint'>・LINEでは動画タップからセミナー申込、着席までの母数がまだ少ないため、登録後のリマインドとセミナー参加理由づけを優先して観察する。</p></section><section class='card '><h2>詳細レポート</h2><p><a href='https://carpa20186-coder.github.io/report/reports/2026-05-11/contents-business.html'>https://carpa20186-coder.github.io/report/reports/2026-05-11/contents-business.html</a></p><p>また、この数値レポートは、AIによる自動出力です。</p><p>あくまで補助的な参考情報としてご活用いただき、最終的な判断にあたっては、必ず人の目で内容を確認・解釈・推敲したうえで進めるようにしてくださいね。</p></section>
+    <div class="footer">この数値レポートおよびCR案はAIによる自動出力です。最終判断は人の目で確認・解釈・推敲してください。</div>
+  </div>
+</body>
+</html>
