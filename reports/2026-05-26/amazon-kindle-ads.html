@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Amazon Kindle広告 攻略メモ</title>
+  <style>
+    :root {
+      --ink: #202124;
+      --muted: #5f6368;
+      --line: #d9dfe7;
+      --soft: #f6f8fb;
+      --paper: #ffffff;
+      --accent: #ff9900;
+      --accent-dark: #b76400;
+      --green: #0b7a4b;
+      --blue: #1b5dbf;
+      --shadow: 0 16px 40px rgba(32, 33, 36, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #f3f5f8;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "YuGothic", "Noto Sans JP", sans-serif;
+      line-height: 1.8;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .hero {
+      color: #111827;
+      background:
+        linear-gradient(115deg, rgba(255, 153, 0, 0.16), rgba(27, 93, 191, 0.08)),
+        linear-gradient(180deg, #fff 0%, #f5f7fb 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-inner,
+    main,
+    footer {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero-inner {
+      padding: 56px 0 34px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 4px 10px;
+      border: 1px solid rgba(255, 153, 0, 0.5);
+      border-radius: 999px;
+      color: var(--accent-dark);
+      background: rgba(255, 255, 255, 0.78);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 18px 0 12px;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 780px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .summary {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .summary b {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .summary span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      gap: 30px;
+      padding: 30px 0 52px;
+    }
+
+    nav {
+      position: sticky;
+      top: 18px;
+      align-self: start;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    nav strong {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    nav a {
+      display: block;
+      padding: 7px 0;
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    article {
+      min-width: 0;
+    }
+
+    section {
+      margin-bottom: 18px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent);
+      font-size: 26px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 26px 0 8px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    ul,
+    ol {
+      margin: 0 0 16px;
+      padding-left: 1.3em;
+    }
+
+    li {
+      margin: 4px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 20px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #edf2f8;
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    code,
+    pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    }
+
+    pre {
+      overflow-x: auto;
+      padding: 16px;
+      border-radius: 8px;
+      background: #172033;
+      color: #f8fafc;
+      line-height: 1.6;
+    }
+
+    .callout {
+      margin: 18px 0;
+      padding: 18px;
+      border-left: 5px solid var(--accent);
+      border-radius: 8px;
+      background: #fff8eb;
+    }
+
+    .decision {
+      border-left-color: var(--green);
+      background: #eefaf4;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pill-list li {
+      margin: 0;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--soft);
+      font-size: 14px;
+    }
+
+    footer {
+      padding: 0 0 38px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 860px) {
+      .summary-grid,
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        position: static;
+      }
+
+      section {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">KDP / Kindle Ads Playbook</div>
+      <h1>Amazon Kindle広告 攻略メモ</h1>
+      <p class="lead">Kindle本を広告で伸ばし、LINE登録、セミナー申込、決済までつなげるための実務メモ。専門用語を減らして、運用で迷わない形に整理。</p>
+      <div class="summary-grid">
+        <div class="summary">
+          <b>まずは調査</b>
+          <span>オートターゲティングで反応する検索語句を拾う。</span>
+        </div>
+        <div class="summary">
+          <b>勝ち筋だけ拡大</b>
+          <span>反応があるキーワードとCRを手動で伸ばす。</span>
+        </div>
+        <div class="summary">
+          <b>Amazon外まで見る</b>
+          <span>注文だけでなくLINE、セミナー、決済まで追う。</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav aria-label="ページ内リンク">
+      <strong>目次</strong>
+      <a href="#conclusion">結論</a>
+      <a href="#metrics">見る数字</a>
+      <a href="#campaign">キャンペーン設計</a>
+      <a href="#creative">動画CR</a>
+      <a href="#pdca">週次PDCA</a>
+      <a href="#budget">予算</a>
+      <a href="#free">無料キャンペーン</a>
+      <a href="#strategy">今回の方針</a>
+      <a href="#sources">参考URL</a>
+    </nav>
+
+    <article>
+      <section id="conclusion">
+        <h2>結論</h2>
+        <p>Amazon Kindle広告は、ざっくり言うと「Amazon内で本を探している人に、自分の本を見せる広告」。検索している人、似た本を見ている人、同じジャンルに興味がある人に対して、Kindle本を表示できる。</p>
+        <p>ただし、広告を出せば勝手に売れるわけではない。Kindle本の場合、広告でクリックを取れても、その先の商品詳細ページで落ちることがかなり多い。</p>
+        <h3>広告前に整えるもの</h3>
+        <ul>
+          <li>表紙が小さい表示でも読める</li>
+          <li>タイトルで誰向けの本かわかる</li>
+          <li>サブタイトルで得られる結果がわかる</li>
+          <li>紹介文が長すぎず、読む理由が伝わる</li>
+          <li>著者ページやプロフィールに怪しさがない</li>
+          <li>本文サンプルで期待値が下がらない</li>
+          <li>本文内のLINE登録や特典導線が自然に入っている</li>
+        </ul>
+        <p>KDP本は日本でも広告掲載の対象になる。基本はスポンサープロダクト広告から始める。条件が整っていれば、スポンサーブランド広告や動画広告も選択肢になる。</p>
+        <ol>
+          <li>KDPの本棚から広告を出す本を選ぶ</li>
+          <li>表紙、タイトル、紹介文、著者ページを整える</li>
+          <li>Sponsored Productsで少額テストする</li>
+          <li>オートターゲティングで反応する検索語句を拾う</li>
+          <li>反応がある語句、商品、ジャンルを手動キャンペーンに移す</li>
+          <li>表紙、タイトル、説明文、動画CRを改善する</li>
+          <li>Kindle注文、KENP、LINE登録、セミナー申込、決済まで見る</li>
+          <li>CPAと遷移率が維持できる範囲で予算を上げる</li>
+        </ol>
+        <div class="callout">
+          <p>Amazon Kindle広告は、いきなり大きく勝つ広告ではない。少額で「どの読者が反応するか」を見つけて、勝ち筋だけを広げる広告。</p>
+        </div>
+      </section>
+
+      <section id="metrics">
+        <h2>見る数字</h2>
+        <p>Amazon広告の画面だけを見ると判断を間違える。Kindle広告は、Amazon内の売上だけで完結しないことがあるため。</p>
+        <table>
+          <thead>
+            <tr><th>数字</th><th>見る意味</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>表示回数</td><td>そもそも露出できているか</td></tr>
+            <tr><td>クリック率</td><td>表紙、タイトル、広告文が刺さっているか</td></tr>
+            <tr><td>CPC</td><td>クリック単価が高すぎないか</td></tr>
+            <tr><td>注文数</td><td>Kindle本として売れているか</td></tr>
+            <tr><td>KENP</td><td>Kindle Unlimitedで読まれているか</td></tr>
+            <tr><td>ACOS</td><td>Amazon内の広告費と売上の比率</td></tr>
+            <tr><td>ROAS</td><td>広告費に対して売上がどれだけ返っているか</td></tr>
+            <tr><td>LINE登録数</td><td>外部導線に読者が流れているか</td></tr>
+            <tr><td>リストCPA</td><td>LINE登録1件あたりの広告費</td></tr>
+            <tr><td>セミナー申込</td><td>リストが本命導線に進んでいるか</td></tr>
+            <tr><td>決済</td><td>最終的に回収できているか</td></tr>
+          </tbody>
+        </table>
+        <p>広告管理画面だけで完結させない方がいい。Amazon広告側では、インプレッション、クリック率、CPC、ACOS、ROASを見る。KDP側では、注文数、KENP既読、Kindle Unlimited経由の伸びを見る。</p>
+        <p>特にKindle本は、広告経由の売上だけでなく、KU既読やランキング上昇の効果もある。そのため、広告画面だけで「赤字」と判断すると見誤ることがある。</p>
+        <div class="callout">
+          <p>ACOS = 広告費 ÷ 広告売上。ROAS = 広告売上 ÷ 広告費。どちらも見るが、最終判断は「利益が残るか」で見る。</p>
+          <p>Kindle本の利益が小さくても、LINE登録、セミナー申込、決済につながっているなら広告として成立する。逆に、Amazon内の注文が出ていても、リストや本命商品の売上につながらないなら、事業全体では弱い広告になる。</p>
+        </div>
+      </section>
+
+      <section id="campaign">
+        <h2>キャンペーン設計</h2>
+        <p>最初は複雑にしない。最初から大量のキャンペーンを作ると、何が良くて何が悪いのかわからなくなる。</p>
+        <p>最初の目的は「利益を最大化すること」ではなく「反応する読者と検索語句を見つけること」。広告費は学習費として使う。</p>
+        <h3>Sponsored Products</h3>
+        <p>最初にやるべき広告は、基本的にはスポンサープロダクト広告。理由はシンプルで、検索結果や商品ページに本を出せるので、すでに本を探している人に当てやすい。</p>
+        <p>Kindle本で最初に欲しいのは、派手な認知ではなく「買う可能性がある読者のクリック」。だから、まずはSponsored Productsで十分。</p>
+        <table>
+          <thead>
+            <tr><th>種類</th><th>役割</th><th>使い方</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>オートターゲティング</td><td>発掘</td><td>Amazonに広めに配信してもらい、反応する語句や関連本を見つける</td></tr>
+            <tr><td>マニュアルターゲティング</td><td>拡大</td><td>反応が出た語句、商品、ジャンルに絞って入札と予算を調整する</td></tr>
+          </tbody>
+        </table>
+        <h3>オートターゲティング</h3>
+        <p>最初から正解キーワードを当てにいかない。Amazonに広めに出してもらい、どんな検索語句、関連本、ジャンルで反応が出るかを拾う。</p>
+        <p>まずは2週間くらい回して、最低限のデータを貯める。1日や2日で判断すると、たまたまクリックされなかっただけの語句まで切ってしまう。</p>
+        <ul>
+          <li>クリックが出たキーワード</li>
+          <li>注文が出たキーワード</li>
+          <li>LINE登録につながったキーワード</li>
+          <li>無駄クリックだけ出ているキーワード</li>
+        </ul>
+        <p>特に大事なのは、売れた検索語句だけではない。クリック率が高い語句も見る。クリック率が高いということは、表紙やタイトルと読者の興味が合っている可能性がある。</p>
+        <table>
+          <thead>
+            <tr><th>状態</th><th>判断</th><th>次の動き</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>表示もクリックもない</td><td>露出が弱い</td><td>入札や対象を広げる</td></tr>
+            <tr><td>表示はあるがクリックが低い</td><td>表紙、タイトル、訴求が弱い</td><td>クリエイティブ改善</td></tr>
+            <tr><td>クリックはあるが注文なし</td><td>商品ページで落ちている</td><td>紹介文、価格、レビュー、試し読みを見直す</td></tr>
+            <tr><td>注文やLINE登録あり</td><td>勝ち筋候補</td><td>手動キャンペーンへ移す</td></tr>
+            <tr><td>クリックだけ多く成果なし</td><td>無駄クリック候補</td><td>除外または入札を下げる</td></tr>
+          </tbody>
+        </table>
+        <h3>マニュアルターゲティング</h3>
+        <p>オートで反応が出たものだけを移す。ここから入札、予算、除外を丁寧に調整する。</p>
+        <p>手動ターゲティングに移す基準は、注文が出た検索語句、LINE登録につながった検索語句、クリック率が高い検索語句、クリック単価が安く反応が悪くない語句、競合本や類似本でクリックが出た商品ターゲティング。</p>
+        <p>手動に移したら、全部を同じ入札にしない。反応が良いものは少し上げる。反応が悪いものは下げる。明らかにズレているものは除外する。この「自動で発掘、手動で伸ばす」がKindle広告の基本形。</p>
+        <ul class="pill-list">
+          <li>本のテーマに近いキーワード</li>
+          <li>読者の悩み系キーワード</li>
+          <li>競合本、類似本</li>
+          <li>著者名、ジャンル名</li>
+          <li>Kindle Unlimitedと相性が良い検索語句</li>
+        </ul>
+        <p>最初から完璧なキーワードリストを作ろうとしなくていい。広告を回しながら、実際にクリックされる語句、売れる語句、LINE登録につながる語句を残していく方が現実的。</p>
+      </section>
+
+      <section id="creative">
+        <h2>動画CR</h2>
+        <p>Amazonの動画広告は、長い説明動画ではない。読者に「この本、自分のことかも」と思わせるための短い入口。</p>
+        <ul>
+          <li>最初の1から2秒で誰向けか出す</li>
+          <li>音なしでも意味が伝わるようにする</li>
+          <li>1本で全部説明しない</li>
+          <li>本を読むと何が変わるかを見せる</li>
+          <li>画面の文字は大きく短くする</li>
+          <li>最後に表紙と行動を出す</li>
+        </ul>
+        <div class="callout">
+          <p>動画は15から30秒程度で十分。スポンサーブランド動画広告の仕様では6から45秒が範囲で、20秒以下が強く推奨されている。</p>
+        </div>
+        <h3>型1 悩み直撃型</h3>
+        <pre><code>副業を始めたいのに、何からやればいいかわからない</code></pre>
+        <p>悩み、原因、本でわかること、表紙、CTAの順で見せる。</p>
+        <h3>型2 Before After型</h3>
+        <pre><code>なんとなく発信していた人が、
+売れるコンテンツの作り方を理解する</code></pre>
+        <p>抽象論ではなく、読む前と読んだ後の変化を見せる。</p>
+        <h3>型3 目次チラ見せ型</h3>
+        <p>目次、図解、チェックリスト、本文の一部、特典や導線を見せる。Kindle本は中身が見えないと不安なので、中身の見せ方が大事。</p>
+      </section>
+
+      <section id="pdca">
+        <h2>週次PDCA</h2>
+        <table>
+          <thead>
+            <tr><th>状態</th><th>見る場所</th><th>対応</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>表示されない</td><td>入札、キーワード、関連性</td><td>入札を上げる。キーワードを広げる。オートを回す。</td></tr>
+            <tr><td>表示はあるがクリックされない</td><td>表紙、タイトル、動画冒頭</td><td>視認性を上げる。誰向けかを冒頭で出す。</td></tr>
+            <tr><td>クリックはあるが注文されない</td><td>商品ページ、説明文、価格、レビュー</td><td>説明文、目次、A+コンテンツ、著者情報を整える。</td></tr>
+            <tr><td>注文はあるがLINE登録されない</td><td>本文内導線、特典</td><td>本文前半と後半に導線を入れる。特典を本の内容と直結させる。</td></tr>
+            <tr><td>LINE登録はあるがセミナー申込されない</td><td>LINE内教育、セミナー訴求</td><td>Kindle本のテーマとセミナーの約束を合わせる。</td></tr>
+            <tr><td>セミナー申込はあるが決済されない</td><td>申込者属性、セミナー内容、オファー</td><td>問題提起、商品導線、価格を見直す。</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="budget">
+        <h2>予算</h2>
+        <p>いきなり大きく増やさない。Kindle広告は、予算を増やした瞬間にCPAや遷移率が崩れることがある。</p>
+        <ul>
+          <li>リストCPAが許容内</li>
+          <li>LINEからセミナー申込に進んでいる</li>
+          <li>決済が継続して発生している</li>
+          <li>アップセル込みで利益が残っている</li>
+          <li>売上が止まった状態で広告費だけ増えていない</li>
+        </ul>
+        <p>数字が維持できているなら増額。崩れるなら、予算ではなくCRと導線を直す。</p>
+      </section>
+
+      <section id="free">
+        <h2>無料キャンペーン</h2>
+        <p>KDPセレクトに登録しているKindle本は、90日間の登録期間中に最大5日間、無料キャンペーンを実施できる。</p>
+        <p>無料キャンペーンは売上を作る施策ではなく、読者数と検証母数を増やす施策として見る。</p>
+      </section>
+
+      <section id="strategy">
+        <h2>今回の方針</h2>
+        <div class="callout decision">
+          <p>来月は「バカでもできる！コンテンツビジネスで稼ぐ方法」を主力にする。</p>
+          <p>累計でも直近でも回収が見えているため、まずはこの案件を広げる。日予算は現状の3,000円前後から1万円に上げて反応を見る。</p>
+        </div>
+        <ul>
+          <li>リストCPAが3,000円から4,000円台で収まるか</li>
+          <li>リストからセミナー申込への遷移率が落ちないか</li>
+          <li>決済、アップセルまでつながるか</li>
+          <li>広告費を増やしても利益が残るか</li>
+        </ul>
+        <p>数字がキープできている限り、段階的に予算を上げる。CPAが悪化したり遷移率が落ちる場合は、まずCRと導線を見直す。</p>
+      </section>
+
+      <section id="sources">
+        <h2>参考URL</h2>
+        <h3>Amazon公式 / KDP・Kindle本広告</h3>
+        <ul>
+          <li><a href="https://kdp.amazon.co.jp/en_US/help/topic/G201499010">KDPで出版した本の広告を出す</a></li>
+          <li><a href="https://advertising.amazon.com/ja-jp/library/guides/advertising-books-on-amazon-authors">Amazon Ads｜Amazonで本の広告を掲載する 著者向けガイド</a></li>
+          <li><a href="https://kdp.amazon.co.jp/ja_JP/help/topic/G201298240">KDP｜本の無料キャンペーン</a></li>
+          <li><a href="https://advertising.amazon.com/ja-jp/library/guides/acos-advertising-cost-of-sales">Amazon Ads｜ACOSとは？計算と改善ポイント</a></li>
+        </ul>
+        <h3>動画CR / クリエイティブ改善</h3>
+        <ul>
+          <li><a href="https://advertising.amazon.com/ja-jp/resources/ad-specs/sponsored-brands-video/">Amazon Ads｜スポンサーブランド動画広告 仕様・ガイドライン</a></li>
+          <li><a href="https://advertising.amazon.com/en-ca/library/guides/getting-started-with-sponsored-brands-video">Amazon Ads｜スポンサーブランド動画広告の始め方</a></li>
+          <li><a href="https://advertising.amazon.com/library/guides/sponsored-products-video">Amazon Ads｜Sponsored Products video ガイド</a></li>
+        </ul>
+        <h3>運用方法 / PDCA</h3>
+        <ul>
+          <li><a href="https://publishrank.io/learn/ads/amazon-ads-kdp-beginners-guide">PublishRank｜Amazon Ads for KDP Beginner's Guide</a></li>
+          <li><a href="https://www.bookbloom.io/blog/amazon-kdp-advertising-guide">BookBloom｜Amazon KDP Advertising Guide</a></li>
+          <li><a href="https://sellermetrics.app/amazon-kdp-advertising/">SellerMetrics｜Amazon Kindle Advertising Strategy</a></li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <footer>
+    <p>Prepared for Amazon Kindle広告運用メモ。</p>
+  </footer>
+</body>
+</html>
