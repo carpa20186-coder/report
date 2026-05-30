@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>エバー事業 年商10億円 逆算作戦シミュレーター</title>
+<style>
+  :root{
+    --bg:#0f1117; --panel:#171a23; --panel2:#1d2130; --line:#2a2f40;
+    --ink:#eef1f7; --sub:#9aa3b8; --accent:#ff8a3d; --accent2:#4da3ff;
+    --ok:#46d39a; --warn:#ffcc55; --bad:#ff6b6b;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,#0f1117,#0c0e14);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.6}
+  .wrap{max-width:1160px;margin:0 auto;padding:28px 20px 80px}
+  header.hero{padding:18px 0 8px}
+  .eyebrow{color:var(--accent);font-weight:700;letter-spacing:.08em;font-size:13px}
+  h1{font-size:30px;margin:6px 0 4px;letter-spacing:.01em}
+  .lead{color:var(--sub);max-width:760px}
+  .kgi{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0 8px}
+  .kgi .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+  .kgi .label{color:var(--sub);font-size:12px}
+  .kgi .val{font-size:26px;font-weight:800;margin-top:4px}
+  .kgi .val.target{color:var(--accent)}
+  .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;margin-top:18px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px 20px 8px;box-shadow:var(--shadow)}
+  .panel h2{font-size:16px;margin:0 0 4px;display:flex;align-items:center;gap:8px}
+  .panel .hint{color:var(--sub);font-size:12.5px;margin:0 0 14px}
+  .ctrl{margin:0 0 16px}
+  .ctrl .row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .ctrl label{font-size:13.5px;font-weight:600}
+  .ctrl .num{font-variant-numeric:tabular-nums;font-weight:700;color:var(--accent2)}
+  .ctrl input[type=range]{width:100%;accent-color:var(--accent);margin-top:6px}
+  .ctrl .sub{color:var(--sub);font-size:11.5px}
+  .seg{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 16px}
+  .seg button{background:var(--panel2);border:1px solid var(--line);color:var(--ink);
+    padding:8px 12px;border-radius:10px;cursor:pointer;font-size:12.5px;font-weight:600}
+  .seg button:hover{border-color:var(--accent)}
+  .seg button.active{background:var(--accent);border-color:var(--accent);color:#1a1206}
+  .out .big{display:flex;align-items:baseline;gap:10px;margin:2px 0 2px}
+  .out .big .n{font-size:40px;font-weight:900;font-variant-numeric:tabular-nums}
+  .bar{height:16px;border-radius:9px;background:#0c0e14;border:1px solid var(--line);overflow:hidden;margin:8px 0 4px}
+  .bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#ffd08a);width:0%}
+  .pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700}
+  .pill.ok{background:rgba(70,211,154,.15);color:var(--ok)}
+  .pill.warn{background:rgba(255,204,85,.15);color:var(--warn)}
+  .pill.bad{background:rgba(255,107,107,.15);color:var(--bad)}
+  table.flow{width:100%;border-collapse:collapse;margin:8px 0 6px;font-size:13px}
+  table.flow th,table.flow td{padding:8px 8px;border-bottom:1px solid var(--line);text-align:right}
+  table.flow th{color:var(--sub);font-weight:600;text-align:right}
+  table.flow td:first-child,table.flow th:first-child{text-align:left}
+  table.flow td .t{color:var(--sub);font-size:11px}
+  .lever{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line)}
+  .lever .nm{font-size:13px}
+  .lever .delta{font-variant-numeric:tabular-nums;font-weight:800}
+  .delta.up{color:var(--ok)} .delta.flat{color:var(--sub)}
+  .sakusen{margin-top:18px}
+  .sakusen .col{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:12px}
+  .sakusen h3{margin:0 0 6px;font-size:15px}
+  .sakusen h3 .k{color:var(--accent);font-weight:900;margin-right:8px}
+  .sakusen p{margin:4px 0;color:#cfd5e6;font-size:13.5px}
+  .sakusen .tag{color:var(--sub);font-size:12px}
+  .note{color:var(--sub);font-size:12px;margin-top:18px}
+  @media(max-width:860px){.kgi{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">EVERGREEN BUSINESS / 逆算作戦</div>
+    <h1>エバー事業 年商10億円 逆算作戦シミュレーター</h1>
+    <p class="lead">「広告→LINE→セミナー→FE/BE/高単価」の常時稼働(エバーグリーン)ファネルで、年商10億円までの道筋を操作しながら設計するアプリです。数値は実データを初期値にしています。レバーを動かすと、必要な広告費・本数・転換率がリアルタイムで分かります。</p>
+  </header>
+
+  <section class="kgi">
+    <div class="card"><div class="label">KGI（年商）</div><div class="val target">¥10億</div></div>
+    <div class="card"><div class="label">月商に直すと</div><div class="val">¥8,333万</div></div>
+    <div class="card"><div class="label">いまの試算（年）</div><div class="val" id="kgiNow">—</div></div>
+    <div class="card"><div class="label">達成率</div><div class="val" id="kgiRate">—</div></div>
+  </section>
+
+  <div class="seg" id="presets" style="margin-top:6px">
+    <span style="color:var(--sub);font-size:12.5px;align-self:center;margin-right:4px">シナリオ：</span>
+    <button data-p="now" class="active">① 現状（1ファネル）</button>
+    <button data-p="improve">② 改善（転換率UP）</button>
+    <button data-p="portfolio">③ 横展開（複数ファネル）</button>
+    <button data-p="goal">④ 10億達成モデル</button>
+  </div>
+
+  <div class="grid">
+    <!-- LEFT: levers -->
+    <div class="panel">
+      <h2>🎛 レバー（1ファネルあたり・月）</h2>
+      <p class="hint">広告の出力と、ファネルの転換率・単価を動かす。実データ初期値：コンテンツエバー相当。</p>
+
+      <div class="ctrl">
+        <div class="row"><label>月間広告費</label><span class="num" id="vAd"></span></div>
+        <input type="range" id="ad" min="500000" max="15000000" step="100000">
+        <div class="sub">スケールするほどCPAは上がりやすい点に注意。</div>
+      </div>
+      <div class="ctrl">
+        <div class="row"><label>登録CPA（リスト単価）</label><span class="num" id="vCpl"></span></div>
+        <input type="range" id="cpl" min="800" max="8000" step="50">
+        <div class="sub">→ 月間登録数：<b id="leads"></b></div>
+      </div>
+      <div class="ctrl">
+        <div class="row"><label>FE転換率（低単価）</label><span class="num" id="vFe"></span></div>
+        <input type="range" id="fe" min="0" max="25" step="0.5">
+        <div class="sub">FE単価 ¥<input id="fep" type="number" value="19800" style="width:88px;background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:6px;padding:2px 6px"></div>
+      </div>
+      <div class="ctrl">
+        <div class="row"><label>BE転換率（¥19.8万）</label><span class="num" id="vBe"></span></div>
+        <input type="range" id="be" min="0" max="12" step="0.25">
+        <div class="sub">BE単価 ¥<input id="bep" type="number" value="198000" style="width:88px;background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:6px;padding:2px 6px"></div>
+      </div>
+      <div class="ctrl">
+        <div class="row"><label>高単価転換率（アカデミー等）</label><span class="num" id="vHt"></span></div>
+        <input type="range" id="ht" min="0" max="5" step="0.1">
+        <div class="sub">高単価 ¥<input id="htp" type="number" value="1000000" style="width:104px;background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:6px;padding:2px 6px"></div>
+      </div>
+      <div class="ctrl">
+        <div class="row"><label>稼働ファネル本数（横展開）</label><span class="num" id="vN"></span></div>
+        <input type="range" id="n" min="1" max="12" step="1">
+        <div class="sub">著者・テーマ違いの常時稼働ファネルの数（保有LINE資産は90以上）。</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: outputs -->
+    <div class="panel out">
+      <h2>📈 試算結果</h2>
+      <p class="hint">レバーに連動。年商・月商・ROAS・10億までの差分を表示。</p>
+      <div class="big"><span class="n" id="annual">—</span><span id="annualPill" class="pill warn">—</span></div>
+      <div class="bar"><i id="annualBar"></i></div>
+      <div class="sub" style="color:var(--sub);font-size:12.5px">月商 <b id="monthly"></b> ・ 総広告費/月 <b id="adTotal"></b> ・ ROAS <b id="roas"></b> ・ 顧客単価(LTV近似) <b id="ltv"></b></div>
+
+      <h2 style="margin-top:18px">🔻 ファネル（全本数合算・月）</h2>
+      <table class="flow">
+        <thead><tr><th>段階</th><th>人数 / 件数</th><th>売上</th></tr></thead>
+        <tbody id="flow"></tbody>
+      </table>
+
+      <h2 style="margin-top:14px">⚡️ 10億達成に効くレバー（感度）</h2>
+      <p class="hint">各レバーを単独で1段階動かしたときの、年商インパクト。</p>
+      <div id="levers"></div>
+    </div>
+  </div>
+
+  <!-- STRATEGY -->
+  <section class="sakusen">
+    <h2 style="font-size:18px;margin:24px 0 10px">🗺 年商10億円の作戦（5本柱）</h2>
+    <div class="col">
+      <h3><span class="k">01</span>横展開：1本で10億は狙わない。複数エバーで積む</h3>
+      <p>1ファネルの現実的な天井は月1,000〜2,000万。10億（月8,333万）は<b>5〜8本の常時稼働ファネルの合算</b>で作る。論理エンジン／売れる企画／コンテンツビジネス／子育て図鑑…と、著者・テーマ違いを同じ型で量産。保有LINE資産90以上が最大の武器。</p>
+      <p class="tag">アプリ操作：⑥「稼働ファネル本数」を上げると一気に近づく。</p>
+    </div>
+    <div class="col">
+      <h3><span class="k">02</span>LTV：入口だけでなく後段（BE・高単価）で単価を伸ばす</h3>
+      <p>登録の安さだけでは10億に届かない。FE¥19,800→BE¥198,000→アカデミー高単価の<b>引き上げ率</b>が効く。顧客単価(LTV)を上げるほど、同じ広告費で売上が伸びる。論理エンジンで判明した「安心のひと言を早く渡す」改善は、後段の転換率を底上げする実装。</p>
+      <p class="tag">アプリ操作：④BE・⑤高単価の転換率が感度トップになりやすい。</p>
+    </div>
+    <div class="col">
+      <h3><span class="k">03</span>転換率：ファネルの離脱点を塞ぐ（広告費より安い伸びしろ）</h3>
+      <p>広告を増やす前に、既存ファネルの離脱を塞ぐ方が安い。登録直後のクイズ離脱、セミナー視聴→購入の谷など、定性レポートで特定した改善を全ファネルに横展開。<b>転換率の数%改善が、広告費1.5倍に匹敵</b>することがある。</p>
+      <p class="tag">アプリ操作：③FE・④BEを少し上げて年商の伸びを体感。</p>
+    </div>
+    <div class="col">
+      <h3><span class="k">04</span>スケール：ROASを守りながら広告費を増やす</h3>
+      <p>転換率と単価を固めたら、広告費を踏む。ただしスケールでCPAは上がる前提で、<b>ROASが目標(例:300%)を割らない範囲</b>を見極める。媒体・クリエイティブの勝ち筋（034型＝安心を先に渡す）を量に変える。</p>
+      <p class="tag">アプリ操作：①広告費↑と②CPA↑を同時に動かし、ROASの下限を確認。</p>
+    </div>
+    <div class="col">
+      <h3><span class="k">05</span>仕組み化：AIでファネル量産を自動化し、人を増やさず本数を増やす</h3>
+      <p>10億のボトルネックは「人」。CR作成・日次/定性レポート・LINEシナリオをAIで量産（このレポート群がその実証）。<b>1本作る工数が下がるほど、柱01の横展開が現実になる</b>。AIコンテンツエバーはその先行事例。</p>
+      <p class="tag">出口：1ファネルの立ち上げ工数を1/3にできれば、本数は3倍出せる。</p>
+    </div>
+  </section>
+
+  <p class="note" id="assump"></p>
+</div>
+
+<script>
+const yen = v => '¥' + Math.round(v).toLocaleString('ja-JP');
+const oku = v => {
+  if (v>=1e8) return (v/1e8).toFixed(2)+'億';
+  if (v>=1e4) return Math.round(v/1e4).toLocaleString('ja-JP')+'万';
+  return Math.round(v).toLocaleString('ja-JP');
+};
+const TARGET = 1e9;
+
+const els = id => document.getElementById(id);
+const S = {
+  ad:els('ad'), cpl:els('cpl'), fe:els('fe'), be:els('be'), ht:els('ht'), n:els('n'),
+  fep:els('fep'), bep:els('bep'), htp:els('htp')
+};
+
+const PRESETS = {
+  now:      {ad:1500000, cpl:3400, fe:8,  be:3,   ht:0.8, n:1},
+  improve:  {ad:1500000, cpl:3000, fe:11, be:4.5, ht:1.2, n:1},
+  portfolio:{ad:1800000, cpl:3200, fe:9,  be:4,   ht:1.0, n:5},
+  goal:     {ad:2500000, cpl:3200, fe:10, be:4.5, ht:1.3, n:6}
+};
+
+function readModel(){
+  const ad=+S.ad.value, cpl=+S.cpl.value, fe=+S.fe.value/100, be=+S.be.value/100, ht=+S.ht.value/100, n=+S.n.value;
+  const fep=+S.fep.value||0, bep=+S.bep.value||0, htp=+S.htp.value||0;
+  const leads = cpl>0 ? ad/cpl : 0;
+  const feUnits=leads*fe, beUnits=leads*be, htUnits=leads*ht;
+  const feRev=feUnits*fep, beRev=beUnits*bep, htRev=htUnits*htp;
+  const revPerFunnel = feRev+beRev+htRev;
+  const monthly = revPerFunnel*n;
+  const adTotal = ad*n;
+  const annual = monthly*12;
+  const roas = adTotal>0 ? monthly/adTotal*100 : 0;
+  const buyers = (feUnits+beUnits+htUnits);
+  const ltv = leads>0 ? revPerFunnel/leads : 0; // 売上/登録
+  return {ad,cpl,fe,be,ht,n,fep,bep,htp,leads,feUnits,beUnits,htUnits,feRev,beRev,htRev,monthly,adTotal,annual,roas,buyers,ltv};
+}
+
+function render(){
+  const m = readModel();
+  els('vAd').textContent = yen(m.ad);
+  els('vCpl').textContent = yen(m.cpl);
+  els('vFe').textContent = (m.fe*100).toFixed(1)+'%';
+  els('vBe').textContent = (m.be*100).toFixed(2)+'%';
+  els('vHt').textContent = (m.ht*100).toFixed(1)+'%';
+  els('vN').textContent = m.n+' 本';
+  els('leads').textContent = Math.round(m.leads).toLocaleString('ja-JP')+' 件';
+
+  els('annual').textContent = yen(m.annual)+' / 年';
+  const rate = m.annual/TARGET*100;
+  els('kgiNow').textContent = oku(m.annual);
+  els('kgiRate').textContent = rate.toFixed(0)+'%';
+  els('annualBar').style.width = Math.min(100,rate)+'%';
+  const pill = els('annualPill');
+  if(rate>=100){pill.className='pill ok';pill.textContent='10億 達成 ✓';}
+  else if(rate>=60){pill.className='pill warn';pill.textContent='あと'+yen(TARGET-m.annual);}
+  else {pill.className='pill bad';pill.textContent='あと'+yen(TARGET-m.annual);}
+
+  els('monthly').textContent = yen(m.monthly);
+  els('adTotal').textContent = yen(m.adTotal);
+  els('roas').textContent = m.roas.toFixed(0)+'%';
+  els('ltv').textContent = yen(m.ltv);
+
+  els('flow').innerHTML = `
+    <tr><td>広告費<span class="t"> 月・全${m.n}本</span></td><td>${yen(m.adTotal)}</td><td>—</td></tr>
+    <tr><td>登録（リスト）</td><td>${Math.round(m.leads*m.n).toLocaleString('ja-JP')}</td><td>—</td></tr>
+    <tr><td>FE 低単価</td><td>${Math.round(m.feUnits*m.n).toLocaleString('ja-JP')} 件</td><td>${yen(m.feRev*m.n)}</td></tr>
+    <tr><td>BE ¥19.8万</td><td>${Math.round(m.beUnits*m.n).toLocaleString('ja-JP')} 件</td><td>${yen(m.beRev*m.n)}</td></tr>
+    <tr><td>高単価</td><td>${Math.round(m.htUnits*m.n).toLocaleString('ja-JP')} 件</td><td>${yen(m.htRev*m.n)}</td></tr>
+    <tr style="font-weight:800"><td>月商 合計</td><td>—</td><td>${yen(m.monthly)}</td></tr>`;
+
+  // sensitivity: bump each lever one notch, measure annual delta
+  const base = m.annual;
+  const tests = [
+    ['広告費 +50万/本', s=>s.ad+=500000],
+    ['CPA -300', s=>s.cpl=Math.max(200,s.cpl-300)],
+    ['FE転換 +1pt', s=>s.fe+=0.01],
+    ['BE転換 +0.5pt', s=>s.be+=0.005],
+    ['高単価転換 +0.2pt', s=>s.ht+=0.002],
+    ['ファネル +1本', s=>s.n+=1],
+  ];
+  let rows='';
+  tests.forEach(([nm,fn])=>{
+    const s={ad:m.ad,cpl:m.cpl,fe:m.fe,be:m.be,ht:m.ht,n:m.n,fep:m.fep,bep:m.bep,htp:m.htp};
+    fn(s);
+    const leads=s.cpl>0?s.ad/s.cpl:0;
+    const rev=(leads*s.fe*s.fep+leads*s.be*s.bep+leads*s.ht*s.htp)*s.n*12;
+    const d=rev-base;
+    rows+=`<div class="lever"><div class="nm">${nm}</div><div class="delta ${d>1?'up':'flat'}">${d>=0?'+':''}${oku(d)}</div></div>`;
+  });
+  els('levers').innerHTML=rows;
+
+  els('assump').textContent =
+    `前提：エバーグリーン(常時稼働)ファネルの月次モデル。初期値はコンテンツエバー実績相当（広告費¥150万/月・登録CPA¥3,400・ROAS約410%）。FE¥19,800／BE¥198,000／高単価¥100万は調整可。売上=登録×各転換率×単価×本数。スケール時のCPA上昇・媒体上限・原価/手数料は別途見込むこと。試算は意思決定の補助で、最終判断は人の目で。`;
+}
+
+function setPreset(p){
+  const v=PRESETS[p]; if(!v) return;
+  S.ad.value=v.ad; S.cpl.value=v.cpl; S.fe.value=v.fe; S.be.value=v.be; S.ht.value=v.ht; S.n.value=v.n;
+  render();
+}
+
+document.querySelectorAll('#presets button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('#presets button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active'); setPreset(b.dataset.p);
+  });
+});
+['ad','cpl','fe','be','ht','n','fep','bep','htp'].forEach(id=>{
+  S[id].addEventListener('input',()=>{
+    document.querySelectorAll('#presets button').forEach(x=>x.classList.remove('active'));
+    render();
+  });
+});
+
+setPreset('now');
+</script>
+</body>
+</html>
