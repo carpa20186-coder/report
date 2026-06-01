@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>エバー週次レポート 2026/5/25-5/31</title>
+  <style>
+    :root {
+      --ink: #182230;
+      --muted: #66758a;
+      --line: #d9e1ea;
+      --paper: #f5f7fa;
+      --panel: #ffffff;
+      --navy: #102033;
+      --blue: #2563eb;
+      --green: #0f9f6e;
+      --orange: #e87826;
+      --red: #d44242;
+      --violet: #7c3aed;
+      --shadow: 0 14px 36px rgba(22, 34, 51, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", sans-serif;
+      line-height: 1.68;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    header {
+      background: var(--navy);
+      color: #fff;
+      padding: 42px 24px 34px;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #a9bed8;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 900px;
+      margin: 16px 0 0;
+      color: #d7e1ed;
+      font-size: 15px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 22px;
+      align-items: end;
+    }
+
+    .hero-note {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 18px;
+      color: #e9f1fb;
+      font-size: 14px;
+    }
+
+    .hero-note strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 15px;
+      color: #fff;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+
+    nav .wrap {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 10px 18px;
+    }
+
+    nav a {
+      flex: 0 0 auto;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      padding: 7px 10px;
+      border-radius: 6px;
+    }
+
+    nav a:hover {
+      background: #e8eef5;
+    }
+
+    main {
+      padding: 28px 18px 64px;
+    }
+
+    section {
+      max-width: 1180px;
+      margin: 0 auto 28px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 24px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      line-height: 1.4;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .kpi {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 15px;
+      background: #fbfcfe;
+      min-height: 112px;
+    }
+
+    .kpi span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .kpi strong {
+      display: block;
+      margin-top: 4px;
+      font-size: 25px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .kpi small {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .good strong {
+      color: var(--green);
+    }
+
+    .warn strong {
+      color: var(--orange);
+    }
+
+    .bad strong {
+      color: var(--red);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 860px;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      vertical-align: top;
+      white-space: nowrap;
+    }
+
+    th:first-child,
+    td:first-child {
+      text-align: left;
+      white-space: normal;
+      min-width: 210px;
+    }
+
+    thead th {
+      background: #edf2f7;
+      color: #425066;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .plus {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .minus {
+      color: var(--red);
+      font-weight: 900;
+    }
+
+    .neutral {
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #edf2f7;
+      color: #425066;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .tag.good {
+      color: #087052;
+      background: #dff6ed;
+    }
+
+    .tag.warn {
+      color: #9a520c;
+      background: #fff0dc;
+    }
+
+    .tag.bad {
+      color: #a72929;
+      background: #ffe5e5;
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .insight {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: #fbfcfe;
+    }
+
+    .insight p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .bar-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 230px 1fr 110px;
+      gap: 10px;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .bar-track {
+      height: 10px;
+      border-radius: 999px;
+      background: #e7edf4;
+      overflow: hidden;
+    }
+
+    .bar-track span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--blue);
+    }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .decision {
+      border-left: 5px solid var(--blue);
+      background: #f8fbff;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .decision:nth-child(2) {
+      border-left-color: var(--orange);
+    }
+
+    .decision:nth-child(3) {
+      border-left-color: var(--green);
+    }
+
+    .decision:nth-child(4) {
+      border-left-color: var(--violet);
+    }
+
+    .footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .grid-2,
+      .insight-grid,
+      .decision-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .bar-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      header {
+        padding: 32px 18px 28px;
+      }
+
+      main {
+        padding: 22px 12px 48px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Weekly Evergreen Report / 2026-05-25 to 2026-05-31</p>
+        <h1>エバー週次レポート</h1>
+        <p class="subtitle">Slack「エバー戦績まとめ」の5/24時点と5/31時点を比較し、広告運用中エバー、過去エバーリスト経由、ハウス広告まで含めて差分を整理した週次レポートです。</p>
+      </div>
+      <aside class="hero-note">
+        <strong>集計メモ</strong>
+        比較は5/24 17:00投稿から5/31 17:00投稿への差分。対象週は2026/5/25(月)〜5/31(日)です。
+      </aside>
+    </div>
+  </header>
+
+  <nav>
+    <div class="wrap">
+      <a href="#summary">サマリー</a>
+      <a href="#totals">全体差分</a>
+      <a href="#past-list">過去リスト経由</a>
+      <a href="#projects">案件別</a>
+      <a href="#issues">論点</a>
+      <a href="#actions">来週アクション</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="summary" class="card">
+      <h2>週次サマリー</h2>
+      <p>先週のエバー関連全体は、売上 <strong>+3,135,000円</strong>、利益 <strong>+1,117,640円</strong>。広告運用中のエバー案件に加えて、過去エバーリスト経由の販売が <strong>+445,500円</strong> 発生しており、全体売上を押し上げました。</p>
+      <p>一方で、広告運用分だけを見ると週次ROASは <strong>139.7%</strong>。黒字ではあるものの、広告費の増加に対して売上回収が重い案件もあり、特に「売れる企画」「コンテンツビジネス大全」は早めに確認したい状態です。</p>
+      <div class="kpi-grid">
+        <div class="kpi good"><span>総合計 売上差分</span><strong>+3,135,000円</strong><small>エバー＋ハウス広告</small></div>
+        <div class="kpi good"><span>総合計 利益差分</span><strong>+1,117,640円</strong><small>週次で利益は積み増し</small></div>
+        <div class="kpi warn"><span>広告運用分 ROAS</span><strong>139.7%</strong><small>黒字だがやや重い</small></div>
+        <div class="kpi good"><span>過去リスト経由</span><strong>+445,500円</strong><small>広告運用外の売上貢献</small></div>
+      </div>
+    </section>
+
+    <section id="totals" class="card">
+      <h2>全体差分</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>区分</th>
+              <th>広告費</th>
+              <th>リスト数</th>
+              <th>売上</th>
+              <th>利益</th>
+              <th>CPA</th>
+              <th>週次ROAS</th>
+              <th>5/31時点累計ROAS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>総合計（エバー＋ハウス広告）</strong></td>
+              <td>+2,017,360円</td>
+              <td>+2,234件</td>
+              <td class="plus">+3,135,000円</td>
+              <td class="plus">+1,117,640円</td>
+              <td>903円</td>
+              <td>155.4%</td>
+              <td>253.3%</td>
+            </tr>
+            <tr>
+              <td><strong>エバー広告まとめ</strong><br><span class="muted">広告運用分＋過去リスト経由</span></td>
+              <td>+1,833,459円</td>
+              <td>+1,982件</td>
+              <td class="plus">+3,006,300円</td>
+              <td class="plus">+1,172,841円</td>
+              <td>925円</td>
+              <td>164.0%</td>
+              <td>274.7%</td>
+            </tr>
+            <tr>
+              <td><strong>エバー広告運用分</strong><br><span class="muted">現在広告を回しているエバー案件のみ</span></td>
+              <td>+1,833,459円</td>
+              <td>+1,967件</td>
+              <td class="plus">+2,560,800円</td>
+              <td class="plus">+727,341円</td>
+              <td>932円</td>
+              <td>139.7%</td>
+              <td>239.1%</td>
+            </tr>
+            <tr>
+              <td><strong>ハウス広告まとめ</strong></td>
+              <td>+183,901円</td>
+              <td>+252件</td>
+              <td class="plus">+128,700円</td>
+              <td class="minus">-55,201円</td>
+              <td>730円</td>
+              <td>70.0%</td>
+              <td>68.6%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <div class="card">
+        <h2>売上差分の構成</h2>
+        <div class="bar-list">
+          <div class="bar-row"><strong>広告運用エバー</strong><div class="bar-track"><span style="width:100%"></span></div><span>+2,560,800円</span></div>
+          <div class="bar-row"><strong>過去リスト経由</strong><div class="bar-track"><span style="width:17.4%"></span></div><span>+445,500円</span></div>
+          <div class="bar-row"><strong>ハウス広告</strong><div class="bar-track"><span style="width:5.0%"></span></div><span>+128,700円</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>読み取り</h2>
+        <p>エバー全体の売上差分は、広告運用分だけでなく過去リスト経由の販売も大きく効いています。今後の週次では、広告費を使っている案件と、過去リストからの自然発生売上を分けて見ると判断しやすくなります。</p>
+        <p>ハウス広告はCPA自体は軽い一方で、売上化が追いつかず週次利益はマイナスです。リスト獲得だけではなく、教育・販売導線の検証が必要です。</p>
+      </div>
+    </section>
+
+    <section id="past-list" class="card">
+      <h2>過去エバーリスト経由の販売</h2>
+      <p>過去エバーリスト経由の販売は、5/24時点の <strong>1,272,100円</strong> から、5/31時点の <strong>1,717,600円</strong> へ増加。週次差分は <strong>+445,500円</strong> です。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>商品・案件</th>
+              <th>5/24時点</th>
+              <th>5/31時点</th>
+              <th>差分</th>
+              <th>コメント</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>苫米地英人オンラインセミナー</td><td>0円</td><td>277,200円</td><td class="plus">+277,200円</td><td>週次の最大増加要因</td></tr>
+            <tr><td>相談支援専門員入門セミナー</td><td>89,100円</td><td>207,900円</td><td class="plus">+118,800円</td><td>安定して追加販売</td></tr>
+            <tr><td>スモールコンテンツビジネス出版記念講演会</td><td>59,400円</td><td>89,100円</td><td class="plus">+29,700円</td><td>小幅に積み増し</td></tr>
+            <tr><td>ヒグチノブユキ講演会</td><td>89,100円</td><td>108,900円</td><td class="plus">+19,800円</td><td>小幅に積み増し</td></tr>
+            <tr><td>織田さん「資産防衛戦略」</td><td>451,000円</td><td>451,000円</td><td class="neutral">±0円</td><td>差分なし</td></tr>
+            <tr><td>Claude Coworkセットアップ大全</td><td>463,100円</td><td>463,100円</td><td class="neutral">±0円</td><td>差分なし</td></tr>
+            <tr><td>原田×長倉「体験資本マーケティング」</td><td>70,400円</td><td>70,400円</td><td class="neutral">±0円</td><td>差分なし</td></tr>
+            <tr><td>出版戦略ラボ</td><td>50,000円</td><td>50,000円</td><td class="neutral">±0円</td><td>差分なし</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="projects" class="card">
+      <h2>案件別差分</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>案件</th>
+              <th>広告費</th>
+              <th>リスト数</th>
+              <th>売上</th>
+              <th>利益</th>
+              <th>CPA</th>
+              <th>ROAS</th>
+              <th>評価</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>長倉さんFB広告 合計</td><td>+1,423,193円</td><td>+552件</td><td class="plus">+2,074,600円</td><td class="plus">+651,407円</td><td>2,578円</td><td>145.8%</td><td><span class="tag warn">利益は出るが重い</span></td></tr>
+            <tr><td>売れる企画の作り方</td><td>+173,995円</td><td>+80件</td><td class="plus">+9,900円</td><td class="minus">-164,095円</td><td>2,175円</td><td>5.7%</td><td><span class="tag bad">要確認</span></td></tr>
+            <tr><td>コンテンツビジネス大全</td><td>+985,629円</td><td>+395件</td><td class="plus">+683,100円</td><td class="minus">-302,529円</td><td>2,495円</td><td>69.3%</td><td><span class="tag bad">赤字幅大</span></td></tr>
+            <tr><td>コンテンツビジネス・アカデミー</td><td>+107,948円</td><td>+51件</td><td class="plus">+1,144,000円</td><td class="plus">+1,036,052円</td><td>2,117円</td><td>1059.8%</td><td><span class="tag good">最も好調</span></td></tr>
+            <tr><td>AI電子書籍</td><td>+155,621円</td><td>+26件</td><td class="plus">+237,600円</td><td class="plus">+81,979円</td><td>5,985円</td><td>152.7%</td><td><span class="tag warn">CPA高め</span></td></tr>
+            <tr><td>星さん／子育て図鑑</td><td>+56,103円</td><td>+1,039件</td><td class="neutral">±0円</td><td class="minus">-56,103円</td><td>54円</td><td>0%</td><td><span class="tag warn">売上化待ち</span></td></tr>
+            <tr><td>出口さん 国語力大全広告</td><td>0円</td><td>0件</td><td class="neutral">±0円</td><td class="neutral">±0円</td><td>-</td><td>-</td><td><span class="tag">差分なし</span></td></tr>
+            <tr><td>出口さん 論理エンジン広告</td><td>+171,412円</td><td>+198件</td><td class="plus">+376,200円</td><td class="plus">+204,788円</td><td>866円</td><td>219.5%</td><td><span class="tag good">安定黒字</span></td></tr>
+            <tr><td>シュタイナー</td><td>+37,014円</td><td>+32件</td><td class="plus">+110,000円</td><td class="plus">+72,986円</td><td>1,157円</td><td>297.2%</td><td><span class="tag good">小規模好調</span></td></tr>
+            <tr><td>博士歴史</td><td>+145,737円</td><td>+146件</td><td class="neutral">±0円</td><td class="minus">-145,737円</td><td>998円</td><td>0%</td><td><span class="tag bad">売上なし</span></td></tr>
+            <tr><td>たてばやしClaude</td><td>0円</td><td>0件</td><td class="neutral">±0円</td><td class="neutral">±0円</td><td>-</td><td>-</td><td><span class="tag">停止中</span></td></tr>
+            <tr><td>出口王仁三郎</td><td>+183,901円</td><td>+252件</td><td class="plus">+128,700円</td><td class="minus">-55,201円</td><td>730円</td><td>70.0%</td><td><span class="tag warn">売上化弱め</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="issues" class="card">
+      <h2>良かった点と課題</h2>
+      <div class="insight-grid">
+        <article class="insight">
+          <h3>良かった点</h3>
+          <p>エバー関連全体で売上 +3,006,300円、利益 +1,172,841円。CBA、論理エンジン、シュタイナーが黒字で、過去リスト経由も +445,500円 と貢献しました。</p>
+        </article>
+        <article class="insight">
+          <h3>課題</h3>
+          <p>広告運用分の週次ROASは139.7%。コンテンツビジネス大全と売れる企画は広告費に対する売上回収が弱く、早めの改善判断が必要です。</p>
+        </article>
+        <article class="insight">
+          <h3>見落とし注意</h3>
+          <p>星さん／子育て図鑑、博士歴史はリスト獲得が進んでいますが、売上が未発生。CPAだけで判断せず、リストの質と販売導線を合わせて見る必要があります。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="actions" class="card">
+      <h2>来週見るべきポイント</h2>
+      <div class="decision-grid">
+        <article class="decision">
+          <h3>1. コンテンツビジネス大全の直近ROAS改善</h3>
+          <p>累計では強いものの、先週単体では赤字。広告費の増加に対して売上が追いついていないため、配信面・クリエイティブ・販売導線を確認します。</p>
+        </article>
+        <article class="decision">
+          <h3>2. 売れる企画の広告継続判断</h3>
+          <p>週次ROAS 5.7% とかなり低いため、訴求、導線、販売タイミングを見直した上で継続判断します。</p>
+        </article>
+        <article class="decision">
+          <h3>3. CBAの伸びを再現できるか</h3>
+          <p>週次で +1,144,000円、ROAS 1059.8%。何が効いたのかを確認し、他案件へ横展開できる要素を抽出します。</p>
+        </article>
+        <article class="decision">
+          <h3>4. 過去リスト経由販売の定点観測</h3>
+          <p>広告運用外の売上として週次差分に含め続けます。特に苫米地セミナーと相談支援専門員入門セミナーは伸びの要因を確認したいところです。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>総評</h2>
+      <p>先週のエバー全体は、売上・利益ともにプラスで着地。特にCBAと過去エバーリスト経由の販売が大きく貢献しました。</p>
+      <p>一方で、広告運用分だけを見ると案件ごとの濃淡がかなり出ています。CBA・論理エンジン・シュタイナーは良好ですが、コンテンツビジネス大全・売れる企画・博士歴史・ハウス広告は改善余地が大きいです。</p>
+      <p>来週は「伸びている案件を強める」よりも先に、広告費が大きい案件の赤字要因を潰すのが優先度高めです。特にコンテンツビジネス大全と売れる企画は、週次で広告費に対する売上回収が弱くなっているため、早めに確認したいです。</p>
+    </section>
+
+    <div class="footer">この週次レポートはSlack投稿および既存レポート差分をもとに作成しています。最終判断は人の目で確認・解釈したうえで進めてください。</div>
+  </main>
+</body>
+</html>
