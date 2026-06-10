@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>エバー前月同日比較レポート</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #10203a;
+        --muted: #66758a;
+        --line: #d7e4f0;
+        --paper: #f3f8fd;
+        --panel: #ffffff;
+        --blue: #184cc6;
+        --blue-2: #2f94cc;
+        --blue-soft: #eaf3ff;
+        --green: #087a4f;
+        --green-soft: #e8f7ef;
+        --red: #bd3d34;
+        --red-soft: #fff0ed;
+        --amber: #a86600;
+        --amber-soft: #fff6e4;
+        --shadow: 0 16px 34px rgba(16, 32, 58, 0.08);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          linear-gradient(180deg, #eaf4ff 0, rgba(243, 248, 253, 0) 360px),
+          var(--paper);
+      }
+
+      .page {
+        width: min(1180px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: 28px 0 48px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 390px;
+        gap: 26px;
+        align-items: center;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: linear-gradient(110deg, #fff 0%, #fff 62%, #eaf4ff 62%, #f8fbff 100%);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-copy {
+        padding: 34px 36px;
+      }
+
+      .eyebrow {
+        margin-bottom: 10px;
+        color: var(--blue);
+        font-size: 13px;
+        font-weight: 850;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        color: #102a4c;
+        font-size: clamp(30px, 4vw, 48px);
+        line-height: 1.13;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        margin-top: 14px;
+        color: #53677e;
+        font-size: 15px;
+        line-height: 1.85;
+      }
+
+      .hero-img {
+        align-self: stretch;
+        min-height: 250px;
+        background-image: url("../../assets/report-character-header.png");
+        background-size: cover;
+        background-position: center right;
+        border-left: 1px solid var(--line);
+      }
+
+      .meta-row,
+      .grid,
+      .summary-grid,
+      .project-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .meta-row {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 16px;
+      }
+
+      .pill-card,
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 8px 20px rgba(16, 32, 58, 0.05);
+      }
+
+      .pill-card {
+        padding: 14px 16px;
+      }
+
+      .label {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 780;
+      }
+
+      .value {
+        display: block;
+        margin-top: 6px;
+        color: #122b50;
+        font-size: 22px;
+        line-height: 1.15;
+        font-weight: 850;
+      }
+
+      section {
+        margin-top: 28px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 14px;
+      }
+
+      h2 {
+        color: #0f223d;
+        font-size: 24px;
+        letter-spacing: 0;
+      }
+
+      .note {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      .summary-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .metric {
+        padding: 18px;
+        border-top: 4px solid var(--blue);
+      }
+
+      .metric.good {
+        border-top-color: var(--green);
+      }
+
+      .metric.bad {
+        border-top-color: var(--red);
+      }
+
+      .metric.neutral {
+        border-top-color: var(--blue-2);
+      }
+
+      .metric .sub {
+        margin-top: 9px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 760;
+      }
+
+      .delta-good {
+        color: var(--green);
+      }
+
+      .delta-bad {
+        color: var(--red);
+      }
+
+      .delta-neutral {
+        color: #24539b;
+      }
+
+      .callout {
+        display: grid;
+        grid-template-columns: 8px minmax(0, 1fr);
+        gap: 16px;
+        padding: 20px;
+      }
+
+      .callout::before {
+        content: "";
+        display: block;
+        border-radius: 99px;
+        background: var(--amber);
+      }
+
+      .callout strong {
+        display: block;
+        color: #6d4400;
+        font-size: 17px;
+      }
+
+      .callout p {
+        margin-top: 7px;
+        color: #69543a;
+        line-height: 1.75;
+      }
+
+      .compare-table,
+      .project-table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      th,
+      td {
+        padding: 14px 16px;
+        border-bottom: 1px solid #e7eef6;
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      th:first-child,
+      td:first-child {
+        text-align: left;
+      }
+
+      th {
+        background: #f2f7fe;
+        color: #52647b;
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      td {
+        color: #172d4f;
+        font-weight: 760;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .project-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .project-card {
+        overflow: hidden;
+      }
+
+      .project-card header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 18px 18px 12px;
+      }
+
+      .project-card h3 {
+        color: #142b4d;
+        font-size: 18px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        padding: 0 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 850;
+      }
+
+      .badge.good {
+        color: var(--green);
+        background: var(--green-soft);
+        border: 1px solid #bce8d3;
+      }
+
+      .badge.bad {
+        color: var(--red);
+        background: var(--red-soft);
+        border: 1px solid #ffd0c8;
+      }
+
+      .badge.watch {
+        color: var(--amber);
+        background: var(--amber-soft);
+        border: 1px solid #f3d397;
+      }
+
+      .project-card .body {
+        padding: 0 18px 18px;
+      }
+
+      .mini-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .mini {
+        border: 1px solid #e3edf7;
+        border-radius: 8px;
+        background: #fbfdff;
+        padding: 12px;
+      }
+
+      .mini span {
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 800;
+      }
+
+      .mini strong {
+        display: block;
+        margin-top: 6px;
+        color: #102b50;
+        font-size: 16px;
+      }
+
+      .bar-row {
+        display: grid;
+        grid-template-columns: 96px minmax(0, 1fr) 86px;
+        gap: 12px;
+        align-items: center;
+        margin-top: 14px;
+        color: #52647b;
+        font-size: 12px;
+        font-weight: 760;
+      }
+
+      .bar {
+        overflow: hidden;
+        height: 12px;
+        border-radius: 999px;
+        background: #e6eef8;
+      }
+
+      .bar i {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--blue), var(--blue-2));
+      }
+
+      .project-card p {
+        margin-top: 14px;
+        color: #53677e;
+        font-size: 13px;
+        line-height: 1.75;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+        gap: 16px;
+      }
+
+      .list-card {
+        padding: 20px;
+      }
+
+      .list-card ol,
+      .list-card ul {
+        margin: 12px 0 0;
+        padding-left: 22px;
+        color: #213a5f;
+        line-height: 1.9;
+        font-weight: 720;
+      }
+
+      .definition {
+        padding: 18px 20px;
+        background: #f9fcff;
+      }
+
+      .definition p {
+        color: #53677e;
+        line-height: 1.75;
+      }
+
+      @media (max-width: 920px) {
+        .page {
+          width: min(100% - 28px, 1180px);
+        }
+
+        .hero,
+        .split,
+        .project-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-img {
+          min-height: 180px;
+          border-left: 0;
+          border-top: 1px solid var(--line);
+        }
+
+        .summary-grid,
+        .meta-row {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .table-wrap {
+          overflow-x: auto;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .summary-grid,
+        .meta-row,
+        .mini-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-copy {
+          padding: 26px 22px;
+        }
+
+        .bar-row {
+          grid-template-columns: 1fr;
+          gap: 7px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">Revenue Command Center</div>
+          <h1>エバー前月同日比較レポート</h1>
+          <p class="lead">同じ経過日数のSlack戦績を突き合わせ、売上・広告費・利益・ROASの差分から、今月どこが伸びていて、どこが利益を削っているかを確認します。</p>
+          <div class="meta-row">
+            <div class="pill-card">
+              <span class="label">今月</span>
+              <strong class="value">6/10 18:00</strong>
+            </div>
+            <div class="pill-card">
+              <span class="label">先月</span>
+              <strong class="value">5/10 17:00</strong>
+            </div>
+            <div class="pill-card">
+              <span class="label">比較軸</span>
+              <strong class="value">10日経過</strong>
+            </div>
+          </div>
+        </div>
+        <div class="hero-img" aria-hidden="true"></div>
+      </header>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <h2>全体の現在地</h2>
+            <p class="note">売上は伸びているが、広告費の伸びが強く、利益とROASが落ちています。</p>
+          </div>
+        </div>
+        <div class="summary-grid">
+          <div class="card metric good">
+            <span class="label">売上差分</span>
+            <strong class="value delta-good">+¥1,636,600</strong>
+            <div class="sub">¥4,610,100 → ¥6,246,700</div>
+          </div>
+          <div class="card metric bad">
+            <span class="label">広告費差分</span>
+            <strong class="value delta-bad">+¥2,019,903</strong>
+            <div class="sub">¥1,221,322 → ¥3,241,225</div>
+          </div>
+          <div class="card metric bad">
+            <span class="label">利益差分</span>
+            <strong class="value delta-bad">-¥383,303</strong>
+            <div class="sub">¥3,388,778 → ¥3,005,475</div>
+          </div>
+          <div class="card metric bad">
+            <span class="label">ROAS</span>
+            <strong class="value delta-bad">377.5% → 192.7%</strong>
+            <div class="sub">-184.8pt</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="card callout">
+          <div>
+            <strong>今月は「売上増」ではなく「利益の残り方」を見る月です。</strong>
+            <p>月商ペースは先月同日より約491万円高い一方、広告費は約202万円増え、利益は約38万円減っています。広告費をどの案件に寄せるかの判断が重要です。</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <h2>大枠の内訳</h2>
+            <p class="note">エバー広告、ハウス広告、過去エバーリスト告知の3軸で確認します。</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>区分</th>
+                <th>5/10売上</th>
+                <th>6/10売上</th>
+                <th>売上差分</th>
+                <th>広告費差分</th>
+                <th>ROAS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>エバー広告</td>
+                <td>¥4,505,600</td>
+                <td>¥6,078,400</td>
+                <td class="delta-good">+¥1,572,800</td>
+                <td class="delta-bad">+¥1,786,153</td>
+                <td>421.5% → 212.9%</td>
+              </tr>
+              <tr>
+                <td>ハウス広告</td>
+                <td>¥104,500</td>
+                <td>¥168,300</td>
+                <td class="delta-good">+¥63,800</td>
+                <td class="delta-bad">+¥233,750</td>
+                <td>68.6% → 43.6%</td>
+              </tr>
+              <tr>
+                <td>過去エバーリスト告知</td>
+                <td>¥506,000</td>
+                <td>約¥796,300</td>
+                <td class="delta-good">+約¥290,300</td>
+                <td>¥0</td>
+                <td>広告費なし</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <h2>案件別の勝ち負け</h2>
+            <p class="note">先月同日と比べて、どの案件が利益を増やし、どの案件が効率を落としているか。</p>
+          </div>
+        </div>
+        <div class="project-grid">
+          <article class="card project-card">
+            <header>
+              <h3>売れる企画の作り方</h3>
+              <span class="badge good">勝ち筋</span>
+            </header>
+            <div class="body">
+              <div class="mini-grid">
+                <div class="mini"><span>売上差分</span><strong class="delta-good">+¥1,509,900</strong></div>
+                <div class="mini"><span>広告費差分</span><strong class="delta-good">-¥169,962</strong></div>
+                <div class="mini"><span>ROAS</span><strong>2079.2%</strong></div>
+              </div>
+              <div class="bar-row"><span>売上伸長</span><div class="bar"><i style="width: 100%"></i></div><strong>強い</strong></div>
+              <p>広告費を減らしながら、売上・利益が大きく伸びています。今月最大の改善要因なので、訴求・導線・購入理由を最優先で分解したい案件です。</p>
+            </div>
+          </article>
+
+          <article class="card project-card">
+            <header>
+              <h3>コンテンツビジネス大全（Meta+X合算）</h3>
+              <span class="badge bad">要改善</span>
+            </header>
+            <div class="body">
+              <div class="mini-grid">
+                <div class="mini"><span>売上差分</span><strong class="delta-bad">-¥49,500</strong></div>
+                <div class="mini"><span>広告費差分</span><strong class="delta-bad">+¥1,591,522</strong></div>
+                <div class="mini"><span>ROAS</span><strong>136.9%</strong></div>
+              </div>
+              <div class="bar-row"><span>効率悪化</span><div class="bar"><i style="width: 86%"></i></div><strong>大</strong></div>
+              <p>売上はほぼ横ばいなのに広告費が大きく増え、利益を削っています。今月のROAS悪化の中心。Meta/Xは分けて判断する必要があります。</p>
+            </div>
+          </article>
+
+          <article class="card project-card">
+            <header>
+              <h3>コンテンツビジネス Meta広告</h3>
+              <span class="badge bad">止血対象</span>
+            </header>
+            <div class="body">
+              <div class="mini-grid">
+                <div class="mini"><span>6/10売上</span><strong>¥1,772,100</strong></div>
+                <div class="mini"><span>広告費</span><strong>¥1,560,602</strong></div>
+                <div class="mini"><span>ROAS</span><strong>113.6%</strong></div>
+              </div>
+              <p>売上規模は大きいものの、利益効率が低い。増額よりも、広告費の使い方と登録後の成約導線を確認したい状態です。</p>
+            </div>
+          </article>
+
+          <article class="card project-card">
+            <header>
+              <h3>コンテンツビジネス X広告</h3>
+              <span class="badge good">比較的良好</span>
+            </header>
+            <div class="body">
+              <div class="mini-grid">
+                <div class="mini"><span>6/10売上</span><strong>¥881,100</strong></div>
+                <div class="mini"><span>広告費</span><strong>¥377,982</strong></div>
+                <div class="mini"><span>ROAS</span><strong>233.1%</strong></div>
+              </div>
+              <p>Metaより売上規模は小さいが、ROASは高い。横展開や増額余地を見るなら、Meta合算ではなくX単体で判断します。</p>
+            </div>
+          </article>
+
+          <article class="card project-card">
+            <header>
+              <h3>AI電子書籍</h3>
+              <span class="badge bad">売上停止</span>
+            </header>
+            <div class="body">
+              <div class="mini-grid">
+                <div class="mini"><span>売上差分</span><strong class="delta-bad">-¥440,000</strong></div>
+                <div class="mini"><span>広告費差分</span><strong class="delta-good">-¥113,633</strong></div>
+                <div class="mini"><span>ROAS</span><strong>0%</strong></div>
+              </div>
+              <p>先月は売上があったが、今月は広告費だけが出ています。登録は取れているのか、登録後の申込導線で止まっているのかを確認。</p>
+            </div>
+          </article>
+
+          <article class="card project-card">
+            <header>
+              <h3>論理エンジン</h3>
+              <span class="badge watch">効率低下</span>
+            </header>
+            <div class="body">
+              <div class="mini-grid">
+                <div class="mini"><span>売上差分</span><strong class="delta-bad">-¥108,600</strong></div>
+                <div class="mini"><span>広告費差分</span><strong class="delta-bad">+¥62,358</strong></div>
+                <div class="mini"><span>ROAS</span><strong>180.0%</strong></div>
+              </div>
+              <p>先月同日より売上・利益・ROASが悪化。広告増額より、先月の勝ち日との訴求差分を見るのが先です。</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <h2>案件別テーブル</h2>
+            <p class="note">数値を一覧で確認するための詳細表です。</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="project-table">
+            <thead>
+              <tr>
+                <th>案件</th>
+                <th>5/10売上</th>
+                <th>6/10売上</th>
+                <th>売上差分</th>
+                <th>5/10広告費</th>
+                <th>6/10広告費</th>
+                <th>利益差分</th>
+                <th>ROAS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>売れる企画</td><td>¥455,400</td><td>¥1,965,300</td><td class="delta-good">+¥1,509,900</td><td>¥264,484</td><td>¥94,522</td><td class="delta-good">+¥1,679,862</td><td>172.2% → 2079.2%</td></tr>
+              <tr><td>コンテンツビジネス大全（Meta+X）</td><td>¥2,702,700</td><td>¥2,653,200</td><td class="delta-bad">-¥49,500</td><td>¥347,062</td><td>¥1,938,584</td><td class="delta-bad">-¥1,641,022</td><td>778.7% → 136.9%</td></tr>
+              <tr><td>AI電子書籍</td><td>¥440,000</td><td>¥0</td><td class="delta-bad">-¥440,000</td><td>¥284,544</td><td>¥170,911</td><td class="delta-bad">-¥326,367</td><td>154.6% → 0%</td></tr>
+              <tr><td>論理エンジン</td><td>¥396,000</td><td>¥287,400</td><td class="delta-bad">-¥108,600</td><td>¥93,113</td><td>¥155,471</td><td class="delta-bad">-¥170,958</td><td>430.0% → 180.0%</td></tr>
+              <tr><td>コンテンツアカデミー</td><td>¥0</td><td>¥237,600</td><td class="delta-good">+¥237,600</td><td>¥0</td><td>¥192,915</td><td class="delta-good">+¥44,685</td><td>- → 123.2%</td></tr>
+              <tr><td>星さん子育て図鑑</td><td>¥0</td><td>¥99,000</td><td class="delta-good">+¥99,000</td><td>¥0</td><td>¥97,602</td><td class="delta-good">+¥1,398</td><td>0% → 101.4%</td></tr>
+              <tr><td>ハウス広告</td><td>¥104,500</td><td>¥168,300</td><td class="delta-good">+¥63,800</td><td>¥152,271</td><td>¥386,021</td><td class="delta-bad">-¥169,950</td><td>68.6% → 43.6%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="split">
+        <div class="card list-card">
+          <h2>今日見る順番</h2>
+          <ol>
+            <li>売れる企画の勝ち要因を分解する</li>
+            <li>コンテンツビジネスMeta広告を止血する</li>
+            <li>AI電子書籍の売上0を確認する</li>
+            <li>論理エンジンの先月比悪化を確認する</li>
+          </ol>
+        </div>
+        <div class="card list-card">
+          <h2>判断メモ</h2>
+          <ul>
+            <li>売上だけなら今月の方が強い</li>
+            <li>利益効率は先月同日の方が強い</li>
+            <li>MetaとXは合算で判断しない</li>
+            <li>広告費なし売上は別枠で評価する</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <div class="card definition">
+          <h2>定義</h2>
+          <p class="note">前月同日比較は、今月の同じ経過日数時点と、先月の同じ経過日数時点の累計値を比較する見方です。売上差分で月商ペース、広告費差分で投下量、利益差分で実際に残っている金額、ROAS差分で広告効率を見ます。</p>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
