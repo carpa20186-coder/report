@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>20代コミュニティ 日次レポート</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2933;
+      --muted: #6b7482;
+      --line: #e3e7ee;
+      --paper: #ffffff;
+      --bg: #f6f7f9;
+      --blue: #2f5f9f;
+      --navy: #263446;
+      --green: #24735d;
+      --amber: #9b6a24;
+      --soft-blue: #eef4ff;
+      --soft-green: #edf8f4;
+      --shadow: 0 8px 22px rgba(31, 41, 51, .06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+      line-height: 1.75;
+    }
+    .shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 22px 56px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+    .hero-main, .hero-side, .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .hero-main {
+      padding: 30px;
+      border-top: 4px solid var(--blue);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+    .judgement {
+      margin: 0;
+      max-width: 760px;
+      font-size: 16px;
+      color: #293648;
+    }
+    .hero-side {
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 118px;
+      gap: 12px;
+      align-items: end;
+      background:
+        radial-gradient(circle at 92% 18%, rgba(47, 95, 159, .10), transparent 32%),
+        var(--paper);
+    }
+    .hero-side h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+    .hero-side ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .hero-side li {
+      margin-bottom: 10px;
+    }
+    .hero-side-content {
+      position: relative;
+      z-index: 1;
+    }
+    .character-wrap {
+      align-self: end;
+      justify-self: center;
+      position: relative;
+      z-index: 0;
+    }
+    .character-wrap img {
+      display: block;
+      width: min(130px, 30vw);
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 16px rgba(31, 41, 51, .14));
+    }
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .kpi {
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .kpi span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .kpi strong {
+      display: block;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.25;
+    }
+    .kpi small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .card {
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+    .card h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    .card h2::before {
+      content: "";
+      width: 6px;
+      height: 24px;
+      border-radius: 4px;
+      background: var(--blue);
+    }
+    .highlight {
+      border-top: 4px solid var(--green);
+    }
+    .highlight h2::before {
+      background: var(--green);
+    }
+    .action-card {
+      border-top: 4px solid var(--amber);
+    }
+    .action-card h2::before {
+      background: var(--amber);
+    }
+    .period, .section-lead, .section-period {
+      color: var(--muted);
+      margin-top: -6px;
+    }
+    .section-period {
+      display: inline-flex;
+      margin-bottom: 16px;
+      padding: 5px 9px;
+      border-radius: 6px;
+      background: #f1f5fb;
+      color: #536073;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+    .spotlight {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 10px;
+    }
+    .metric {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 17px;
+    }
+    .chart-card {
+      margin: 18px 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .chart-card h3, .funnel-visual h3 {
+      margin-top: 0;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: minmax(170px, 1.1fr) minmax(180px, 2fr) 90px;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid #edf0f5;
+    }
+    .bar-row:last-child {
+      border-bottom: 0;
+    }
+    .bar-label {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--navy);
+    }
+    .bar-track {
+      height: 12px;
+      border-radius: 999px;
+      background: #e9eef6;
+      overflow: hidden;
+    }
+    .bar-track span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--green), #5ba98d);
+    }
+    .bar-value {
+      text-align: right;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .chart-note {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    h3 {
+      margin: 24px 0 10px;
+      font-size: 17px;
+      color: var(--navy);
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+    th, td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    th {
+      position: sticky;
+      left: 0;
+      background: #f8faff;
+      max-width: 360px;
+      white-space: normal;
+      font-weight: 650;
+    }
+    tr:last-child th, tr:last-child td {
+      border-bottom: 0;
+    }
+    .mobile-table-cards {
+      display: none;
+    }
+    .mobile-row-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .mobile-row-card h4 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--navy);
+    }
+    .mobile-row-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .mini-metric {
+      border: 1px solid #e6eaf1;
+      border-radius: 7px;
+      background: white;
+      padding: 8px 9px;
+      min-width: 0;
+    }
+    .mini-metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+    .mini-metric strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.25;
+      color: var(--ink);
+      overflow-wrap: anywhere;
+    }
+    .body p, .card p {
+      margin: 0 0 15px;
+    }
+    .bullet {
+      padding: 13px 15px;
+      border-left: 4px solid var(--blue);
+      background: #f8faff;
+      border-radius: 6px;
+    }
+    .axis-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .axis {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      padding: 16px;
+    }
+    .route-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .route-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      padding: 16px;
+    }
+    .route-card h3 {
+      margin-top: 0;
+      color: var(--blue);
+    }
+    .funnel table {
+      min-width: 720px;
+    }
+    .funnel thead th {
+      position: static;
+      background: #eef4ff;
+      color: var(--navy);
+      font-weight: 700;
+    }
+    .funnel tbody th {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .funnel td {
+      font-variant-numeric: tabular-nums;
+    }
+    .hint {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .funnel-visual {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .funnel-step {
+      display: grid;
+      grid-template-columns: 120px minmax(180px, 1fr) 92px;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid #edf0f5;
+    }
+    .funnel-step:last-child {
+      border-bottom: 0;
+    }
+    .funnel-name {
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .funnel-bar {
+      height: 22px;
+      border-radius: 6px;
+      background: #e9eef6;
+      overflow: hidden;
+    }
+    .funnel-bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), #6d91ca);
+    }
+    .funnel-num {
+      text-align: right;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .funnel-num small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .readable {
+      max-width: 860px;
+    }
+    .readable p {
+      font-size: 15px;
+      line-height: 1.9;
+      margin-bottom: 14px;
+    }
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .decision {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffaf2;
+      padding: 14px;
+    }
+    .decision span {
+      display: inline-block;
+      color: var(--amber);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .decision p {
+      margin: 0;
+      line-height: 1.75;
+    }
+    .axis h3 {
+      margin-top: 0;
+      color: var(--blue);
+    }
+    .footer {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 18px;
+    }
+    @media (max-width: 900px) {
+      .hero, .axis-grid, .decision-grid, .route-grid { grid-template-columns: 1fr; }
+      .kpi-row, .spotlight { grid-template-columns: 1fr 1fr; }
+      .bar-row, .funnel-step { grid-template-columns: 1fr; gap: 6px; }
+      .bar-value, .funnel-num { text-align: left; }
+      .hero-side { grid-template-columns: minmax(0, 1fr) 104px; }
+    }
+    @media (max-width: 560px) {
+      .shell { padding: 16px 12px 36px; }
+      .hero-main, .hero-side, .card { padding: 18px; }
+      .kpi-row, .spotlight, .metrics { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .hero-side { grid-template-columns: 1fr; }
+      .character-wrap {
+        justify-self: end;
+        margin-top: -8px;
+      }
+      .character-wrap img { width: 92px; }
+      .table-wrap { display: none; }
+      .mobile-table-cards { display: block; }
+      th, td { font-size: 13px; }
+    }
+  .report-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:14px 0 0;color:#687386;font-size:14px;font-weight:700;line-height:1.6}.report-meta span{display:inline-flex;align-items:center}</style>
+</head>
+<body>
+  <div class="shell">
+    <div class="hero">
+      <section class="hero-main">
+        <div class="eyebrow">Daily Report / 2026-06-13</div>
+        <h1>20代コミュニティ<br>日次レポート</h1>
+        <p class="judgement">セミナー直のCPAと登録効率が優勢。登録数だけでなく売上につながる質を見ます。</p>
+        <div class='report-meta'><span>報告日時：2026年6月13日 14:00</span><span>種別：数値レポート</span></div>
+        <div class="kpi-row"><div class='kpi'><span>コミュ直CPA</span><strong>-</strong><small>6月累計</small></div><div class='kpi'><span>セミナー直CPA</span><strong>¥7,417</strong><small>6月累計</small></div><div class='kpi'><span>直近実CPA</span><strong>¥7,417</strong><small>直近3日</small></div><div class='kpi'><span>セミナー直売上</span><strong>¥0</strong><small>6月累計</small></div></div>
+      </section>
+      <aside class="hero-side">
+        <div class="hero-side-content">
+          <h2>今日の次アクション</h2>
+          <ul><li>直近3日は案件全体CPA¥14,834、実CPA¥7,417。当日途中値も含めて登録効率は改善傾向。</li><li>CR別では セミナー直｜ノンタゲ18-32｜ヘッダー が実CPA¥7,417で最も強い。コミュニティ直の入口は維持し、LPテーマとの接続をさらに明確化する。</li><li>一方で明確な弱いCR判定はまだ早い。セミナー直は累計売上があるため完全停止ではなく、訴求差し替えと少額検証に寄せる。</li></ul>
+        </div>
+        <div class="character-wrap">
+          <img src="../../assets/report-character-header.png" alt="レポートを説明するキャラクター">
+        </div>
+      </aside>
+    </div>
+    <section class='card highlight'><h2>直近3日パフォーマンス</h2><p class='period'>対象期間：2026-06-11 / 2026-06-12 / 2026-06-13</p><div class='spotlight'><div class='kpi'><span>消化</span><strong>¥14,834</strong><small></small></div><div class='kpi'><span>実登録</span><strong>2</strong><small></small></div><div class='kpi'><span>実CPA</span><strong>¥7,417</strong><small></small></div><div class='kpi'><span>CTR</span><strong>0.8%</strong><small></small></div><div class='kpi'><span>CVR</span><strong>3.6%</strong><small></small></div></div><div class='chart-card'><h3>日別 実CPA（直近3日）</h3><div class='bar-row'><div class='bar-label'>2026-06-11</div><div class='bar-track'><span style='width:100.0%'></span></div><div class='bar-value'>¥3,050</div></div><p class='chart-note'>CPA系のグラフは、バーが長いほど効率が良い表示です。</p></div><h3>日別推移（直近3日）</h3><div class='table-wrap'><table><tr><th>2026-06-11</th><td>消化¥6,101</td><td>実登録2</td><td>実CPA¥3,050</td><td>CTR0.6%</td><td>CVR14.3%</td></tr><tr><th>2026-06-12</th><td>消化¥5,808</td><td>実登録0</td><td>実CPA-</td><td>CTR0.7%</td><td>CVR0.0%</td></tr><tr><th>2026-06-13</th><td>消化¥2,925</td><td>実登録0</td><td>実CPA-</td><td>CTR0.9%</td><td>CVR0.0%</td></tr></table></div><div class='mobile-table-cards'><article class='mobile-row-card'><h4>2026-06-11</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥6,101</strong></div><div class='mini-metric'><span>実登録</span><strong>2</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥3,050</strong></div><div class='mini-metric'><span>CTR</span><strong>0.6%</strong></div><div class='mini-metric'><span>CVR</span><strong>14.3%</strong></div></div></article><article class='mobile-row-card'><h4>2026-06-12</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥5,808</strong></div><div class='mini-metric'><span>実登録</span><strong>0</strong></div><div class='mini-metric'><span>実CPA</span><strong>-</strong></div><div class='mini-metric'><span>CTR</span><strong>0.7%</strong></div><div class='mini-metric'><span>CVR</span><strong>0.0%</strong></div></div></article><article class='mobile-row-card'><h4>2026-06-13</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥2,925</strong></div><div class='mini-metric'><span>実登録</span><strong>0</strong></div><div class='mini-metric'><span>実CPA</span><strong>-</strong></div><div class='mini-metric'><span>CTR</span><strong>0.9%</strong></div><div class='mini-metric'><span>CVR</span><strong>0.0%</strong></div></div></article></div><div class='chart-card'><h3>CR別 実CPAが軽い順（直近3日合計）</h3><div class='bar-row'><div class='bar-label'>004ノンタゲ18-32｜ヘッダー</div><div class='bar-track'><span style='width:100.0%'></span></div><div class='bar-value'>¥7,417</div></div><p class='chart-note'>CPA系のグラフは、バーが長いほど効率が良い表示です。</p></div><h3>CR別（直近3日合計）</h3><div class='table-wrap'><table><tr><th>004【28歳本】セミナー直｜ノンタゲ18-32｜ヘッダー</th><td>消化¥14,834</td><td>実登録2</td><td>実CPA¥7,417</td><td>CTR0.8%</td><td>CVR3.6%</td></tr></table></div><div class='mobile-table-cards'><article class='mobile-row-card'><h4>004【28歳本】セミナー直｜ノンタゲ18-32｜ヘッダー</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥14,834</strong></div><div class='mini-metric'><span>実登録</span><strong>2</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥7,417</strong></div><div class='mini-metric'><span>CTR</span><strong>0.8%</strong></div><div class='mini-metric'><span>CVR</span><strong>3.6%</strong></div></div></article></div></section><section class='card summary-card'><h2>6月パフォーマンス（導線別）</h2><p class='section-period'>対象期間：2026年6月1日〜本日までの月間累計</p><div class='route-grid'><article class='route-card'><h3>コミュニティ直</h3><div class='metrics'><div class='metric'><span>配信状況</span><strong>停止中</strong></div><div class='metric'><span>広告費</span><strong>¥14,731</strong></div><div class='metric'><span>リスト獲得数</span><strong>0</strong></div><div class='metric'><span>リスト単価</span><strong>-</strong></div><div class='metric'><span>インプレッション</span><strong>5,071</strong></div><div class='metric'><span>クリック数</span><strong>33</strong></div><div class='metric'><span>クリック率</span><strong>0.7%</strong></div><div class='metric'><span>オプト登録率</span><strong>0.0%</strong></div><div class='metric'><span>売上</span><strong>¥0</strong></div><div class='metric'><span>利益</span><strong>¥-14,731</strong></div><div class='metric'><span>ROAS</span><strong>0.0%</strong></div></div></article><article class='route-card'><h3>セミナー直</h3><div class='metrics'><div class='metric'><span>配信状況</span><strong>広告運用中</strong></div><div class='metric'><span>広告費</span><strong>¥14,834</strong></div><div class='metric'><span>リスト獲得数</span><strong>2</strong></div><div class='metric'><span>リスト単価</span><strong>¥7,417</strong></div><div class='metric'><span>インプレッション</span><strong>3,715</strong></div><div class='metric'><span>クリック数</span><strong>28</strong></div><div class='metric'><span>クリック率</span><strong>0.8%</strong></div><div class='metric'><span>オプト登録率</span><strong>7.1%</strong></div><div class='metric'><span>売上</span><strong>¥0</strong></div><div class='metric'><span>利益</span><strong>¥-14,834</strong></div><div class='metric'><span>ROAS</span><strong>0.0%</strong></div></div></article></div></section><section class='card '><h2>月跨ぎ累計パフォーマンス（導線別）</h2><p class='section-period'>対象期間：累計データ</p><div class='route-grid'><article class='route-card'><h3>コミュニティ直</h3><div class='metrics'><div class='metric'><span>配信状況</span><strong>停止中</strong></div><div class='metric'><span>広告費</span><strong>¥202,798</strong></div><div class='metric'><span>リスト獲得数</span><strong>70</strong></div><div class='metric'><span>リスト単価</span><strong>¥2,897</strong></div><div class='metric'><span>インプレッション</span><strong>89,374</strong></div><div class='metric'><span>クリック数</span><strong>792</strong></div><div class='metric'><span>クリック率</span><strong>0.9%</strong></div><div class='metric'><span>オプト登録率</span><strong>8.8%</strong></div><div class='metric'><span>売上</span><strong>¥30,000</strong></div><div class='metric'><span>利益</span><strong>¥-172,798</strong></div><div class='metric'><span>ROAS</span><strong>14.8%</strong></div></div></article><article class='route-card'><h3>セミナー直</h3><div class='metrics'><div class='metric'><span>配信状況</span><strong>広告運用中</strong></div><div class='metric'><span>広告費</span><strong>¥220,407</strong></div><div class='metric'><span>リスト獲得数</span><strong>73</strong></div><div class='metric'><span>リスト単価</span><strong>¥3,019</strong></div><div class='metric'><span>インプレッション</span><strong>61,311</strong></div><div class='metric'><span>クリック数</span><strong>573</strong></div><div class='metric'><span>クリック率</span><strong>0.9%</strong></div><div class='metric'><span>オプト登録率</span><strong>12.7%</strong></div><div class='metric'><span>売上</span><strong>¥125,200</strong></div><div class='metric'><span>利益</span><strong>¥-95,207</strong></div><div class='metric'><span>ROAS</span><strong>56.8%</strong></div></div></article></div></section><section class='card prose-card'><h2>数値まとめ・コメント</h2><p>今月のコミュニティ直は停止中です。停止前の6月実績として、広告費¥14,731、リスト獲得0件、CPA-です。CTRは0.7%、オプト登録率は0.0%です。</p><p>今月のセミナー直は広告運用中です。広告費¥14,834、リスト獲得2件、CPA¥7,417です。CTRは0.8%、オプト登録率は7.1%で、今月時点でもコミュニティ直よりクリック後の登録率が高めに出ています。</p><p>累計では、コミュニティ直が広告費¥202,798、リスト獲得70件、CPA¥2,897。セミナー直が広告費¥220,407、リスト獲得73件、CPA¥3,019です。累計でもセミナー直のCPAとCVRが優勢で、さらに売上も立っています。</p></section><section class='card prose-card'><h2>ターゲットインサイト</h2><p>直近3日の案件全体はCPA¥14,834、実CPA¥7,417です。今回の訴求判断は固定テーマではなく、直近3日のCR別実績を基準に見ます。</p><p>勝ち筋は セミナー直｜ノンタゲ18-32｜ヘッダー で、実CPA¥7,417。ここから見ると、いま反応しているのは「セミナー直｜ノンタゲ18-32」の切り口です。ターゲットは、20代で将来への不安や成長実感のなさを抱え、学びの具体性が見えると反応しやすい層です。</p><p>一方で、直近3日は比較できるCR母数がまだ少ないため、勝ち筋を断定しすぎず、同じ切り口の別表現を少額で増やして反応を見たいです。</p><p>そのため次のCRは、勝ちCRの表現をただ複製するのではなく、勝っている感情・状況を別フックに展開しつつ、弱いCRで出ているズレを避ける方向で作ります。セミナー直とコミュニティ直で登録後の質が違うため、勝っている導線の訴求は厚めにしつつ、弱い導線はLPテーマとの接続を補強します。</p></section><section class='card'><h2>次のCR訴求軸案</h2><p class='section-lead'>今回は、直近3日の勝ちCRと弱いCRを起点に訴求を作ります。</p><div class='axis-grid'><article class='axis'><h3>1. 横展開｜セミナー直｜ノンタゲ18-32</h3><p>フック：<br>セミナー直｜ノンタゲ18-32で反応した人に、<br>もう一段わかりやすい入口を作る。</p><p>オファー明記：<br>20代のうちに知っておくべき学びを無料で受け取る</p><p>狙い：<br>直近3日で セミナー直｜ノンタゲ18-32｜ヘッダー が実CPA¥7,417と最も効率が良いため、この切り口を横展開する。勝ちCRの言葉をそのまま使い回すのではなく、同じ悩みを別の生活場面・仕事場面に置き換えて検証する。</p></article><article class='axis'><h3>2. 改善検証｜セミナー直｜ノンタゲ18-32の別表現</h3><p>フック：<br>気になるけれど、<br>自分ごと化しきれない人へ。</p><p>オファー明記：<br>20代のうちに知っておくべき学びを無料で受け取る</p><p>狙い：<br>セミナー直｜ノンタゲ18-32｜ヘッダー が実CPA¥7,417で強い。直近3日は比較できる弱いCRが少ないため、勝ち筋の言葉を変えて再現性を確認する。</p></article><article class='axis'><h3>3. 新規検証｜働き方・人間関係・将来設計の不安を持つ20代</h3><p>フック：<br>今の勝ち筋とは違う入口から、<br>同じ悩みを持つ人を拾う。</p><p>オファー明記：<br>20代のうちに知っておくべき学びを無料で受け取る</p><p>狙い：<br>勝ちCRへの寄せすぎを避けるため、直近の勝ち筋とは別の入口も1本混ぜる。既存CRの焼き直しではなく、同じ商品価値を別ターゲット・別シーンで検証する。</p></article></div></section><section class='card action-card'><h2>今日の具体アクション</h2><div class='decision-grid'><article class='decision'><span>1. 今日見るポイント</span><p>直近3日は案件全体CPA¥14,834、実CPA¥7,417。当日途中値も含めて登録効率は改善傾向。</p></article><article class='decision'><span>2. 今日見るポイント</span><p>CR別では セミナー直｜ノンタゲ18-32｜ヘッダー が実CPA¥7,417で最も強い。コミュニティ直の入口は維持し、LPテーマとの接続をさらに明確化する。</p></article><article class='decision'><span>3. 今日見るポイント</span><p>一方で明確な弱いCR判定はまだ早い。セミナー直は累計売上があるため完全停止ではなく、訴求差し替えと少額検証に寄せる。</p></article><article class='decision'><span>4. 今日見るポイント</span><p>累計ではセミナー直に売上が出ているため、短期CPAだけで判断せず、コミュニティ直で量、セミナー直で質を追う見方を継続する。</p></article></div></section>
+    <div class="footer">この数値レポートおよびCR案はAIによる自動出力です。最終判断は人の目で確認・解釈・推敲してください。</div>
+  </div>
+</body>
+</html>
