@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>本日（2026年6月23日）のレポート報告になります。ご確認ください！</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2933;
+      --muted: #6b7482;
+      --line: #e3e7ee;
+      --paper: #ffffff;
+      --bg: #f6f7f9;
+      --blue: #2f5f9f;
+      --navy: #263446;
+      --green: #24735d;
+      --amber: #9b6a24;
+      --soft-blue: #eef4ff;
+      --soft-green: #edf8f4;
+      --shadow: 0 8px 22px rgba(31, 41, 51, .06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+      line-height: 1.75;
+    }
+    .shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 22px 56px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+    .hero-main, .hero-side, .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .hero-main {
+      padding: 30px;
+      border-top: 4px solid var(--blue);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+    .judgement {
+      margin: 0;
+      max-width: 760px;
+      font-size: 16px;
+      color: #293648;
+    }
+    .hero-side {
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 118px;
+      gap: 12px;
+      align-items: end;
+      background:
+        radial-gradient(circle at 92% 18%, rgba(47, 95, 159, .10), transparent 32%),
+        var(--paper);
+    }
+    .hero-side h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+    .hero-side ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .hero-side li {
+      margin-bottom: 10px;
+    }
+    .hero-side-content {
+      position: relative;
+      z-index: 1;
+    }
+    .character-wrap {
+      align-self: end;
+      justify-self: center;
+      position: relative;
+      z-index: 0;
+    }
+    .character-wrap img {
+      display: block;
+      width: min(130px, 30vw);
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 16px rgba(31, 41, 51, .14));
+    }
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .kpi {
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .kpi span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .kpi strong {
+      display: block;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.25;
+    }
+    .kpi small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .card {
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+    .card h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    .card h2::before {
+      content: "";
+      width: 6px;
+      height: 24px;
+      border-radius: 4px;
+      background: var(--blue);
+    }
+    .highlight {
+      border-top: 4px solid var(--green);
+    }
+    .highlight h2::before {
+      background: var(--green);
+    }
+    .action-card {
+      border-top: 4px solid var(--amber);
+    }
+    .action-card h2::before {
+      background: var(--amber);
+    }
+    .period, .section-lead, .section-period {
+      color: var(--muted);
+      margin-top: -6px;
+    }
+    .section-period {
+      display: inline-flex;
+      margin-bottom: 16px;
+      padding: 5px 9px;
+      border-radius: 6px;
+      background: #f1f5fb;
+      color: #536073;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+    .spotlight {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 10px;
+    }
+    .metric {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 17px;
+    }
+    .chart-card {
+      margin: 18px 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .chart-card h3, .funnel-visual h3 {
+      margin-top: 0;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: minmax(170px, 1.1fr) minmax(180px, 2fr) 90px;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid #edf0f5;
+    }
+    .bar-row:last-child {
+      border-bottom: 0;
+    }
+    .bar-label {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--navy);
+    }
+    .bar-track {
+      height: 12px;
+      border-radius: 999px;
+      background: #e9eef6;
+      overflow: hidden;
+    }
+    .bar-track span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--green), #5ba98d);
+    }
+    .bar-value {
+      text-align: right;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .chart-note {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    h3 {
+      margin: 24px 0 10px;
+      font-size: 17px;
+      color: var(--navy);
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+    th, td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    th {
+      position: sticky;
+      left: 0;
+      background: #f8faff;
+      max-width: 360px;
+      white-space: normal;
+      font-weight: 650;
+    }
+    tr:last-child th, tr:last-child td {
+      border-bottom: 0;
+    }
+    .mobile-table-cards {
+      display: none;
+    }
+    .mobile-row-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .mobile-row-card h4 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--navy);
+    }
+    .mobile-row-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .mini-metric {
+      border: 1px solid #e6eaf1;
+      border-radius: 7px;
+      background: white;
+      padding: 8px 9px;
+      min-width: 0;
+    }
+    .mini-metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+    .mini-metric strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.25;
+      color: var(--ink);
+      overflow-wrap: anywhere;
+    }
+    .body p, .card p {
+      margin: 0 0 15px;
+    }
+    .bullet {
+      padding: 13px 15px;
+      border-left: 4px solid var(--blue);
+      background: #f8faff;
+      border-radius: 6px;
+    }
+    .axis-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .axis {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      padding: 16px;
+    }
+    .funnel table {
+      min-width: 720px;
+    }
+    .funnel thead th {
+      position: static;
+      background: #eef4ff;
+      color: var(--navy);
+      font-weight: 700;
+    }
+    .funnel tbody th {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .funnel td {
+      font-variant-numeric: tabular-nums;
+    }
+    .hint {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .funnel-visual {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .funnel-step {
+      display: grid;
+      grid-template-columns: 120px minmax(180px, 1fr) 92px;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid #edf0f5;
+    }
+    .funnel-step:last-child {
+      border-bottom: 0;
+    }
+    .funnel-name {
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .funnel-bar {
+      height: 22px;
+      border-radius: 6px;
+      background: #e9eef6;
+      overflow: hidden;
+    }
+    .funnel-bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), #6d91ca);
+    }
+    .funnel-num {
+      text-align: right;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .funnel-num small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .readable {
+      max-width: 860px;
+    }
+    .readable p {
+      font-size: 15px;
+      line-height: 1.9;
+      margin-bottom: 14px;
+    }
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .decision {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffaf2;
+      padding: 14px;
+    }
+    .decision span {
+      display: inline-block;
+      color: var(--amber);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .decision p {
+      margin: 0;
+      line-height: 1.75;
+    }
+    .axis h3 {
+      margin-top: 0;
+      color: var(--blue);
+    }
+    .footer {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 18px;
+    }
+    @media (max-width: 900px) {
+      .hero, .axis-grid, .decision-grid { grid-template-columns: 1fr; }
+      .kpi-row, .spotlight { grid-template-columns: 1fr 1fr; }
+      .bar-row, .funnel-step { grid-template-columns: 1fr; gap: 6px; }
+      .bar-value, .funnel-num { text-align: left; }
+      .hero-side { grid-template-columns: minmax(0, 1fr) 104px; }
+    }
+    @media (max-width: 560px) {
+      .shell { padding: 16px 12px 36px; }
+      .hero-main, .hero-side, .card { padding: 18px; }
+      .kpi-row, .spotlight, .metrics { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .hero-side { grid-template-columns: 1fr; }
+      .character-wrap {
+        justify-self: end;
+        margin-top: -8px;
+      }
+      .character-wrap img { width: 92px; }
+      .table-wrap { display: none; }
+      .mobile-table-cards { display: block; }
+      th, td { font-size: 13px; }
+    }
+  .report-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:14px 0 0;color:#687386;font-size:14px;font-weight:700;line-height:1.6}.report-meta span{display:inline-flex;align-items:center}.metric strong{overflow-wrap:anywhere;line-height:1.25}.metric-note{display:block;margin-top:4px;color:#687386;font-size:12px;font-weight:700;line-height:1.35;overflow-wrap:anywhere}.kpi .metric-note{font-size:11px}</style>
+</head>
+<body>
+  <div class="shell">
+    <div class="hero">
+      <section class="hero-main">
+        <div class="eyebrow">Daily Report / 2026-06-23</div>
+        <h1>コンテンツエバー<br>日次レポート</h1>
+        <p class="judgement">売上は広告費を大きく上回る状態。BE成約率が高いため、申込・着席までの母数拡大を見ます。</p>
+        <div class='report-meta'><span>報告日時：2026年6月23日 13:00</span><span>種別：数値レポート</span></div>
+        <div class='kpi-row'><div class='metric'><span>消化</span><strong>¥2,701,235</strong></div><div class='metric'><span>CTR</span><strong>2.3%</strong></div><div class='metric'><span>CVR</span><strong>4.0%</strong></div><div class='metric'><span>CPA</span><strong>¥3,080</strong></div><div class='metric'><span>売上</span><strong>¥2,900,700</strong></div><div class='metric'><span>ROAS</span><strong>107.4%</strong></div></div>
+      </section>
+      <aside class="hero-side">
+        <div class="hero-side-content">
+          <h2>今日の次アクション</h2>
+          <ul><li>直近3日は案件全体CPA¥1,599、実CPA¥3,043。月次リスト単価¥3,005と合わせて、まずは配信継続で見る。</li><li>直近で効率が良いのは 50代向け冒頭② | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン元）（実CPA¥1,046）、自分の人生 | 冒頭③ | 縦型・実写 | ノンタゲ | ※652の複製（オプト修正ver.）（実CPA¥1,110）。勝ちCRは登録後のウェビナー申込・着席まで進むかもセットで確認する。</li><li>一方で 自分の人生 | 冒頭① | 縦型・実写 | ノンタゲ | ※648の複製（オプト修正ver.）（消化¥8,572/実登録0）、自分の人生 | 冒頭① | 縦型・実写 | ノンタゲ | ※647の複製（オプト修正ver.）（消化¥8,113/実登録0） は広告入口かLP接続のどちらかで温度感が落ちている可能性があるため、訴求文を差し替えて少額で見る。</li></ul>
+        </div>
+        <div class="character-wrap">
+          <img src="../../assets/report-character-header.png" alt="レポートを説明するキャラクター">
+        </div>
+      </aside>
+    </div>
+    <section class='card highlight'><h2>6月サマリー</h2><div class='metrics'><div class='metric'><span>消化</span><strong>¥2,701,235</strong></div><div class='metric'><span>CTR</span><strong>2.3%</strong></div><div class='metric'><span>CVR</span><strong>4.0%</strong></div><div class='metric'><span>CPA</span><strong>¥3,080</strong></div><div class='metric'><span>登録</span><strong>877</strong></div><div class='metric'><span>申込数</span><strong>316</strong><small class='metric-note'>（登録比36.0%）</small></div><div class='metric'><span>申込CPO</span><strong>¥8,548</strong></div><div class='metric'><span>着席数</span><strong>264</strong><small class='metric-note'>（登録比30.1% / 申込比83.5%）</small></div><div class='metric'><span>着席CPO</span><strong>¥10,232</strong></div><div class='metric'><span>視聴完了数</span><strong>27</strong><small class='metric-note'>（登録比3.1% / 着席比10.2%）</small></div><div class='metric'><span>視聴完了単価</span><strong>¥100,046</strong></div><div class='metric'><span>購入</span><strong>13</strong></div></div></section><section class='card '><h2>月跨ぎ累計サマリー（2026年1月〜6月）</h2><p class='section-period'>対象期間：2026年1月〜6月の月跨ぎ累計</p><div class='metrics'><div class='metric'><span>消化</span><strong>¥14,738,289</strong></div><div class='metric'><span>CTR</span><strong>2.1%</strong></div><div class='metric'><span>CVR</span><strong>5.4%</strong></div><div class='metric'><span>CPA</span><strong>¥3,246</strong></div><div class='metric'><span>登録</span><strong>4,541</strong></div><div class='metric'><span>申込CPO</span><strong>¥7,765</strong></div><div class='metric'><span>着席CPO</span><strong>¥12,543</strong></div><div class='metric'><span>購入</span><strong>101</strong></div><div class='metric'><span>売上</span><strong>¥26,581,100</strong></div><div class='metric'><span>ROAS</span><strong>180.4%</strong></div></div></section><section class='card highlight'><h2>直近3日パフォーマンス</h2><p class='period'>対象期間：2026-06-21 / 2026-06-22 / 2026-06-23</p><div class='spotlight'><div class='kpi'><span>消化</span><strong>¥188,696</strong><small></small></div><div class='kpi'><span>実登録</span><strong>62</strong><small></small></div><div class='kpi'><span>実CPA</span><strong>¥3,043</strong><small></small></div><div class='kpi'><span>CTR</span><strong>1.9%</strong><small></small></div><div class='kpi'><span>CVR</span><strong>7.3%</strong><small></small></div></div><div class='chart-card'><h3>日別 実CPA（直近3日）</h3><div class='bar-row'><div class='bar-label'>2026-06-21</div><div class='bar-track'><span style='width:100.0%'></span></div><div class='bar-value'>¥2,582</div></div><div class='bar-row'><div class='bar-label'>2026-06-23</div><div class='bar-track'><span style='width:74.3%'></span></div><div class='bar-value'>¥3,476</div></div><div class='bar-row'><div class='bar-label'>2026-06-22</div><div class='bar-track'><span style='width:70.6%'></span></div><div class='bar-value'>¥3,655</div></div><p class='chart-note'>CPA系のグラフは、バーが長いほど効率が良い表示です。</p></div><h3>日別推移（直近3日）</h3><div class='table-wrap'><table><tr><th>2026-06-21</th><td>消化¥87,794</td><td>実登録34</td><td>実CPA¥2,582</td><td>CTR1.9%</td><td>CVR7.3%</td></tr><tr><th>2026-06-22</th><td>消化¥73,098</td><td>実登録20</td><td>実CPA¥3,655</td><td>CTR2.1%</td><td>CVR8.2%</td></tr><tr><th>2026-06-23</th><td>消化¥27,804</td><td>実登録8</td><td>実CPA¥3,476</td><td>CTR1.6%</td><td>CVR5.3%</td></tr></table></div><div class='mobile-table-cards'><article class='mobile-row-card'><h4>2026-06-21</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥87,794</strong></div><div class='mini-metric'><span>実登録</span><strong>34</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥2,582</strong></div><div class='mini-metric'><span>CTR</span><strong>1.9%</strong></div><div class='mini-metric'><span>CVR</span><strong>7.3%</strong></div></div></article><article class='mobile-row-card'><h4>2026-06-22</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥73,098</strong></div><div class='mini-metric'><span>実登録</span><strong>20</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥3,655</strong></div><div class='mini-metric'><span>CTR</span><strong>2.1%</strong></div><div class='mini-metric'><span>CVR</span><strong>8.2%</strong></div></div></article><article class='mobile-row-card'><h4>2026-06-23</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥27,804</strong></div><div class='mini-metric'><span>実登録</span><strong>8</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥3,476</strong></div><div class='mini-metric'><span>CTR</span><strong>1.6%</strong></div><div class='mini-metric'><span>CVR</span><strong>5.3%</strong></div></div></article></div><div class='chart-card'><h3>CR別 実CPAが軽い順（直近3日合計）</h3><div class='bar-row'><div class='bar-label'>641【コンテンツビジネス】50代向け冒頭② | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン元）</div><div class='bar-track'><span style='width:100.0%'></span></div><div class='bar-value'>¥1,046</div></div><div class='bar-row'><div class='bar-label'>627【コンテンツビジネス】50代向け冒頭② | 横型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン元）</div><div class='bar-track'><span style='width:63.2%'></span></div><div class='bar-value'>¥1,655</div></div><div class='bar-row'><div class='bar-label'>630【コンテンツビジネス】50代向け冒頭③ | 横型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン変）</div><div class='bar-track'><span style='width:48.1%'></span></div><div class='bar-value'>¥2,173</div></div><div class='bar-row'><div class='bar-label'>646【コンテンツビジネス】50代向け冒頭④ | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン変）</div><div class='bar-track'><span style='width:46.7%'></span></div><div class='bar-value'>¥2,238</div></div><div class='bar-row'><div class='bar-label'>652【コンテンツビジネス】自分の人生 | 冒頭③ | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン変）</div><div class='bar-track'><span style='width:23.4%'></span></div><div class='bar-value'>¥4,464</div></div><div class='bar-row'><div class='bar-label'>648【コンテンツビジネス】自分の人生 | 冒頭① | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン変）</div><div class='bar-track'><span style='width:22.8%'></span></div><div class='bar-value'>¥4,588</div></div><p class='chart-note'>CPA系のグラフは、バーが長いほど効率が良い表示です。</p></div><h3>CR別（直近3日合計）</h3><div class='table-wrap'><table><tr><th>648【コンテンツビジネス】自分の人生 | 冒頭① | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン変）</th><td>消化¥13,764</td><td>実登録3</td><td>実CPA¥4,588</td><td>CTR5.7%</td><td>CVR12.8%</td></tr><tr><th>641【コンテンツビジネス】50代向け冒頭② | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン元）</th><td>消化¥13,604</td><td>実登録13</td><td>実CPA¥1,046</td><td>CTR4.5%</td><td>CVR15.6%</td></tr><tr><th>647【コンテンツビジネス】自分の人生 | 冒頭① | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン元）</th><td>消化¥13,560</td><td>実登録2</td><td>実CPA¥6,780</td><td>CTR4.8%</td><td>CVR9.1%</td></tr><tr><th>646【コンテンツビジネス】50代向け冒頭④ | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン変）</th><td>消化¥13,428</td><td>実登録6</td><td>実CPA¥2,238</td><td>CTR3.7%</td><td>CVR8.1%</td></tr><tr><th>652【コンテンツビジネス】自分の人生 | 冒頭③ | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン変）</th><td>消化¥13,391</td><td>実登録3</td><td>実CPA¥4,464</td><td>CTR2.7%</td><td>CVR5.7%</td></tr><tr><th>627【コンテンツビジネス】50代向け冒頭② | 横型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン元）</th><td>消化¥13,237</td><td>実登録8</td><td>実CPA¥1,655</td><td>CTR2.2%</td><td>CVR10.1%</td></tr><tr><th>630【コンテンツビジネス】50代向け冒頭③ | 横型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン変）</th><td>消化¥13,039</td><td>実登録6</td><td>実CPA¥2,173</td><td>CTR2.8%</td><td>CVR8.2%</td></tr><tr><th>632【コンテンツビジネス】50代向け冒頭③ | 横型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン変）</th><td>消化¥12,916</td><td>実登録2</td><td>実CPA¥6,458</td><td>CTR2.6%</td><td>CVR4.2%</td></tr></table></div><div class='mobile-table-cards'><article class='mobile-row-card'><h4>648【コンテンツビジネス】自分の人生 | 冒頭① | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン変）</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥13,764</strong></div><div class='mini-metric'><span>実登録</span><strong>3</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥4,588</strong></div><div class='mini-metric'><span>CTR</span><strong>5.7%</strong></div><div class='mini-metric'><span>CVR</span><strong>12.8%</strong></div></div></article><article class='mobile-row-card'><h4>641【コンテンツビジネス】50代向け冒頭② | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン元）</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥13,604</strong></div><div class='mini-metric'><span>実登録</span><strong>13</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥1,046</strong></div><div class='mini-metric'><span>CTR</span><strong>4.5%</strong></div><div class='mini-metric'><span>CVR</span><strong>15.6%</strong></div></div></article><article class='mobile-row-card'><h4>647【コンテンツビジネス】自分の人生 | 冒頭① | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン元）</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥13,560</strong></div><div class='mini-metric'><span>実登録</span><strong>2</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥6,780</strong></div><div class='mini-metric'><span>CTR</span><strong>4.8%</strong></div><div class='mini-metric'><span>CVR</span><strong>9.1%</strong></div></div></article><article class='mobile-row-card'><h4>646【コンテンツビジネス】50代向け冒頭④ | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン変）</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥13,428</strong></div><div class='mini-metric'><span>実登録</span><strong>6</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥2,238</strong></div><div class='mini-metric'><span>CTR</span><strong>3.7%</strong></div><div class='mini-metric'><span>CVR</span><strong>8.1%</strong></div></div></article><article class='mobile-row-card'><h4>652【コンテンツビジネス】自分の人生 | 冒頭③ | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン変）</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥13,391</strong></div><div class='mini-metric'><span>実登録</span><strong>3</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥4,464</strong></div><div class='mini-metric'><span>CTR</span><strong>2.7%</strong></div><div class='mini-metric'><span>CVR</span><strong>5.7%</strong></div></div></article><article class='mobile-row-card'><h4>627【コンテンツビジネス】50代向け冒頭② | 横型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン元）</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥13,237</strong></div><div class='mini-metric'><span>実登録</span><strong>8</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥1,655</strong></div><div class='mini-metric'><span>CTR</span><strong>2.2%</strong></div><div class='mini-metric'><span>CVR</span><strong>10.1%</strong></div></div></article><article class='mobile-row-card'><h4>630【コンテンツビジネス】50代向け冒頭③ | 横型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン変）</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥13,039</strong></div><div class='mini-metric'><span>実登録</span><strong>6</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥2,173</strong></div><div class='mini-metric'><span>CTR</span><strong>2.8%</strong></div><div class='mini-metric'><span>CVR</span><strong>8.2%</strong></div></div></article><article class='mobile-row-card'><h4>632【コンテンツビジネス】50代向け冒頭③ | 横型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン変）</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥12,916</strong></div><div class='mini-metric'><span>実登録</span><strong>2</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥6,458</strong></div><div class='mini-metric'><span>CTR</span><strong>2.6%</strong></div><div class='mini-metric'><span>CVR</span><strong>4.2%</strong></div></div></article></div></section><section class='card '><h2>セミナーパフォーマンス</h2><div class='metrics'><div class='metric'><span>ウェビナー申込数</span><strong>316</strong></div><div class='metric'><span>ウェビナー申込率</span><strong>36.0%</strong></div><div class='metric'><span>ウェビナー申込単価</span><strong>¥8,548</strong></div><div class='metric'><span>ウェビナー着席数</span><strong>264</strong></div><div class='metric'><span>ウェビナー着席率</span><strong>83.5%</strong></div><div class='metric'><span>ウェビナー着席単価</span><strong>¥10,232</strong></div><div class='metric'><span>ウェビナー視聴完了数</span><strong>27</strong></div><div class='metric'><span>ウェビナー視聴完了率</span><strong>10.2%</strong></div><div class='metric'><span>ウェビナー視聴完了単価</span><strong>¥100,046</strong></div></div><p>※数値報告スプシの最終報告は「6月22日17時00分」です。<br>※ウェビナー申込・着席・視聴完了は、LMESクロス分析（cross 10992 / 2026-06-19）の実測値を反映しています。</p></section><section class='card '><h2>視聴完了内訳（訴求別）</h2><div class='table-wrap'><table><tr><th>海外訴求</th><td>対象人数748</td><td>6月視聴完了7</td><td>5月視聴完了15</td><td>完了率0.9%</td><td>参考視聴完了単価¥160,270</td></tr><tr><th>アド大</th><td>対象人数485</td><td>6月視聴完了8</td><td>5月視聴完了12</td><td>完了率1.6%</td><td>参考視聴完了単価¥90,929</td></tr><tr><th>50代向け</th><td>対象人数263</td><td>6月視聴完了6</td><td>5月視聴完了1</td><td>完了率2.3%</td><td>参考視聴完了単価¥65,744</td></tr><tr><th>自分の人生</th><td>対象人数50</td><td>6月視聴完了4</td><td>5月視聴完了3</td><td>完了率8.0%</td><td>参考視聴完了単価¥18,748</td></tr></table></div><div class='mobile-table-cards'><article class='mobile-row-card'><h4>海外訴求</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>748</strong></div><div class='mini-metric'><span>6月視聴完了7</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了15</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>0.9%</strong></div><div class='mini-metric'><span>参考視聴完了単価</span><strong>¥160,270</strong></div></div></article><article class='mobile-row-card'><h4>アド大</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>485</strong></div><div class='mini-metric'><span>6月視聴完了8</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了12</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>1.6%</strong></div><div class='mini-metric'><span>参考視聴完了単価</span><strong>¥90,929</strong></div></div></article><article class='mobile-row-card'><h4>50代向け</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>263</strong></div><div class='mini-metric'><span>6月視聴完了6</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了1</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>2.3%</strong></div><div class='mini-metric'><span>参考視聴完了単価</span><strong>¥65,744</strong></div></div></article><article class='mobile-row-card'><h4>自分の人生</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>50</strong></div><div class='mini-metric'><span>6月視聴完了4</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了3</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>8.0%</strong></div><div class='mini-metric'><span>参考視聴完了単価</span><strong>¥18,748</strong></div></div></article></div><p>※内訳の参考視聴完了単価は、全体広告費を各内訳の対象人数構成比で按分した参考値です。CR・訴求別の実消化が取れる場合はそちらを優先します。</p></section><section class='card '><h2>視聴完了内訳（CR別上位）</h2><div class='table-wrap'><table><tr><th>CR 422</th><td>対象人数338</td><td>6月視聴完了7</td><td>5月視聴完了3</td><td>完了率2.1%</td></tr><tr><th>CR 646</th><td>対象人数35</td><td>6月視聴完了3</td><td>5月視聴完了1</td><td>完了率8.6%</td></tr><tr><th>CR 631</th><td>対象人数39</td><td>6月視聴完了3</td><td>5月視聴完了0</td><td>完了率7.7%</td></tr><tr><th>CR 624</th><td>対象人数51</td><td>6月視聴完了3</td><td>5月視聴完了0</td><td>完了率5.9%</td></tr><tr><th>CR 523</th><td>対象人数212</td><td>6月視聴完了3</td><td>5月視聴完了4</td><td>完了率1.4%</td></tr><tr><th>CR 157</th><td>対象人数242</td><td>6月視聴完了3</td><td>5月視聴完了2</td><td>完了率1.2%</td></tr><tr><th>CR 063</th><td>対象人数589</td><td>6月視聴完了3</td><td>5月視聴完了0</td><td>完了率0.5%</td></tr><tr><th>CR 144</th><td>対象人数5</td><td>6月視聴完了2</td><td>5月視聴完了1</td><td>完了率40.0%</td></tr><tr><th>CR 139</th><td>対象人数9</td><td>6月視聴完了2</td><td>5月視聴完了1</td><td>完了率22.2%</td></tr><tr><th>CR 634</th><td>対象人数30</td><td>6月視聴完了2</td><td>5月視聴完了0</td><td>完了率6.7%</td></tr><tr><th>CR 539</th><td>対象人数54</td><td>6月視聴完了2</td><td>5月視聴完了0</td><td>完了率3.7%</td></tr><tr><th>CR 158</th><td>対象人数118</td><td>6月視聴完了2</td><td>5月視聴完了1</td><td>完了率1.7%</td></tr><tr><th>CR 018</th><td>対象人数144</td><td>6月視聴完了2</td><td>5月視聴完了1</td><td>完了率1.4%</td></tr><tr><th>CR 118</th><td>対象人数222</td><td>6月視聴完了2</td><td>5月視聴完了1</td><td>完了率0.9%</td></tr><tr><th>CR 001</th><td>対象人数253</td><td>6月視聴完了2</td><td>5月視聴完了1</td><td>完了率0.8%</td></tr></table></div><div class='mobile-table-cards'><article class='mobile-row-card'><h4>CR 422</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>338</strong></div><div class='mini-metric'><span>6月視聴完了7</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了3</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>2.1%</strong></div></div></article><article class='mobile-row-card'><h4>CR 646</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>35</strong></div><div class='mini-metric'><span>6月視聴完了3</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了1</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>8.6%</strong></div></div></article><article class='mobile-row-card'><h4>CR 631</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>39</strong></div><div class='mini-metric'><span>6月視聴完了3</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了0</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>7.7%</strong></div></div></article><article class='mobile-row-card'><h4>CR 624</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>51</strong></div><div class='mini-metric'><span>6月視聴完了3</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了0</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>5.9%</strong></div></div></article><article class='mobile-row-card'><h4>CR 523</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>212</strong></div><div class='mini-metric'><span>6月視聴完了3</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了4</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>1.4%</strong></div></div></article><article class='mobile-row-card'><h4>CR 157</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>242</strong></div><div class='mini-metric'><span>6月視聴完了3</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了2</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>1.2%</strong></div></div></article><article class='mobile-row-card'><h4>CR 063</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>589</strong></div><div class='mini-metric'><span>6月視聴完了3</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了0</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>0.5%</strong></div></div></article><article class='mobile-row-card'><h4>CR 144</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>5</strong></div><div class='mini-metric'><span>6月視聴完了2</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了1</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>40.0%</strong></div></div></article><article class='mobile-row-card'><h4>CR 139</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>9</strong></div><div class='mini-metric'><span>6月視聴完了2</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了1</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>22.2%</strong></div></div></article><article class='mobile-row-card'><h4>CR 634</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>30</strong></div><div class='mini-metric'><span>6月視聴完了2</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了0</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>6.7%</strong></div></div></article><article class='mobile-row-card'><h4>CR 539</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>54</strong></div><div class='mini-metric'><span>6月視聴完了2</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了0</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>3.7%</strong></div></div></article><article class='mobile-row-card'><h4>CR 158</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>118</strong></div><div class='mini-metric'><span>6月視聴完了2</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了1</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>1.7%</strong></div></div></article><article class='mobile-row-card'><h4>CR 018</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>144</strong></div><div class='mini-metric'><span>6月視聴完了2</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了1</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>1.4%</strong></div></div></article><article class='mobile-row-card'><h4>CR 118</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>222</strong></div><div class='mini-metric'><span>6月視聴完了2</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了1</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>0.9%</strong></div></div></article><article class='mobile-row-card'><h4>CR 001</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象人数</span><strong>253</strong></div><div class='mini-metric'><span>6月視聴完了2</span><strong></strong></div><div class='mini-metric'><span>5月視聴完了1</span><strong></strong></div><div class='mini-metric'><span>完了率</span><strong>0.8%</strong></div></div></article></div><p>※CR別は重複タグを含む可能性があるため、上位CRの参考比較として見ます。</p></section><section class='card '><h2>成約</h2><div class='metrics'><div class='metric'><span>成約数</span><strong>13</strong></div><div class='metric'><span>獲得リストに対するBE成約率</span><strong>1.5%</strong></div><div class='metric'><span>ウェビナー申込数に対するBE成約率</span><strong>約4.1%</strong></div><div class='metric'><span>ウェビナー着席数に対するBE成約率</span><strong>約4.9%</strong></div><div class='metric'><span>ウェビナー視聴完了数に対するBE成約率</span><strong>約48.1%</strong></div><div class='metric'><span>成約数</span><strong>17</strong></div><div class='metric'><span>リストに対する成約率</span><strong>1.9%</strong></div><div class='metric'><span>成約数</span><strong>0</strong></div><div class='metric'><span>BE購入者に対する成約率</span><strong>0.0%</strong></div><div class='metric'><span>BE</span><strong>¥2,732,400</strong></div><div class='metric'><span>ダウンセル</span><strong>¥168,300</strong></div><div class='metric'><span>ワンタイム</span><strong>¥0</strong></div></div><p class='hint'>・BE</p><p class='hint'>・ダウンセル</p><p class='hint'>・ワンタイム</p><p class='hint'>・売上</p></section><section class='card '><h2>見るべきポイント</h2><p class='hint'>・6月は広告費¥2,701,235、登録877件、CPA¥3,080です。</p><p class='hint'>・CPAは¥3,080で、広告入口の登録効率を見ます。</p><p class='hint'>・成約・売上は数値報告スプシの6月値を反映しています。現時点では成約13、売上¥2,900,700です。</p><p class='hint'>・ウェビナー申込率は36.0%、着席率は83.5%、視聴完了率は10.2%です。</p></section><section class='card '><h2>ターゲットインサイト</h2><p>直近3日の案件全体はCPA¥1,599、実CPA¥3,043です。今回の訴求判断は固定テーマではなく、直近3日のCR別実績を基準に見ます。</p><p>勝ち筋は 50代向け冒頭② | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン元） で、実CPA¥1,046。ここから見ると、いま反応しているのは「縦型・実写｜年配向けLP（ヘッダーデザイン元）」の切り口です。ターゲットは、コンテンツ販売や講座ビジネスをゼロから学ぶ層というより、すでに関心が高く、ウェビナーに進めばBE成約まで動きやすい層です。</p><p>一方で、２０~４０代、男女 は消化に対して実登録が薄く、訴求の入口だけでなく登録後の期待値も確認したいです。</p><p>そのため次のCRは、勝ちCRの表現をただ複製するのではなく、勝っている感情・状況を別フックに展開しつつ、弱いCRで出ているズレを避ける方向で作ります。ウェビナー申込率は36.0%、着席率は83.5%、視聴完了率は10.2%です。広告ではリスト獲得だけでなく、申込・着席・視聴完了まで進む理由づけまで含めて見ます。</p></section><section class='card '><h2>次のCR訴求軸案</h2><p>今回は、直近3日の勝ちCRと弱いCRを起点に訴求を作ります。</p><p>1. 横展開｜縦型・実写｜年配向けLP（ヘッダーデザイン元）</p><p>縦型・実写｜年配向けLP（ヘッダーデザイン元）で反応した人に、<br>もう一段わかりやすい入口を作る。</p><p>コンテンツビジネスの全体像を無料ウェビナーで学ぶ</p><p>直近3日で 50代向け冒頭② | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン元） が実CPA¥1,046と最も効率が良いため、この切り口を横展開する。勝ちCRの言葉をそのまま使い回すのではなく、同じ悩みを別の生活場面・仕事場面に置き換えて検証する。</p><p>2. 改善検証｜~４０代、男女のズレを修正</p><p>気になるけれど、<br>自分ごと化しきれない人へ。</p><p>コンテンツビジネスの全体像を無料ウェビナーで学ぶ</p><p>２０~４０代、男女 は実CPA-と重め。テーマ自体を捨てる前に、誰向けの悩みなのか、登録後に何が得られるのかを広告内で明確にして、LP接続のズレを減らす。</p><p>3. 新規検証｜BE成約につながる温度感の高い層</p><p>今の勝ち筋とは違う入口から、<br>同じ悩みを持つ人を拾う。</p><p>コンテンツビジネスの全体像を無料ウェビナーで学ぶ</p><p>勝ちCRへの寄せすぎを避けるため、直近の勝ち筋とは別の入口も1本混ぜる。既存CRの焼き直しではなく、同じ商品価値を別ターゲット・別シーンで検証する。</p></section><section class='card action-card'><h2>今日の具体アクション</h2><p class='hint'>・直近3日は案件全体CPA¥1,599、実CPA¥3,043。月次リスト単価¥3,005と合わせて、まずは配信継続で見る。</p><p class='hint'>・直近で効率が良いのは 50代向け冒頭② | 縦型・実写 | ノンタゲ | 年配向けLP（ヘッダーデザイン元）（実CPA¥1,046）、自分の人生 | 冒頭③ | 縦型・実写 | ノンタゲ | ※652の複製（オプト修正ver.）（実CPA¥1,110）。勝ちCRは登録後のウェビナー申込・着席まで進むかもセットで確認する。</p><p class='hint'>・一方で 自分の人生 | 冒頭① | 縦型・実写 | ノンタゲ | ※648の複製（オプト修正ver.）（消化¥8,572/実登録0）、自分の人生 | 冒頭① | 縦型・実写 | ノンタゲ | ※647の複製（オプト修正ver.）（消化¥8,113/実登録0） は広告入口かLP接続のどちらかで温度感が落ちている可能性があるため、訴求文を差し替えて少額で見る。</p><p class='hint'>・BE成約率が高いので、広告側ではリスト数だけでなく、申込率43.8%・着席率58.1%につながる参加理由を強める。</p></section><section class='card '><h2>詳細レポート</h2><p><a href='https://carpa20186-coder.github.io/report/reports/2026-06-23/contents-evergreen.html'>https://carpa20186-coder.github.io/report/reports/2026-06-23/contents-evergreen.html</a></p><p>また、この数値レポートは、AIによる自動出力です。</p><p>あくまで補助的な参考情報としてご活用いただき、最終的な判断にあたっては、必ず人の目で内容を確認・解釈・推敲したうえで進めるようにしてくださいね。</p></section>
+    <div class="footer">この数値レポートおよびCR案はAIによる自動出力です。最終判断は人の目で確認・解釈・推敲してください。</div>
+  </div>
+</body>
+</html>
