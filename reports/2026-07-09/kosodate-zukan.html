@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>本日（2026年7月9日）のレポート報告になります。ご確認ください！</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2933;
+      --muted: #6b7482;
+      --line: #e3e7ee;
+      --paper: #ffffff;
+      --bg: #f6f7f9;
+      --blue: #2f5f9f;
+      --navy: #263446;
+      --green: #24735d;
+      --amber: #9b6a24;
+      --soft-blue: #eef4ff;
+      --soft-green: #edf8f4;
+      --shadow: 0 8px 22px rgba(31, 41, 51, .06);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+      line-height: 1.75;
+    }
+    .shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 22px 56px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, .75fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+    .hero-main, .hero-side, .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .hero-main {
+      padding: 30px;
+      border-top: 4px solid var(--blue);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+    .judgement {
+      margin: 0;
+      max-width: 760px;
+      font-size: 16px;
+      color: #293648;
+    }
+    .hero-side {
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 118px;
+      gap: 12px;
+      align-items: end;
+      background:
+        radial-gradient(circle at 92% 18%, rgba(47, 95, 159, .10), transparent 32%),
+        var(--paper);
+    }
+    .hero-side h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+    .hero-side ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+    .hero-side li {
+      margin-bottom: 10px;
+    }
+    .hero-side-content {
+      position: relative;
+      z-index: 1;
+    }
+    .character-wrap {
+      align-self: end;
+      justify-self: center;
+      position: relative;
+      z-index: 0;
+    }
+    .character-wrap img {
+      display: block;
+      width: min(130px, 30vw);
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 16px rgba(31, 41, 51, .14));
+    }
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+    .kpi {
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .kpi span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    .kpi strong {
+      display: block;
+      font-size: clamp(18px, 2vw, 24px);
+      line-height: 1.25;
+    }
+    .kpi small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .card {
+      padding: 24px;
+      margin-bottom: 18px;
+    }
+    .card h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    .card h2::before {
+      content: "";
+      width: 6px;
+      height: 24px;
+      border-radius: 4px;
+      background: var(--blue);
+    }
+    .highlight {
+      border-top: 4px solid var(--green);
+    }
+    .highlight h2::before {
+      background: var(--green);
+    }
+    .action-card {
+      border-top: 4px solid var(--amber);
+    }
+    .action-card h2::before {
+      background: var(--amber);
+    }
+    .period, .section-lead, .section-period {
+      color: var(--muted);
+      margin-top: -6px;
+    }
+    .section-period {
+      display: inline-flex;
+      margin-bottom: 16px;
+      padding: 5px 9px;
+      border-radius: 6px;
+      background: #f1f5fb;
+      color: #536073;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+    .spotlight {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 10px;
+    }
+    .metric {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .metric strong {
+      display: block;
+      font-size: 17px;
+    }
+    .chart-card {
+      margin: 18px 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .chart-card h3, .funnel-visual h3 {
+      margin-top: 0;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: minmax(170px, 1.1fr) minmax(180px, 2fr) 90px;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid #edf0f5;
+    }
+    .bar-row:last-child {
+      border-bottom: 0;
+    }
+    .bar-label {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--navy);
+    }
+    .bar-track {
+      height: 12px;
+      border-radius: 999px;
+      background: #e9eef6;
+      overflow: hidden;
+    }
+    .bar-track span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--green), #5ba98d);
+    }
+    .bar-value {
+      text-align: right;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .chart-note {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    h3 {
+      margin: 24px 0 10px;
+      font-size: 17px;
+      color: var(--navy);
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+    th, td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    th {
+      position: sticky;
+      left: 0;
+      background: #f8faff;
+      max-width: 360px;
+      white-space: normal;
+      font-weight: 650;
+    }
+    tr:last-child th, tr:last-child td {
+      border-bottom: 0;
+    }
+    .mobile-table-cards {
+      display: none;
+    }
+    .mobile-row-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .mobile-row-card h4 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--navy);
+    }
+    .mobile-row-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .mini-metric {
+      border: 1px solid #e6eaf1;
+      border-radius: 7px;
+      background: white;
+      padding: 8px 9px;
+      min-width: 0;
+    }
+    .mini-metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+    .mini-metric strong {
+      display: block;
+      font-size: 15px;
+      line-height: 1.25;
+      color: var(--ink);
+      overflow-wrap: anywhere;
+    }
+    .body p, .card p {
+      margin: 0 0 15px;
+    }
+    .bullet {
+      padding: 13px 15px;
+      border-left: 4px solid var(--blue);
+      background: #f8faff;
+      border-radius: 6px;
+    }
+    .axis-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .axis {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+      padding: 16px;
+    }
+    .funnel table {
+      min-width: 720px;
+    }
+    .funnel thead th {
+      position: static;
+      background: #eef4ff;
+      color: var(--navy);
+      font-weight: 700;
+    }
+    .funnel tbody th {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .funnel td {
+      font-variant-numeric: tabular-nums;
+    }
+    .hint {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .funnel-visual {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+    .funnel-step {
+      display: grid;
+      grid-template-columns: 120px minmax(180px, 1fr) 92px;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid #edf0f5;
+    }
+    .funnel-step:last-child {
+      border-bottom: 0;
+    }
+    .funnel-name {
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .funnel-bar {
+      height: 22px;
+      border-radius: 6px;
+      background: #e9eef6;
+      overflow: hidden;
+    }
+    .funnel-bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), #6d91ca);
+    }
+    .funnel-num {
+      text-align: right;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+    .funnel-num small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .readable {
+      max-width: 860px;
+    }
+    .readable p {
+      font-size: 15px;
+      line-height: 1.9;
+      margin-bottom: 14px;
+    }
+    .decision-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .decision {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffaf2;
+      padding: 14px;
+    }
+    .decision span {
+      display: inline-block;
+      color: var(--amber);
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .decision p {
+      margin: 0;
+      line-height: 1.75;
+    }
+    .axis h3 {
+      margin-top: 0;
+      color: var(--blue);
+    }
+    .footer {
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 18px;
+    }
+    @media (max-width: 900px) {
+      .hero, .axis-grid, .decision-grid { grid-template-columns: 1fr; }
+      .kpi-row, .spotlight { grid-template-columns: 1fr 1fr; }
+      .bar-row, .funnel-step { grid-template-columns: 1fr; gap: 6px; }
+      .bar-value, .funnel-num { text-align: left; }
+      .hero-side { grid-template-columns: minmax(0, 1fr) 104px; }
+    }
+    @media (max-width: 560px) {
+      .shell { padding: 16px 12px 36px; }
+      .hero-main, .hero-side, .card { padding: 18px; }
+      .kpi-row, .spotlight, .metrics { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .hero-side { grid-template-columns: 1fr; }
+      .character-wrap {
+        justify-self: end;
+        margin-top: -8px;
+      }
+      .character-wrap img { width: 92px; }
+      .table-wrap { display: none; }
+      .mobile-table-cards { display: block; }
+      th, td { font-size: 13px; }
+    }
+  
+.hero-main .kpi-row{grid-template-columns:repeat(3,minmax(0,1fr));}
+@media (max-width:640px){.hero-main .kpi-row{grid-template-columns:1fr 1fr;}}.report-meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin:14px 0 0;color:#687386;font-size:14px;font-weight:700;line-height:1.6}.report-meta span{display:inline-flex;align-items:center}.metric strong{overflow-wrap:anywhere;line-height:1.25}.metric-note{display:block;margin-top:4px;color:#687386;font-size:12px;font-weight:700;line-height:1.35;overflow-wrap:anywhere}.kpi .metric-note{font-size:11px}</style>
+</head>
+<body>
+  <div class="shell">
+    <div class="hero">
+      <section class="hero-main">
+        <div class="eyebrow">Daily Report / 2026-07-09</div>
+        <h1>子育て図鑑<br>日次レポート</h1>
+        <p class="judgement">広告入口は良好。次は申込・視聴・購入までの接続を見ます。</p>
+        <div class='report-meta'><span>報告日時：2026年7月9日 13:00</span><span>種別：数値レポート</span></div>
+        <div class="kpi-row"><div class='kpi'><span>実CPA</span><strong>¥1,720</strong><small>7月累計</small></div><div class='kpi'><span>実登録</span><strong>32</strong><small>7月累計</small></div><div class='kpi'><span>消化</span><strong>¥55,052</strong><small>7月累計</small></div><div class='kpi'><span>CVR</span><strong>11.8%</strong><small>7月累計</small></div><div class='kpi'><span>売上</span><strong>¥0</strong><small>7月累計</small></div><div class='kpi'><span>ROAS</span><strong>0.0%</strong><small>7月累計</small></div></div>
+      </section>
+      <aside class="hero-side">
+        <div class="hero-side-content">
+          <h2>今日の次アクション</h2>
+          <ul><li>現時点ではCTR1.5%、CVR11.8%、実CPA¥1,720。シート目安（CTR1.0% / CVR8.0% / 実CPA¥1,500）に対して、登録効率と申込み後の導線を分けて確認する。</li><li>直近で効率が良いのは ノンタゲ25-45｜ヘッダー（実CPA¥1,453 / CVR12.7%）、ノンタゲ25-45｜P1_怒るのは今日で終わりにしませんか？_共感型_イラスト（実CPA¥2,662 / CVR10.0%）。特にノンタゲ25-45はCPAが軽く、申込みも出ているため優先維持。</li><li>一方で ノンタゲ25-45｜Phase1_全米トップ進学校_権威型_星さん実写（消化¥6,233 / 申込み0）、ノンタゲ25-45｜P1_怒るのは今日で終わりにしませんか？_共感型_イラスト（消化¥5,325 / 申込み0） は購入・申込みまでの母数がまだ薄い。停止判断ではなく、まずは申込み後の導線と商品訴求の接続を確認する。</li></ul>
+        </div>
+        <div class="character-wrap">
+          <img src="../../assets/report-character-header.png" alt="レポートを説明するキャラクター">
+        </div>
+      </aside>
+    </div>
+    <section class='card highlight'><h2>直近3日パフォーマンス</h2><p class='period'>対象期間：2026-07-07 / 2026-07-08 / 2026-07-09</p><div class='spotlight'><div class='kpi'><span>消化</span><strong>¥20,236</strong><small></small></div><div class='kpi'><span>実登録</span><strong>10</strong><small></small></div><div class='kpi'><span>実CPA</span><strong>¥2,024</strong><small></small></div><div class='kpi'><span>CTR</span><strong>1.6%</strong><small></small></div><div class='kpi'><span>CVR</span><strong>15.0%</strong><small></small></div></div><div class='chart-card'><h3>日別 実CPA（直近3日）</h3><div class='bar-row'><div class='bar-label'>2026-07-08</div><div class='bar-track'><span style='width:100.0%'></span></div><div class='bar-value'>¥1,599</div></div><div class='bar-row'><div class='bar-label'>2026-07-09</div><div class='bar-track'><span style='width:69.1%'></span></div><div class='bar-value'>¥2,313</div></div><div class='bar-row'><div class='bar-label'>2026-07-07</div><div class='bar-track'><span style='width:64.4%'></span></div><div class='bar-value'>¥2,482</div></div><p class='chart-note'>CPA系のグラフは、バーが長いほど効率が良い表示です。</p></div><h3>日別推移（直近3日）</h3><div class='table-wrap'><table><tr><th>2026-07-07</th><td>消化¥9,927</td><td>実登録4</td><td>実CPA¥2,482</td><td>CTR1.5%</td><td>CVR15.6%</td></tr><tr><th>2026-07-08</th><td>消化¥7,996</td><td>実登録5</td><td>実CPA¥1,599</td><td>CTR1.6%</td><td>CVR14.6%</td></tr><tr><th>2026-07-09</th><td>消化¥2,313</td><td>実登録1</td><td>実CPA¥2,313</td><td>CTR2.1%</td><td>CVR14.3%</td></tr></table></div><div class='mobile-table-cards'><article class='mobile-row-card'><h4>2026-07-07</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥9,927</strong></div><div class='mini-metric'><span>実登録</span><strong>4</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥2,482</strong></div><div class='mini-metric'><span>CTR</span><strong>1.5%</strong></div><div class='mini-metric'><span>CVR</span><strong>15.6%</strong></div></div></article><article class='mobile-row-card'><h4>2026-07-08</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥7,996</strong></div><div class='mini-metric'><span>実登録</span><strong>5</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥1,599</strong></div><div class='mini-metric'><span>CTR</span><strong>1.6%</strong></div><div class='mini-metric'><span>CVR</span><strong>14.6%</strong></div></div></article><article class='mobile-row-card'><h4>2026-07-09</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥2,313</strong></div><div class='mini-metric'><span>実登録</span><strong>1</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥2,313</strong></div><div class='mini-metric'><span>CTR</span><strong>2.1%</strong></div><div class='mini-metric'><span>CVR</span><strong>14.3%</strong></div></div></article></div><div class='chart-card'><h3>CR別 実CPAが軽い順（直近3日合計）</h3><div class='bar-row'><div class='bar-label'>meta002ノンタゲ25-45｜ヘッダー</div><div class='bar-track'><span style='width:100.0%'></span></div><div class='bar-value'>¥1,514</div></div><div class='bar-row'><div class='bar-label'>meta009ノンタゲ25-45｜P1_怒るのは今日で終わりにしませんか？_共感型_イラスト</div><div class='bar-track'><span style='width:56.9%'></span></div><div class='bar-value'>¥2,662</div></div><div class='bar-row'><div class='bar-label'>meta008ノンタゲ25-45｜P1_自分を責めているお母さんへ_共感型_イラスト</div><div class='bar-track'><span style='width:0.0%'></span></div><div class='bar-value'>-</div></div><p class='chart-note'>CPA系のグラフは、バーが長いほど効率が良い表示です。</p></div><h3>CR別（直近3日合計）</h3><div class='table-wrap'><table><tr><th>meta002【子育て図鑑】ノンタゲ25-45｜ヘッダー</th><td>消化¥12,114</td><td>実登録8</td><td>実CPA¥1,514</td><td>CTR1.7%</td><td>CVR16.7%</td></tr><tr><th>meta009【子育て図鑑】ノンタゲ25-45｜P1_怒るのは今日で終わりにしませんか？_共感型_イラスト</th><td>消化¥5,325</td><td>実登録2</td><td>実CPA¥2,662</td><td>CTR1.5%</td><td>CVR15.0%</td></tr><tr><th>meta008【子育て図鑑】ノンタゲ25-45｜P1_自分を責めているお母さんへ_共感型_イラスト</th><td>消化¥2,797</td><td>実登録0</td><td>実CPA-</td><td>CTR1.1%</td><td>CVR0.0%</td></tr></table></div><div class='mobile-table-cards'><article class='mobile-row-card'><h4>meta002【子育て図鑑】ノンタゲ25-45｜ヘッダー</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥12,114</strong></div><div class='mini-metric'><span>実登録</span><strong>8</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥1,514</strong></div><div class='mini-metric'><span>CTR</span><strong>1.7%</strong></div><div class='mini-metric'><span>CVR</span><strong>16.7%</strong></div></div></article><article class='mobile-row-card'><h4>meta009【子育て図鑑】ノンタゲ25-45｜P1_怒るのは今日で終わりにしませんか？_共感型_イラスト</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥5,325</strong></div><div class='mini-metric'><span>実登録</span><strong>2</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥2,662</strong></div><div class='mini-metric'><span>CTR</span><strong>1.5%</strong></div><div class='mini-metric'><span>CVR</span><strong>15.0%</strong></div></div></article><article class='mobile-row-card'><h4>meta008【子育て図鑑】ノンタゲ25-45｜P1_自分を責めているお母さんへ_共感型_イラスト</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥2,797</strong></div><div class='mini-metric'><span>実登録</span><strong>0</strong></div><div class='mini-metric'><span>実CPA</span><strong>-</strong></div><div class='mini-metric'><span>CTR</span><strong>1.1%</strong></div><div class='mini-metric'><span>CVR</span><strong>0.0%</strong></div></div></article></div></section><section class='card summary-card'><h2>今月サマリー（2026年7月累計）</h2><p class='section-period'>対象期間：2026年7月1日〜本日までの月間累計</p><div class='metrics'><div class='metric'><span>消化</span><strong>¥55,052</strong></div><div class='metric'><span>CTR</span><strong>1.5%</strong></div><div class='metric'><span>CVR</span><strong>11.8%</strong></div><div class='metric'><span>実CPA</span><strong>¥1,720</strong></div><div class='metric'><span>実登録</span><strong>32</strong></div><div class='metric'><span>無料動画視聴数</span><strong>9</strong><small class='metric-note'>（登録比47.4%）</small></div><div class='metric'><span>無料動画視聴単価</span><strong>¥6,117</strong></div><div class='metric'><span>セミナー申込数</span><strong>3</strong><small class='metric-note'>（登録比15.8%）</small></div><div class='metric'><span>セミナー申込単価</span><strong>¥18,351</strong></div><div class='metric'><span>セミナー視聴数</span><strong>0</strong><small class='metric-note'>（登録比0.0%）</small></div><div class='metric'><span>セミナー視聴単価</span><strong>-</strong></div><div class='metric'><span>セミナー視聴完了数</span><strong>4</strong><small class='metric-note'>（登録比21.1% / 視聴比-）</small></div><div class='metric'><span>セミナー視聴完了単価</span><strong>¥13,763</strong></div><div class='metric'><span>購入</span><strong>0</strong></div><div class='metric'><span>売上</span><strong>¥0</strong></div><div class='metric'><span>ROAS</span><strong>0.0%</strong></div></div></section><section class='card summary-card'><h2>月跨ぎ累計サマリー（今期合計：2026年5月〜）</h2><p class='section-period'>対象期間：今期合計：2026年5月〜の月跨ぎ累計</p><div class='metrics'><div class='metric'><span>消化</span><strong>¥262,872</strong></div><div class='metric'><span>CTR</span><strong>1.7%</strong></div><div class='metric'><span>CVR</span><strong>14.5%</strong></div><div class='metric'><span>実CPA</span><strong>¥1,240</strong></div><div class='metric'><span>実登録</span><strong>212</strong></div><div class='metric'><span>無料動画視聴数</span><strong>168</strong><small class='metric-note'>（登録比58.3%）</small></div><div class='metric'><span>無料動画視聴単価</span><strong>¥1,565</strong></div><div class='metric'><span>セミナー申込数</span><strong>46</strong><small class='metric-note'>（登録比16.0%）</small></div><div class='metric'><span>セミナー申込単価</span><strong>¥5,715</strong></div><div class='metric'><span>セミナー視聴数</span><strong>44</strong><small class='metric-note'>（登録比15.3%）</small></div><div class='metric'><span>セミナー視聴単価</span><strong>¥5,974</strong></div><div class='metric'><span>セミナー視聴完了数</span><strong>51</strong><small class='metric-note'>（登録比17.7% / 視聴比115.9%）</small></div><div class='metric'><span>セミナー視聴完了単価</span><strong>¥5,154</strong></div><div class='metric'><span>購入</span><strong>3</strong></div><div class='metric'><span>売上</span><strong>¥317,839</strong></div><div class='metric'><span>ROAS</span><strong>120.9%</strong></div></div></section><section class='card'><h2>広告別パフォーマンス</h2><div class='table-wrap'><table><tr><th>meta002 ノンタゲ25-45｜ヘッダー</th><td>消化¥40,697</td><td>実登録28</td><td>実CPA¥1,453</td><td>CTR1.6%</td><td>CVR12.7%</td><td>無料動画視聴数8</td><td>無料動画視聴単価¥5,087</td><td>セミナー申込3</td><td>セミナー視聴数0</td><td>セミナー視聴単価-</td><td>セミナー視聴完了数4</td><td>セミナー視聴完了単価¥10,174</td><td>購入0</td></tr><tr><th>meta003 ノンタゲ25-45｜Phase1_全米トップ進学校_権威型_星さん実写</th><td>消化¥6,233</td><td>実登録2</td><td>実CPA¥3,116</td><td>CTR1.0%</td><td>CVR8.7%</td><td>無料動画視聴数1</td><td>無料動画視聴単価¥6,233</td><td>セミナー申込0</td><td>セミナー視聴数0</td><td>セミナー視聴単価-</td><td>セミナー視聴完了数0</td><td>セミナー視聴完了単価-</td><td>購入0</td></tr><tr><th>meta008 ノンタゲ25-45｜P1_自分を責めているお母さんへ_共感型_イラスト</th><td>消化¥2,797</td><td>実登録0</td><td>実CPA-</td><td>CTR1.1%</td><td>CVR0.0%</td><td>無料動画視聴数0</td><td>無料動画視聴単価-</td><td>セミナー申込0</td><td>セミナー視聴数0</td><td>セミナー視聴単価-</td><td>セミナー視聴完了数0</td><td>セミナー視聴完了単価-</td><td>購入0</td></tr><tr><th>meta009 ノンタゲ25-45｜P1_怒るのは今日で終わりにしませんか？_共感型_イラスト</th><td>消化¥5,325</td><td>実登録2</td><td>実CPA¥2,662</td><td>CTR1.5%</td><td>CVR10.0%</td><td>無料動画視聴数0</td><td>無料動画視聴単価-</td><td>セミナー申込0</td><td>セミナー視聴数0</td><td>セミナー視聴単価-</td><td>セミナー視聴完了数0</td><td>セミナー視聴完了単価-</td><td>購入0</td></tr></table></div><div class='mobile-table-cards'><article class='mobile-row-card'><h4>meta002 ノンタゲ25-45｜ヘッダー</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥40,697</strong></div><div class='mini-metric'><span>実登録</span><strong>28</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥1,453</strong></div><div class='mini-metric'><span>CTR</span><strong>1.6%</strong></div><div class='mini-metric'><span>CVR</span><strong>12.7%</strong></div><div class='mini-metric'><span>無料動画視聴数</span><strong>8</strong></div><div class='mini-metric'><span>無料動画視聴単価</span><strong>¥5,087</strong></div><div class='mini-metric'><span>セミナー申込</span><strong>3</strong></div><div class='mini-metric'><span>セミナー視聴数</span><strong>0</strong></div><div class='mini-metric'><span>セミナー視聴単価</span><strong>-</strong></div><div class='mini-metric'><span>セミナー視聴完了数</span><strong>4</strong></div><div class='mini-metric'><span>セミナー視聴完了単価</span><strong>¥10,174</strong></div><div class='mini-metric'><span>購入</span><strong>0</strong></div></div></article><article class='mobile-row-card'><h4>meta003 ノンタゲ25-45｜Phase1_全米トップ進学校_権威型_星さん実写</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥6,233</strong></div><div class='mini-metric'><span>実登録</span><strong>2</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥3,116</strong></div><div class='mini-metric'><span>CTR</span><strong>1.0%</strong></div><div class='mini-metric'><span>CVR</span><strong>8.7%</strong></div><div class='mini-metric'><span>無料動画視聴数</span><strong>1</strong></div><div class='mini-metric'><span>無料動画視聴単価</span><strong>¥6,233</strong></div><div class='mini-metric'><span>セミナー申込</span><strong>0</strong></div><div class='mini-metric'><span>セミナー視聴数</span><strong>0</strong></div><div class='mini-metric'><span>セミナー視聴単価</span><strong>-</strong></div><div class='mini-metric'><span>セミナー視聴完了数</span><strong>0</strong></div><div class='mini-metric'><span>セミナー視聴完了単価</span><strong>-</strong></div><div class='mini-metric'><span>購入</span><strong>0</strong></div></div></article><article class='mobile-row-card'><h4>meta008 ノンタゲ25-45｜P1_自分を責めているお母さんへ_共感型_イラスト</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥2,797</strong></div><div class='mini-metric'><span>実登録</span><strong>0</strong></div><div class='mini-metric'><span>実CPA</span><strong>-</strong></div><div class='mini-metric'><span>CTR</span><strong>1.1%</strong></div><div class='mini-metric'><span>CVR</span><strong>0.0%</strong></div><div class='mini-metric'><span>無料動画視聴数</span><strong>0</strong></div><div class='mini-metric'><span>無料動画視聴単価</span><strong>-</strong></div><div class='mini-metric'><span>セミナー申込</span><strong>0</strong></div><div class='mini-metric'><span>セミナー視聴数</span><strong>0</strong></div><div class='mini-metric'><span>セミナー視聴単価</span><strong>-</strong></div><div class='mini-metric'><span>セミナー視聴完了数</span><strong>0</strong></div><div class='mini-metric'><span>セミナー視聴完了単価</span><strong>-</strong></div><div class='mini-metric'><span>購入</span><strong>0</strong></div></div></article><article class='mobile-row-card'><h4>meta009 ノンタゲ25-45｜P1_怒るのは今日で終わりにしませんか？_共感型_イラスト</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>消化</span><strong>¥5,325</strong></div><div class='mini-metric'><span>実登録</span><strong>2</strong></div><div class='mini-metric'><span>実CPA</span><strong>¥2,662</strong></div><div class='mini-metric'><span>CTR</span><strong>1.5%</strong></div><div class='mini-metric'><span>CVR</span><strong>10.0%</strong></div><div class='mini-metric'><span>無料動画視聴数</span><strong>0</strong></div><div class='mini-metric'><span>無料動画視聴単価</span><strong>-</strong></div><div class='mini-metric'><span>セミナー申込</span><strong>0</strong></div><div class='mini-metric'><span>セミナー視聴数</span><strong>0</strong></div><div class='mini-metric'><span>セミナー視聴単価</span><strong>-</strong></div><div class='mini-metric'><span>セミナー視聴完了数</span><strong>0</strong></div><div class='mini-metric'><span>セミナー視聴完了単価</span><strong>-</strong></div><div class='mini-metric'><span>購入</span><strong>0</strong></div></div></article></div></section><section class='card flow-card'><h2>LINEシナリオ</h2><p class='section-period'>対象期間：LMESクロス分析の最新日</p><p>月別_数字分析用（cross 15286 / 2026-07-06）<br>CR別_数字分析用（cross 15285 / 2026-07-06）</p><h3>月別_数字分析用</h3><div class='table-wrap'><table><tr><th>FB広告経由(2026年5月)</th><td>対象57</td><td>無料動画29（50.9%）</td><td>セミナー申込10（17.5%）</td><td>セミナー視聴11（19.3%）</td><td>セミナー視聴完了9（15.8%）</td><td>アーカイブ12（21.1%）</td></tr><tr><th>FB広告経由(2026年6月)</th><td>対象212</td><td>無料動画130（61.3%）</td><td>セミナー申込33（15.6%）</td><td>セミナー視聴33（15.6%）</td><td>セミナー視聴完了38（17.9%）</td><td>アーカイブ57（26.9%）</td></tr><tr><th>FB広告経由(2026年7月)</th><td>対象19</td><td>無料動画9（47.4%）</td><td>セミナー申込3（15.8%）</td><td>セミナー視聴0（0.0%）</td><td>セミナー視聴完了4（21.1%）</td><td>アーカイブ4（21.1%）</td></tr></table></div><div class='mobile-table-cards'><article class='mobile-row-card'><h4>FB広告経由(2026年5月)</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象</span><strong>57</strong></div><div class='mini-metric'><span>無料動画</span><strong>29（50.9%）</strong></div><div class='mini-metric'><span>セミナー申込</span><strong>10（17.5%）</strong></div><div class='mini-metric'><span>セミナー視聴</span><strong>11（19.3%）</strong></div><div class='mini-metric'><span>セミナー視聴完了</span><strong>9（15.8%）</strong></div><div class='mini-metric'><span>アーカイブ</span><strong>12（21.1%）</strong></div></div></article><article class='mobile-row-card'><h4>FB広告経由(2026年6月)</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象</span><strong>212</strong></div><div class='mini-metric'><span>無料動画</span><strong>130（61.3%）</strong></div><div class='mini-metric'><span>セミナー申込</span><strong>33（15.6%）</strong></div><div class='mini-metric'><span>セミナー視聴</span><strong>33（15.6%）</strong></div><div class='mini-metric'><span>セミナー視聴完了</span><strong>38（17.9%）</strong></div><div class='mini-metric'><span>アーカイブ</span><strong>57（26.9%）</strong></div></div></article><article class='mobile-row-card'><h4>FB広告経由(2026年7月)</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象</span><strong>19</strong></div><div class='mini-metric'><span>無料動画</span><strong>9（47.4%）</strong></div><div class='mini-metric'><span>セミナー申込</span><strong>3（15.8%）</strong></div><div class='mini-metric'><span>セミナー視聴</span><strong>0（0.0%）</strong></div><div class='mini-metric'><span>セミナー視聴完了</span><strong>4（21.1%）</strong></div><div class='mini-metric'><span>アーカイブ</span><strong>4（21.1%）</strong></div></div></article></div><h3>CR別_数字分析用</h3><div class='table-wrap'><table><tr><th>meta002</th><td>対象17</td><td>無料動画8（47.1%）</td><td>セミナー申込3（17.6%）</td><td>セミナー視聴0（0.0%）</td><td>セミナー視聴完了4（23.5%）</td><td>アーカイブ4（23.5%）</td></tr><tr><th>meta003</th><td>対象2</td><td>無料動画1（50.0%）</td><td>セミナー申込0（0.0%）</td><td>セミナー視聴0（0.0%）</td><td>セミナー視聴完了0（0.0%）</td><td>アーカイブ0（0.0%）</td></tr><tr><th>meta006</th><td>対象0</td><td>無料動画0（-）</td><td>セミナー申込0（-）</td><td>セミナー視聴0（-）</td><td>セミナー視聴完了0（-）</td><td>アーカイブ0（-）</td></tr><tr><th>meta007</th><td>対象0</td><td>無料動画0（-）</td><td>セミナー申込0（-）</td><td>セミナー視聴0（-）</td><td>セミナー視聴完了0（-）</td><td>アーカイブ0（-）</td></tr></table></div><div class='mobile-table-cards'><article class='mobile-row-card'><h4>meta002</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象</span><strong>17</strong></div><div class='mini-metric'><span>無料動画</span><strong>8（47.1%）</strong></div><div class='mini-metric'><span>セミナー申込</span><strong>3（17.6%）</strong></div><div class='mini-metric'><span>セミナー視聴</span><strong>0（0.0%）</strong></div><div class='mini-metric'><span>セミナー視聴完了</span><strong>4（23.5%）</strong></div><div class='mini-metric'><span>アーカイブ</span><strong>4（23.5%）</strong></div></div></article><article class='mobile-row-card'><h4>meta003</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象</span><strong>2</strong></div><div class='mini-metric'><span>無料動画</span><strong>1（50.0%）</strong></div><div class='mini-metric'><span>セミナー申込</span><strong>0（0.0%）</strong></div><div class='mini-metric'><span>セミナー視聴</span><strong>0（0.0%）</strong></div><div class='mini-metric'><span>セミナー視聴完了</span><strong>0（0.0%）</strong></div><div class='mini-metric'><span>アーカイブ</span><strong>0（0.0%）</strong></div></div></article><article class='mobile-row-card'><h4>meta006</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象</span><strong>0</strong></div><div class='mini-metric'><span>無料動画</span><strong>0（-）</strong></div><div class='mini-metric'><span>セミナー申込</span><strong>0（-）</strong></div><div class='mini-metric'><span>セミナー視聴</span><strong>0（-）</strong></div><div class='mini-metric'><span>セミナー視聴完了</span><strong>0（-）</strong></div><div class='mini-metric'><span>アーカイブ</span><strong>0（-）</strong></div></div></article><article class='mobile-row-card'><h4>meta007</h4><div class='mobile-row-metrics'><div class='mini-metric'><span>対象</span><strong>0</strong></div><div class='mini-metric'><span>無料動画</span><strong>0（-）</strong></div><div class='mini-metric'><span>セミナー申込</span><strong>0（-）</strong></div><div class='mini-metric'><span>セミナー視聴</span><strong>0（-）</strong></div><div class='mini-metric'><span>セミナー視聴完了</span><strong>0（-）</strong></div><div class='mini-metric'><span>アーカイブ</span><strong>0（-）</strong></div></div></article></div><div class='chart-card'><h3>無料動画視聴率</h3><div class='bar-row'><div class='bar-label'>FB広告経由(2026年6月)</div><div class='bar-track'><span style='width:100.0%'></span></div><div class='bar-value'>130（61.3%）</div></div><div class='bar-row'><div class='bar-label'>FB広告経由(2026年5月)</div><div class='bar-track'><span style='width:22.6%'></span></div><div class='bar-value'>29（50.9%）</div></div><div class='bar-row'><div class='bar-label'>FB広告経由(2026年7月)</div><div class='bar-track'><span style='width:7.3%'></span></div><div class='bar-value'>9（47.4%）</div></div><div class='bar-row'><div class='bar-label'>meta002</div><div class='bar-track'><span style='width:6.5%'></span></div><div class='bar-value'>8（47.1%）</div></div><div class='bar-row'><div class='bar-label'>meta003</div><div class='bar-track'><span style='width:5.0%'></span></div><div class='bar-value'>1（50.0%）</div></div><div class='bar-row'><div class='bar-label'>meta006</div><div class='bar-track'><span style='width:0.0%'></span></div><div class='bar-value'>0（-）</div></div></div></section><section class='card prose-card'><h2>数値まとめ・コメント</h2><p>広告入口はCTR1.5%、CVR11.8%、実CPA¥1,720です。シート目安（CTR1.0% / CVR8.0% / 実CPA¥1,500）に対して、登録効率と申込み後の導線を分けて確認します。LMES側は対象19人に対して、セミナー申込3人（15.8%）、無料動画視聴9人（47.4%）です。</p><p>一方で購入はまだ0件なので、次の論点は広告停止ではなく、申込み・視聴・購入までの接続です。特に ノンタゲ25-45｜ヘッダー は実CPA¥1,453で強いため、広告の勝ち筋は残しながら、セミナー申込や無料動画視聴へ進む理由づけを見ます。</p></section><section class='card action-card'><h2>今日の具体アクション</h2><div class='decision-grid'><article class='decision'><span>1. 今日見るポイント</span><p>現時点ではCTR1.5%、CVR11.8%、実CPA¥1,720。シート目安（CTR1.0% / CVR8.0% / 実CPA¥1,500）に対して、登録効率と申込み後の導線を分けて確認する。</p></article><article class='decision'><span>2. 今日見るポイント</span><p>直近で効率が良いのは ノンタゲ25-45｜ヘッダー（実CPA¥1,453 / CVR12.7%）、ノンタゲ25-45｜P1_怒るのは今日で終わりにしませんか？_共感型_イラスト（実CPA¥2,662 / CVR10.0%）。特にノンタゲ25-45はCPAが軽く、申込みも出ているため優先維持。</p></article><article class='decision'><span>3. 今日見るポイント</span><p>一方で ノンタゲ25-45｜Phase1_全米トップ進学校_権威型_星さん実写（消化¥6,233 / 申込み0）、ノンタゲ25-45｜P1_怒るのは今日で終わりにしませんか？_共感型_イラスト（消化¥5,325 / 申込み0） は購入・申込みまでの母数がまだ薄い。停止判断ではなく、まずは申込み後の導線と商品訴求の接続を確認する。</p></article><article class='decision'><span>4. 今日見るポイント</span><p>判定基準は固定の停止ルールではなく、シート上の目標値をコメント生成の参考ラインとして使う。CTRだけでなく、登録・申込み・購入までセットで見る。</p></article></div></section>
+    <div class="footer">この数値レポートおよびCR案はAIによる自動出力です。最終判断は人の目で確認・解釈・推敲してください。</div>
+  </div>
+</body>
+</html>
